@@ -2,7 +2,6 @@
 import TheSearch from "./TheSearch.vue";
 import TheFilter from "./TheFilter.vue";
 import TheSorting from "./TheSorting.vue";
-import CreateTaskBlock from "./CreateTaskBlock.vue";
 </script>
 
 <template>

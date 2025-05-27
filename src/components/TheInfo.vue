@@ -1,21 +1,4 @@
-<script setup>
-import { useStore } from "@/stores/main";
-import { computed } from "vue";
-
-const store = useStore();
-
-const inProgress = computed(() =>
-  store.list.filter((task) => task.status === "inProgress"),
-);
-
-const pending = computed(() =>
-  store.list.filter((task) => task.status === "pending"),
-);
-
-const done = computed(() =>
-  store.list.filter((task) => task.status === "done"),
-);
-</script>
+<!-- <script setup></script>
 
 <template>
   <div
@@ -38,4 +21,4 @@ const done = computed(() =>
   >
     Done: {{ done.length }}
   </div>
-</template>
+</template> -->
