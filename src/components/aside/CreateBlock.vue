@@ -1,6 +1,6 @@
 <script setup>
 import AsideCreateButton from "./AsideCreateButton.vue";
-import { useMainStore } from "@/stores/main";
+import { useMainStore } from "@/stores/MainStore";
 
 const mainStore = useMainStore();
 </script>

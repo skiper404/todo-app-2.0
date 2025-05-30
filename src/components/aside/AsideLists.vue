@@ -1,6 +1,6 @@
 <script setup>
 import { XMarkIcon } from "@heroicons/vue/24/outline";
-import { useMainStore } from "@/stores/main";
+import { useMainStore } from "@/stores/MainStore";
 
 const mainStore = useMainStore();
 </script>

@@ -3,10 +3,12 @@ import { XMarkIcon } from "@heroicons/vue/24/outline";
 import { computed, watchEffect } from "vue";
 import CreateTaskBlock from "./CreateTaskBlock.vue";
 import { useRoute } from "vue-router";
-import { useMainStore } from "@/stores/main";
+import { useMainStore } from "@/stores/MainStore";
+import { useTaskStore } from "@/stores/TaskStore";
 
 const route = useRoute();
 const mainStore = useMainStore();
+const taskStore = useTaskStore();
 
 const activeListId = computed(() => route.params.listId);
 
@@ -25,14 +27,13 @@ watchEffect(async () => {
         taskPriority,
         taskCategory,
         taskStatus,
-      } in mainStore.tasksInActiveList"
+      } in taskStore.tasksInActiveList"
     >
       <div class="flex items-center justify-between gap-2 py-1">
         <div
           class="flex w-full gap-2 rounded-xl border p-2 hover:border-green-600"
         >
           <div>{{ taskName }}</div>
-
           <div>{{ taskPriority }}</div>
           <div>{{ taskCategory }}</div>
           <div>{{ taskStatus }}</div>
@@ -40,7 +41,7 @@ watchEffect(async () => {
         <div class>
           <button
             class="flex rounded-xl border border-blue-500 p-2 text-blue-500 hover:border-red-300 hover:text-red-300"
-            @click="mainStore.removeTask(taskId)"
+            @click="taskStore.removeTask(taskId)"
           >
             <XMarkIcon class="size-6" />
           </button>
@@ -57,7 +58,7 @@ watchEffect(async () => {
     leave-to-class="opacity-0"
   >
     <div
-      v-show="mainStore.tasksInActiveList.length === 0"
+      v-show="taskStore.tasksInActiveList.length === 0"
       class="py-1 text-center text-red-400"
     >
       You don't have any task.

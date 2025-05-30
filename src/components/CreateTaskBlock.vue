@@ -1,7 +1,8 @@
 <script setup>
 import { priorityOptions, statusOptions, categoryOptions } from "@/constants";
-import { useMainStore } from "@/stores/main";
-const mainStore = useMainStore();
+import { useTaskStore } from "@/stores/TaskStore";
+
+const taskStore = useTaskStore();
 </script>
 
 <template>
@@ -14,8 +15,8 @@ const mainStore = useMainStore();
           id="taskName"
           class="border"
           placeholder="Task name..."
-          v-model="mainStore.newTaskName"
-          @keyup.enter="mainStore.createTask"
+          v-model="taskStore.newTaskName"
+          @keyup.enter="taskStore.createTask"
       /></label>
     </div>
     <div>
@@ -23,8 +24,8 @@ const mainStore = useMainStore();
         <span> Task Priority: </span>
         <select
           id="taskPriority"
-          @keyup.enter="mainStore.createTask"
-          v-model="mainStore.newTaskPriority"
+          v-model="taskStore.newTaskPriority"
+          @keyup.enter="taskStore.createTask"
         >
           <option
             v-for="{ label, value } in priorityOptions"
@@ -41,8 +42,8 @@ const mainStore = useMainStore();
         <span> Task Category: </span>
         <select
           id="taskCategory"
-          @keyup.enter="mainStore.createTask"
-          v-model="mainStore.newTaskCategory"
+          @keyup.enter="taskStore.createTask"
+          v-model="taskStore.newTaskCategory"
         >
           <option
             v-for="{ label, value } in categoryOptions"
@@ -59,8 +60,8 @@ const mainStore = useMainStore();
         <span> Task Status: </span>
         <select
           id="taskStatus"
-          @keyup.enter="mainStore.createTask"
-          v-model="mainStore.newTaskStatus"
+          @keyup.enter="taskStore.createTask"
+          v-model="taskStore.newTaskStatus"
         >
           <option
             v-for="{ label, value } in statusOptions"
@@ -85,18 +86,18 @@ const mainStore = useMainStore();
         <div
           class="text-xs text-orange-400"
           v-if="
-            mainStore.errorType === 'task' && mainStore.showTaskErrorMessage
+            taskStore.errorType === 'task' && taskStore.showTaskErrorMessage
           "
-          :key="mainStore.messageError"
+          :key="taskStore.messageError"
         >
-          {{ mainStore.messageError }}
+          {{ taskStore.messageError }}
         </div>
       </transition>
     </div>
 
     <button
       class="m-2 border border-green-400 hover:border-yellow-400"
-      @click="mainStore.createTask"
+      @click="taskStore.createTask"
     >
       Create Task
     </button>
