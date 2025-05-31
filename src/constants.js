@@ -1,9 +1,9 @@
 export const priorityOptions = [
-  { label: "Critical", value: "critical", priority: 1 },
-  { label: "High", value: "high", priority: 2 },
-  { label: "Medium", value: "medium", priority: 3 },
-  { label: "Low", value: "low", priority: 4 },
-  { label: "Optionsl", value: "optional", priority: 5 },
+  { label: "Critical", value: "critical", level: 1 },
+  { label: "High", value: "high", level: 2 },
+  { label: "Medium", value: "medium", level: 3 },
+  { label: "Low", value: "low", level: 4 },
+  { label: "Optionsl", value: "optional", level: 5 },
 ];
 
 export const statusOptions = [
@@ -30,4 +30,12 @@ export const categoryOptions = [
   { label: "Analytics", value: "analytics" },
   { label: "Marketing", value: "marketing" },
   { label: "Collaboration", value: "collaboration" },
+];
+
+export const sortingOptions = [
+  { label: "Name", value: "name" },
+  { label: "Date", value: "date" },
+  { label: "Category", value: "category" },
+  { label: "Status", value: "status" },
+  { label: "Priority", value: "priority" },
 ];

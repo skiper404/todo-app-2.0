@@ -1,6 +1,10 @@
 <script setup>
 import { ChevronDoubleUpIcon } from "@heroicons/vue/24/outline";
 import { ChevronDoubleDownIcon } from "@heroicons/vue/24/outline";
+import { sortingOptions } from "@/constants";
+import { useTaskStore } from "@/stores/TaskStore";
+
+const taskStore = useTaskStore();
 </script>
 
 <template>
@@ -9,17 +13,15 @@ import { ChevronDoubleDownIcon } from "@heroicons/vue/24/outline";
       <div class="whitespace-nowrap text-[var(--color-primary-500)]">
         Sort by:
       </div>
-      <select name="select" id="select" @change="">
-        <option value="name" selected>Name</option>
-        <option value="date">Date</option>
-        <option value="category">Category</option>
-        <option value="priority">Priority</option>
-        <option value="status">Status</option>
+      <select name="select" id="select" v-model="taskStore.sortLabel">
+        <option v-for="{ label, value } in sortingOptions" :value="value">
+          {{ label }}
+        </option>
       </select>
-      <button @click="">
+      <button @click="taskStore.sortDirection = true">
         <ChevronDoubleUpIcon class="size-6" />
       </button>
-      <button @click="">
+      <button @click="taskStore.sortDirection = false">
         <ChevronDoubleDownIcon class="size-6" />
       </button>
     </div>

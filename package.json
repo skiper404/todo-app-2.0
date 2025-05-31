@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "date-fns": "^4.1.0",
     "howler": "^2.2.4",
     "pinia": "^3.0.2",
     "uuid": "^11.1.0",
