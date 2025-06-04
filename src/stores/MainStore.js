@@ -1,9 +1,9 @@
 import { defineStore } from "pinia";
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import { v4 as uuid } from "uuid";
-import { useLocalStorage } from "@/components/composables/useLocalStorage";
-import { useValidation } from "@/components/composables/useValidation";
-import { useSoundEffects } from "@/components/composables/useSoundEffects";
+import { useLocalStorage } from "@/composables/useLocalStorage";
+import { useValidation } from "@/composables/useValidation";
+import { useSoundEffects } from "@/composables/useSoundEffects";
 
 export const useMainStore = defineStore("MainStore", () => {
   const mainList = ref([]);
@@ -16,35 +16,44 @@ export const useMainStore = defineStore("MainStore", () => {
   useLocalStorage(mainList, "list");
 
   const {
-    showListErrorMessage,
-    errorType,
-    emptyListName,
-    shortListName,
-    messageError,
-  } = useValidation({ listName: newListName });
+    showShortNameErrorMessage,
+    showEmptyNameErrorMessage,
+    emptyName,
+    shortName,
+  } = useValidation({
+    name: newListName,
+  });
 
   const setActiveId = async (listId) => {
     activeListId.value = listId;
   };
 
   const createList = () => {
-    if (!emptyListName.value && !shortListName.value) {
-      mainList.value = [
-        ...mainList.value,
-        {
-          listId: uuid(),
-          listName: newListName.value,
-          listStatus: newListStatus.value,
-          listTasks: [],
-        },
-      ];
-      showListErrorMessage.value = false;
-      resetNewListInfo();
-      playSound("addList");
-    } else {
-      errorType.value = "list";
-      showListErrorMessage.value = true;
+    if (emptyName.value) {
+      showEmptyNameErrorMessage.value = true;
+      showShortNameErrorMessage.value = false;
+      return;
     }
+
+    if (shortName.value) {
+      showEmptyNameErrorMessage.value = false;
+      showShortNameErrorMessage.value = true;
+      return;
+    }
+
+    mainList.value = [
+      ...mainList.value,
+      {
+        listId: uuid(),
+        listName: newListName.value,
+        listStatus: newListStatus.value,
+        listTasks: [],
+      },
+    ];
+    resetNewListInfo();
+    playSound("addList");
+    showEmptyNameErrorMessage.value = false;
+    showShortNameErrorMessage.value = false;
   };
 
   const resetNewListInfo = () => {
@@ -67,12 +76,10 @@ export const useMainStore = defineStore("MainStore", () => {
     setActiveId,
     createList,
     removeList,
-    emptyListName,
-    shortListName,
 
-    messageError,
-    errorType,
-
-    showListErrorMessage,
+    emptyName,
+    shortName,
+    showShortNameErrorMessage,
+    showEmptyNameErrorMessage,
   };
 });

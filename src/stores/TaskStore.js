@@ -2,9 +2,9 @@ import { ref, computed } from "vue";
 import { v4 as uuid } from "uuid";
 import { defineStore } from "pinia";
 import { useMainStore } from "./MainStore";
-import { useValidation } from "@/components/composables/useValidation";
-import { useSoundEffects } from "@/components/composables/useSoundEffects";
-import { useTaskProcessing } from "@/components/composables/useTaskProcessing";
+import { useValidation } from "@/composables/useValidation";
+import { useSoundEffects } from "@/composables/useSoundEffects";
+import { useTaskProcessing } from "@/composables/useTaskProcessing";
 
 export const useTaskStore = defineStore("taskStore", () => {
   const mainStore = useMainStore();
@@ -21,6 +21,8 @@ export const useTaskStore = defineStore("taskStore", () => {
   const status = ref("all");
   const priority = ref("all");
 
+  const filterMap = { category, priority, status };
+
   //computed
   const activeList = computed(() =>
     mainStore.mainList.find(({ listId }) => listId === mainStore.activeListId),
@@ -31,12 +33,11 @@ export const useTaskStore = defineStore("taskStore", () => {
   //stores, composables
   const { playSound } = useSoundEffects();
   const {
-    showTaskErrorMessage,
-    errorType,
-    emptyTaskName,
-    shortTaskName,
-    messageError,
-  } = useValidation({ taskName: newTaskName });
+    shortName,
+    emptyName,
+    showEmptyNameErrorMessage,
+    showShortNameErrorMessage,
+  } = useValidation({ name: newTaskName });
 
   const { finalTasks } = useTaskProcessing(
     sortLabel,
@@ -50,11 +51,18 @@ export const useTaskStore = defineStore("taskStore", () => {
 
   // methods
   const createTask = () => {
-    if (emptyTaskName.value || shortTaskName.value) {
-      errorType.value = "task";
-      showTaskErrorMessage.value = true;
+    if (emptyName.value) {
+      showEmptyNameErrorMessage.value = true;
+      showShortNameErrorMessage.value = false;
       return;
     }
+
+    if (shortName.value) {
+      showEmptyNameErrorMessage.value = false;
+      showShortNameErrorMessage.value = true;
+      return;
+    }
+
     if (!activeList.value) return;
     activeList.value.listTasks = [
       ...tasksInActiveList.value,
@@ -67,9 +75,10 @@ export const useTaskStore = defineStore("taskStore", () => {
         taskPriority: newTaskPriority.value,
       },
     ];
-    showTaskErrorMessage.value = false;
     resetNewTaskInfo();
     playSound("addTask");
+    showEmptyNameErrorMessage.value = false;
+    showShortNameErrorMessage.value = false;
   };
 
   const resetNewTaskInfo = () => {
@@ -85,6 +94,14 @@ export const useTaskStore = defineStore("taskStore", () => {
       ({ taskId }) => taskId !== taskIdToRemove,
     );
     playSound("removeTask");
+  };
+
+  const resetSearchQuery = () => {
+    searchQuery.value = "";
+  };
+
+  const resetFilter = (filter) => {
+    filterMap[filter].value = "all";
   };
 
   return {
@@ -105,11 +122,10 @@ export const useTaskStore = defineStore("taskStore", () => {
     tasksInActiveList,
 
     //useValidation
-    errorType,
-    messageError,
-    emptyTaskName,
-    shortTaskName,
-    showTaskErrorMessage,
+    shortName,
+    emptyName,
+    showEmptyNameErrorMessage,
+    showShortNameErrorMessage,
 
     //useTaskProcessing
     finalTasks,
@@ -118,5 +134,7 @@ export const useTaskStore = defineStore("taskStore", () => {
     createTask,
     resetNewTaskInfo,
     removeTask,
+    resetSearchQuery,
+    resetFilter,
   };
 });

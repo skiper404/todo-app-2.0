@@ -1,7 +1,7 @@
 <script setup>
 import TheLogo from "../components/TheLogo.vue";
 import TheTitle from "./TheTitle.vue";
-import TheTime from "./TheTime.vue";
+import TheDate from "./TheDate.vue";
 </script>
 
 <template>
@@ -12,6 +12,6 @@ import TheTime from "./TheTime.vue";
       <TheLogo />
       <TheTitle />
     </a>
-    <TheTime />
+    <TheDate />
   </header>
 </template>

@@ -1,3 +1,5 @@
+export const appInfo = { appName: "Task Manager", appVersion: "v2.0" };
+
 export const priorityOptions = [
   { label: "Critical", value: "critical", level: 1 },
   { label: "High", value: "high", level: 2 },
@@ -38,4 +40,10 @@ export const sortingOptions = [
   { label: "Category", value: "category" },
   { label: "Status", value: "status" },
   { label: "Priority", value: "priority" },
+];
+
+export const listCategories = [
+  { label: "A", value: "a" },
+  { label: "B", value: "b" },
+  { label: "C", value: "c" },
 ];

@@ -1,56 +1,51 @@
 <script setup>
-import AsideCreateButton from "./AsideCreateButton.vue";
+import { messages } from "@/messages";
 import { useMainStore } from "@/stores/MainStore";
+import { listCategories } from "@/constants";
+import BaseButton from "../BaseButton.vue";
+import BaseInput from "../BaseInput.vue";
+import BaseMessage from "../BaseMessage.vue";
+import BaseSelect from "../BaseSelect.vue";
 
 const mainStore = useMainStore();
+const { emptyName, shortName } = messages;
 </script>
 
 <template>
   <div class="flex flex-col whitespace-nowrap">
-    <AsideCreateButton @click="mainStore.createList" />
-
-    <div class="flex items-center">
-      <label for="listName">List Name: </label>
-      <input
-        id="listName"
-        type="text"
-        class="mx-2 my-1 w-full outline-0"
-        placeholder="List name..."
-        v-model="mainStore.newListName"
-        @keyup.enter="mainStore.createList"
-      />
-    </div>
-    <div class="flex items-center">
-      List Status:
-      <select
-        id="list"
-        class="mx-2 my-1 w-full"
-        @keyup.enter="mainStore.createList"
-        v-model="mainStore.newListStatus"
-      >
-        <option value="a" selected>A</option>
-        <option value="b">B</option>
-        <option value="c">C</option>
-      </select>
-    </div>
-  </div>
-  <div class="h-6 text-center">
+    <BaseButton name="plus" @click="mainStore.createList">
+      Create List
+    </BaseButton>
+    <BaseInput
+      id="listName"
+      label="List name:"
+      placeholder="List name..."
+      v-model="mainStore.newListName"
+      @submit-enter="mainStore.createList"
+    />
+    <BaseSelect
+      id="listId"
+      label="List Status:"
+      :options="listCategories"
+      v-model="mainStore.newListStatus"
+    />
     <transition
       mode="out-in"
-      enter-active-class="transition duration-200"
-      enter-from-class="opacity-0 -translate-y-4"
-      enter-to-class="opacity-100 translate-y-0"
-      leave-active-class="transition duration-200"
-      leave-from-class="opacity-100 translate-y-0"
-      leave-to-class="opacity-0 -translate-y-4"
+      enter-active-class="transition duration-300"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="transition duration-300"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
     >
-      <div
-        class="text-xs text-orange-400"
-        v-if="mainStore.errorType === 'list' && mainStore.showListErrorMessage"
-        :key="mainStore.messageError"
-      >
-        {{ mainStore.messageError }}
-      </div>
+      <BaseMessage
+        v-if="mainStore.showEmptyNameErrorMessage"
+        :message="emptyName"
+      />
+      <BaseMessage
+        v-else-if="mainStore.showShortNameErrorMessage"
+        :message="shortName"
+      />
     </transition>
   </div>
 </template>
