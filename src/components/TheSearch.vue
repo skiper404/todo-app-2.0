@@ -8,20 +8,18 @@ const taskStore = useTaskStore();
 </script>
 
 <template>
-  <div
-    class="relative flex w-[600px] min-w-[200px] items-center justify-center gap-2 px-4"
-  >
-    <BaseIcon name="search" class="absolute left-8" />
+  <div class="relative mx-2 flex w-[600px] min-w-[200px] flex-1 items-center">
+    <BaseIcon name="search" class="absolute left-4" />
     <BaseInput
       id="searchId"
       label=""
       placeholder="Search..."
       v-model="taskStore.searchQuery"
-      class="w-full rounded-full bg-[var(--color-primary-800)] py-1 pl-10 ring-2 ring-[var(--color-primary-600)] outline-none"
+      class="w-full rounded-full bg-[var(--color-primary-800)] py-1 pl-10 ring-1 ring-[var(--color-primary-600)] outline-none"
     />
     <BaseButton
       name="xmark"
-      class="absolute right-8"
+      class="absolute right-4"
       @click="taskStore.resetSearchQuery"
     />
   </div>

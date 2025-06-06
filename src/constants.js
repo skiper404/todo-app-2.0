@@ -1,3 +1,10 @@
+import CreateListForm from "@/components/forms/CreateListForm.vue";
+import CreateTaskForm from "@/components/forms/CreateTaskForm.vue";
+import EditListForm from "@/components/forms/EditListForm.vue";
+import EditTaskForm from "@/components/forms/EditTaskForm.vue";
+import DeleteListForm from "./components/forms/DeleteListForm.vue";
+import DeleteTaskForm from "./components/forms/DeleteTaskForm.vue";
+
 export const appInfo = { appName: "Task Manager", appVersion: "v2.0" };
 
 export const priorityOptions = [
@@ -47,3 +54,12 @@ export const listCategories = [
   { label: "B", value: "b" },
   { label: "C", value: "c" },
 ];
+
+export const modalFormsMap = {
+  createList: CreateListForm,
+  createTask: CreateTaskForm,
+  editList: EditListForm,
+  editTask: EditTaskForm,
+  deleteList: DeleteListForm,
+  deletaTask: DeleteTaskForm,
+};

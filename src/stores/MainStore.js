@@ -4,6 +4,7 @@ import { v4 as uuid } from "uuid";
 import { useLocalStorage } from "@/composables/useLocalStorage";
 import { useValidation } from "@/composables/useValidation";
 import { useSoundEffects } from "@/composables/useSoundEffects";
+import { useModalStore } from "./ModalStore";
 
 export const useMainStore = defineStore("MainStore", () => {
   const mainList = ref([]);
@@ -11,6 +12,7 @@ export const useMainStore = defineStore("MainStore", () => {
   const newListStatus = ref("a");
   const activeListId = ref(null);
 
+  const modalStore = useModalStore();
   const { playSound } = useSoundEffects();
 
   useLocalStorage(mainList, "list");
@@ -23,6 +25,10 @@ export const useMainStore = defineStore("MainStore", () => {
   } = useValidation({
     name: newListName,
   });
+
+  const resetNewListInfo = () => {
+    (newListName.value = ""), (newListStatus.value = "a");
+  };
 
   const setActiveId = async (listId) => {
     activeListId.value = listId;
@@ -50,14 +56,10 @@ export const useMainStore = defineStore("MainStore", () => {
         listTasks: [],
       },
     ];
-    resetNewListInfo();
-    playSound("addList");
     showEmptyNameErrorMessage.value = false;
     showShortNameErrorMessage.value = false;
-  };
-
-  const resetNewListInfo = () => {
-    (newListName.value = ""), (newListStatus.value = "a");
+    modalStore.closeModal();
+    playSound("addList");
   };
 
   const removeList = (listIdToRemove) => {
@@ -76,6 +78,7 @@ export const useMainStore = defineStore("MainStore", () => {
     setActiveId,
     createList,
     removeList,
+    resetNewListInfo,
 
     emptyName,
     shortName,

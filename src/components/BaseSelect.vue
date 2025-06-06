@@ -1,20 +1,17 @@
 <script setup>
 const props = defineProps({ id: String, label: String, options: Object });
-const emit = defineEmits(["keyupEnter"]);
 const model = defineModel();
 </script>
 
 <template>
-  <div>
-    <label :for="id">
-      <span>
+  <div class="flex w-full items-center">
+    <label :for="id" class="whitespace-nowrap text-violet-400">{{
+      label
+    }}</label>
+    <select :id="id" v-model="model" class="w-full p-1 text-right">
+      <option v-for="{ label, value } in options" :value="value">
         {{ label }}
-      </span>
-      <select :id="id" v-model="model">
-        <option v-for="{ label, value } in options" :value="value">
-          {{ label }}
-        </option>
-      </select>
-    </label>
+      </option>
+    </select>
   </div>
 </template>

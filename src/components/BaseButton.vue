@@ -1,6 +1,9 @@
 <script setup>
 import BaseIcon from "./BaseIcon.vue";
-const props = defineProps({ name: { type: String, default: "plus" } });
+const props = defineProps({
+  name: { type: String, default: "plus" },
+  size: { type: Number, default: 6 },
+});
 </script>
 
 <template>

@@ -8,12 +8,22 @@ const taskStore = useTaskStore();
 </script>
 
 <template>
-  <BaseSelect
-    id="sortingId"
-    label="Sort By:"
-    :options="sortingOptions"
-    v-model="taskStore.sortLabel"
-  />
-  <BaseButton name="arrowUp" @click="taskStore.sortDirection = true" />
-  <BaseButton name="arrowDown" @click="taskStore.sortDirection = false" />
+  <div class="mx-2 flex">
+    <BaseSelect
+      id="sortingId"
+      label="Sort By"
+      :options="sortingOptions"
+      v-model="taskStore.sortLabel"
+    />
+    <BaseButton
+      name="arrowUp"
+      :class="{ 'text-violet-400': taskStore.sortDirection }"
+      @click="taskStore.sortDirection = true"
+    />
+    <BaseButton
+      name="arrowDown"
+      :class="{ 'text-violet-400': !taskStore.sortDirection }"
+      @click="taskStore.sortDirection = false"
+    />
+  </div>
 </template>

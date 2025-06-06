@@ -5,6 +5,7 @@ import { useMainStore } from "./MainStore";
 import { useValidation } from "@/composables/useValidation";
 import { useSoundEffects } from "@/composables/useSoundEffects";
 import { useTaskProcessing } from "@/composables/useTaskProcessing";
+import { useModalStore } from "./ModalStore";
 
 export const useTaskStore = defineStore("taskStore", () => {
   const mainStore = useMainStore();
@@ -31,6 +32,7 @@ export const useTaskStore = defineStore("taskStore", () => {
   const tasksInActiveList = computed(() => activeList.value?.listTasks || []);
 
   //stores, composables
+  const modalStore = useModalStore();
   const { playSound } = useSoundEffects();
   const {
     shortName,
@@ -51,6 +53,7 @@ export const useTaskStore = defineStore("taskStore", () => {
 
   // methods
   const createTask = () => {
+    modalStore.openModal("createTask");
     if (emptyName.value) {
       showEmptyNameErrorMessage.value = true;
       showShortNameErrorMessage.value = false;
@@ -75,10 +78,10 @@ export const useTaskStore = defineStore("taskStore", () => {
         taskPriority: newTaskPriority.value,
       },
     ];
-    resetNewTaskInfo();
-    playSound("addTask");
     showEmptyNameErrorMessage.value = false;
     showShortNameErrorMessage.value = false;
+    modalStore.closeModal();
+    playSound("addTask");
   };
 
   const resetNewTaskInfo = () => {

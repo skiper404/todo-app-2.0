@@ -20,7 +20,7 @@ onUnmounted(() => clearInterval(timer.value));
 
 <template>
   <div
-    class="flex w-50 items-center justify-center rounded-xl bg-[var(--color-primary-700)] px-2 py-1"
+    class="hidden w-50 items-center justify-center rounded-xl bg-gray-900 px-2 py-1 md:flex"
   >
     {{ time }}
   </div>
