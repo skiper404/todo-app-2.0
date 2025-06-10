@@ -1,11 +1,14 @@
-import CreateListForm from "@/components/forms/CreateListForm.vue";
+import CreateTrackedAppForm from "@/components/forms/CreateTrackedAppForm.vue";
 import CreateTaskForm from "@/components/forms/CreateTaskForm.vue";
-import EditListForm from "@/components/forms/EditListForm.vue";
+import EditTrackedAppForm from "@/components/forms/EditTrackedAppForm.vue";
 import EditTaskForm from "@/components/forms/EditTaskForm.vue";
-import DeleteListForm from "./components/forms/DeleteListForm.vue";
-import DeleteTaskForm from "./components/forms/DeleteTaskForm.vue";
+import DeleteTrackedAppForm from "./components/forms/RemoveTrackedAppForm.vue";
+import DeleteTaskForm from "./components/forms/RemoveTaskForm.vue";
 
-export const appInfo = { appName: "Task Manager", appVersion: "v2.0" };
+export const appInfo = {
+  appName: "App Development Tracker",
+  appVersion: "v2.0",
+};
 
 export const priorityOptions = [
   { label: "Critical", value: "critical", level: 1 },
@@ -22,36 +25,85 @@ export const statusOptions = [
 ];
 
 export const categoryOptions = [
-  { label: "Frontend", value: "frontend" },
-  { label: "Backend", value: "backend" },
-  { label: "Database", value: "database" },
-  { label: "DevOps", value: "devops" },
-  { label: "Testing", value: "testing" },
-  { label: "Performance", value: "performance" },
-  { label: "Security", value: "security" },
-  { label: "UX", value: "ux" },
-  { label: "Documentation", value: "documentation" },
-  { label: "Code Review", value: "codeReview" },
-  { label: "Integration", value: "integration" },
-  { label: "Deployment", value: "deployment" },
-  { label: "Product", value: "product" },
-  { label: "Maintenance", value: "maintenance" },
-  { label: "Analytics", value: "analytics" },
-  { label: "Marketing", value: "marketing" },
-  { label: "Collaboration", value: "collaboration" },
+  {
+    label: "Frontend",
+    value: "frontend",
+    color: "text-pink-400",
+  },
+  {
+    label: "Backend",
+    value: "backend",
+    color: "text-indigo-400",
+  },
+  {
+    label: "Database",
+    value: "database",
+    color: "text-emerald-400",
+  },
+  { label: "DevOps", value: "devops", color: "text-blue-400" },
+  { label: "Testing", value: "testing", color: "text-rose-400" },
+  {
+    label: "Performance",
+    value: "performance",
+    color: "text-orange-400",
+  },
+  { label: "Security", value: "security", color: "text-red-400" },
+  { label: "UX", value: "ux", color: "text-yellow-400" },
+  {
+    label: "Documentation",
+    value: "documentation",
+    color: "text-sky-400",
+  },
+  {
+    label: "Code Review",
+    value: "codeReview",
+    color: "text-purple-400",
+  },
+  {
+    label: "Integration",
+    value: "integration",
+    color: "text-teal-400",
+  },
+  {
+    label: "Deployment",
+    value: "deployment",
+    color: "text-fuchsia-400",
+  },
+
+  { label: "Product", value: "product", color: "text-cyan-400" },
+  {
+    label: "Maintenance",
+    value: "maintenance",
+    color: "text-lime-400",
+  },
+  {
+    label: "Analytics",
+    value: "analytics",
+    color: "text-violet-400",
+  },
+  {
+    label: "Marketing",
+    value: "marketing",
+    color: "text-amber-400",
+  },
+  {
+    label: "Collaboration",
+    value: "collaboration",
+    color: "text-zinc-400",
+  },
 ];
 
-export const listCategories = [
-  { label: "A", value: "a" },
-  { label: "B", value: "b" },
-  { label: "C", value: "c" },
+export const appCategories = [
+  { label: "Desktop", value: "desktop" },
+  { label: "Mobile", value: "mobile" },
+  { label: "Web", value: "web" },
 ];
 
 export const modalFormsMap = {
-  createList: CreateListForm,
+  createTrackedApp: CreateTrackedAppForm,
   createTask: CreateTaskForm,
-  editList: EditListForm,
+  editTrackedApp: EditTrackedAppForm,
   editTask: EditTaskForm,
-  deleteList: DeleteListForm,
-  deletaTask: DeleteTaskForm,
+  removeTrackedApp: DeleteTrackedAppForm,
+  removeTask: DeleteTaskForm,
 };

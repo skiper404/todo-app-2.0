@@ -9,8 +9,12 @@ const taskStore = useTaskStore();
 </script>
 
 <template>
-  <div class="mx-2 flex flex-col">
-    <div class="flex">
+  <div
+    class="mt-4 flex w-full cursor-ns-resize items-center justify-between gap-2"
+  >
+    <div
+      :class="`flex rounded-2xl p-1 transition duration-300 ${taskStore.category ? 'bg-gray-600' : 'bg-gray-800'}`"
+    >
       <BaseSelect
         id="categoryId"
         label="Category"
@@ -19,7 +23,9 @@ const taskStore = useTaskStore();
       />
       <BaseButton name="xmark" @click="taskStore.resetFilter('category')" />
     </div>
-    <div class="flex">
+    <div
+      :class="`flex rounded-2xl p-1 transition duration-300 ${taskStore.priority ? 'bg-gray-600' : 'bg-gray-800'}`"
+    >
       <BaseSelect
         id="priorityId"
         label="Priority"
@@ -28,7 +34,9 @@ const taskStore = useTaskStore();
       />
       <BaseButton name="xmark" @click="taskStore.resetFilter('priority')" />
     </div>
-    <div class="flex">
+    <div
+      :class="`flex rounded-2xl p-1 transition duration-300 ${taskStore.status ? 'bg-gray-600' : 'bg-gray-800'}`"
+    >
       <BaseSelect
         id="statusId"
         label="Status"

@@ -1,13 +1,13 @@
 import { Howl } from "howler";
-import addList from "@/assets/sounds/addList.mp3";
+import addApp from "@/assets/sounds/addApp.mp3";
 import addTask from "@/assets/sounds/addTask.wav";
-import removeList from "@/assets/sounds/removeList.mp3";
+import removeApp from "@/assets/sounds/removeApp.mp3";
 import removeTask from "@/assets/sounds/removeTask.mp3";
 
 const soundsMap = {
-  addList: new Howl({ src: addList }),
+  addApp: new Howl({ src: addApp }),
   addTask: new Howl({ src: addTask }),
-  removeList: new Howl({ src: removeList }),
+  removeApp: new Howl({ src: removeApp }),
   removeTask: new Howl({ src: removeTask }),
 };
 

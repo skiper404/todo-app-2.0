@@ -6,6 +6,7 @@ import { useValidation } from "@/composables/useValidation";
 import { useSoundEffects } from "@/composables/useSoundEffects";
 import { useTaskProcessing } from "@/composables/useTaskProcessing";
 import { useModalStore } from "./ModalStore";
+import { categoryOptions } from "@/constants";
 
 export const useTaskStore = defineStore("TaskStore", () => {
   const mainStore = useMainStore();
@@ -16,24 +17,25 @@ export const useTaskStore = defineStore("TaskStore", () => {
   const newTaskPriority = ref("medium");
 
   const searchQuery = ref("");
-  const category = ref("all");
-  const status = ref("all");
-  const priority = ref("all");
+  const category = ref("");
+  const status = ref("");
+  const priority = ref("");
 
   const filterMap = { category, priority, status };
 
   //computed
-  const activeList = computed(() =>
-    mainStore.mainList.find(({ listId }) => listId === mainStore.activeListId),
+
+  const activeApp = computed(() =>
+    mainStore.appsList.find(({ appId }) => appId === mainStore.activeAppId),
   );
 
-  const tasksInActiveList = computed({
+  const tasksInActiveApp = computed({
     get() {
-      return activeList.value ? activeList.value.listTasks || [] : [];
+      return activeApp.value ? activeApp.value.appTasks : [];
     },
     set(newTasks) {
-      if (activeList.value) {
-        activeList.value.listTasks = newTasks;
+      if (activeApp.value) {
+        activeApp.value.appTasks = newTasks;
       }
     },
   });
@@ -53,11 +55,16 @@ export const useTaskStore = defineStore("TaskStore", () => {
     category,
     status,
     priority,
-    tasksInActiveList,
+    tasksInActiveApp,
   );
 
   // methods
+
   const createTask = () => {
+    const categoryColor = categoryOptions.find(
+      (cat) => cat.value === newTaskCategory.value,
+    ).color;
+
     modalStore.openModal("createTask");
     if (emptyName.value) {
       showEmptyNameErrorMessage.value = true;
@@ -71,14 +78,15 @@ export const useTaskStore = defineStore("TaskStore", () => {
       return;
     }
 
-    if (!activeList.value) return;
-    activeList.value.listTasks = [
-      ...tasksInActiveList.value,
+    if (!activeApp.value) return;
+
+    activeApp.value.appTasks = [
+      ...tasksInActiveApp.value,
       {
         taskId: uuid(),
         taskName: newTaskName.value,
         taskDate: new Date().getTime(),
-        taskCategory: newTaskCategory.value,
+        taskCategory: { label: newTaskCategory.value, color: categoryColor },
         taskStatus: newTaskStatus.value,
         taskPriority: newTaskPriority.value,
       },
@@ -89,6 +97,29 @@ export const useTaskStore = defineStore("TaskStore", () => {
     playSound("addTask");
   };
 
+  const updateTask = (updatedTask) => {
+    if (!activeApp.value) return;
+    if (!updatedTask.taskName.length) return;
+
+    const index = activeApp.value.appTasks.findIndex(
+      ({ taskId }) => taskId === updatedTask.taskId,
+    );
+
+    if (index !== -1) {
+      const updated = {
+        ...tasksInActiveApp.value[index],
+        taskName: updatedTask.taskName,
+        taskCategory: updatedTask.taskCategory,
+        taskStatus: updatedTask.taskStatus,
+        taskPriority: updatedTask.taskPriority,
+      };
+
+      activeApp.value.appTasks.splice(index, 1, updated);
+    }
+
+    modalStore.closeModal();
+  };
+
   const resetNewTaskInfo = () => {
     newTaskName.value = "";
     newTaskCategory.value = "frontend";
@@ -97,11 +128,12 @@ export const useTaskStore = defineStore("TaskStore", () => {
   };
 
   const removeTask = (taskIdToRemove) => {
-    if (!activeList.value) return;
-    activeList.value.listTasks = activeList.value.listTasks.filter(
+    if (!activeApp.value) return;
+    activeApp.value.appTasks = activeApp.value.appTasks.filter(
       ({ taskId }) => taskId !== taskIdToRemove,
     );
     playSound("removeTask");
+    modalStore.closeModal();
   };
 
   const resetSearchQuery = () => {
@@ -109,7 +141,7 @@ export const useTaskStore = defineStore("TaskStore", () => {
   };
 
   const resetFilter = (filter) => {
-    filterMap[filter].value = "all";
+    filterMap[filter].value = "";
   };
 
   return {
@@ -124,8 +156,8 @@ export const useTaskStore = defineStore("TaskStore", () => {
     status,
 
     //computed
-    activeList,
-    tasksInActiveList,
+    activeApp,
+    tasksInActiveApp,
 
     //useValidation
     shortName,
@@ -139,6 +171,7 @@ export const useTaskStore = defineStore("TaskStore", () => {
     //methods
     createTask,
     resetNewTaskInfo,
+    updateTask,
     removeTask,
     resetSearchQuery,
     resetFilter,

@@ -13,23 +13,47 @@ const taskStore = useTaskStore();
 const modalStore = useModalStore();
 
 const props = defineProps({ task: Object });
-
-const { taskId, taskName, taskDate, taskCategory, taskStatus, taskPriority } =
-  props.task;
 </script>
 
 <template>
   <div
-    class="my-2 flex w-full gap-1 rounded-xl border p-2 hover:border-green-600"
+    class="mb-4 flex rounded-xl border border-blue-700 px-4 py-2 text-xs text-gray-400 capitalize"
   >
-    <BaseIcon name="drag" class="dragTask" />
-    <TaskName :taskName />
-    <TaskDate :taskDate />
-    <TaskCategory :taskCategory />
-    <TaskPriority :taskPriority />
-    <TaskStatus :taskStatus />
-    <BaseButton name="pencil" @click="modalStore.openModal('editTask')" />
-    <BaseButton name="trash" @click="taskStore.removeTask(taskId)" />
+    <div class="flex items-center pr-4">
+      <BaseIcon name="drag" class="dragTask" />
+    </div>
+    <div class="flex flex-col">
+      <TaskName :taskName="task.taskName" />
+      <div class="flex items-center gap-4">
+        <TaskPriority :taskPriority="task.taskPriority" />
+        <TaskStatus :taskStatus="task.taskStatus" />
+        <TaskCategory :taskCategory="task.taskCategory" />
+        <TaskDate :taskDate="task.taskDate" />
+      </div>
+    </div>
+    <div class="ml-auto flex items-center justify-center gap-2">
+      <BaseButton
+        name="pencil"
+        @click="
+          modalStore.openModal('editTask', {
+            taskId: task.taskId,
+            taskName: task.taskName,
+            taskCategory: task.taskCategory,
+            taskPriority: task.taskPriority,
+            taskStatus: task.taskStatus,
+          })
+        "
+      />
+      <BaseButton
+        name="trash"
+        @click="
+          modalStore.openModal('removeTask', {
+            taskId: task.taskId,
+            taskName: task.taskName,
+          })
+        "
+      />
+    </div>
   </div>
 </template>
 

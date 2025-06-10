@@ -6,7 +6,7 @@ const props = defineProps({ name: String, size: { type: Number, default: 6 } });
 <template>
   <div
     :class="[
-      `size-5`,
+      `size-6 transition duration-300`,
       {
         'hover:text-green-300': name === 'plus',
         'hover:text-orange-300': name === 'xmark',

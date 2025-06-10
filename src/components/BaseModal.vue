@@ -28,10 +28,10 @@ const modalStore = useModalStore();
       >
         <div
           v-if="modalStore.showModal"
-          class="relative flex h-1/2 w-1/2 flex-col rounded-xl bg-gray-900 text-red-500"
+          class="relative -top-40 flex w-full flex-col bg-gray-900 md:w-100 md:rounded-xl"
         >
           <BaseButton
-            class="absolute top-6 right-6"
+            class="absolute top-6 right-6 z-10 text-white"
             name="xmark"
             @click="modalStore.closeModal"
           />

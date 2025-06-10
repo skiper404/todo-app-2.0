@@ -2,7 +2,6 @@
 import TheTitle from "./TheTitle.vue";
 import TheDate from "./TheDate.vue";
 import BaseButton from "./BaseButton.vue";
-import BaseMenu from "./BaseMenu.vue";
 import { useMenuStore } from "@/stores/MenuStore";
 const menuStore = useMenuStore();
 </script>
@@ -16,7 +15,7 @@ const menuStore = useMenuStore();
       <TheDate />
       <BaseButton
         name="menu"
-        class="rounded bg-gray-900 p-1 md:hidden"
+        class="rounded bg-gray-900 p-1 lg:hidden"
         @click="menuStore.openMenu"
       />
     </div>

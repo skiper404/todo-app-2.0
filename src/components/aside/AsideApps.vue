@@ -1,7 +1,7 @@
 <script setup>
 import { messages } from "@/messages";
 import { useMainStore } from "@/stores/MainStore";
-import ListItem from "../ListItem.vue";
+import AppItem from "./AppItem.vue";
 import BaseMessage from "../BaseMessage.vue";
 import draggable from "vuedraggable";
 import { useDragStore } from "@/stores/DragStore";
@@ -14,19 +14,21 @@ const { emptyMainList } = messages;
 <template>
   <nav
     :class="[
-      'rounded-xl border p-1 transition duration-500',
-      { 'border-green-300 bg-green-300/10': dragStore.isDraggableList },
+      'rounded-xl p-1 transition duration-500',
+      { 'border border-blue-300 bg-blue-300/10': dragStore.isDraggableList },
     ]"
   >
     <draggable
-      v-model="mainStore.mainList"
-      item-key="listId"
+      v-model="mainStore.appsList"
+      item-key="appId"
+      :delay="100"
+      :touchStartThreshold="5"
       :handle="'.dragList'"
       @start="dragStore.onDragListStart"
       @end="dragStore.onDragListEnd"
     >
       <template #item="{ element }">
-        <ListItem :list="element" />
+        <AppItem :app="element" />
       </template>
     </draggable>
 
@@ -39,9 +41,11 @@ const { emptyMainList } = messages;
       leave-to-class="opacity-0"
     >
       <BaseMessage
-        v-if="mainStore.mainList.length === 0"
+        v-if="mainStore.appsList.length === 0"
         :message="emptyMainList"
       />
     </transition>
   </nav>
 </template>
+
+<style></style>

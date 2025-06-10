@@ -3,5 +3,7 @@ const props = defineProps({ taskName: String });
 </script>
 
 <template>
-  <div>{{ taskName }}</div>
+  <div class="trancate text-lg text-gray-300">
+    {{ taskName }}
+  </div>
 </template>

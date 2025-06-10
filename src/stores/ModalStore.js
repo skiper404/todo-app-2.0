@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 import { useMainStore } from "./MainStore";
 import { useTaskStore } from "./TaskStore";
 import { modalFormsMap } from "@/constants";
@@ -9,20 +9,29 @@ export const useModalStore = defineStore("ModalStore", () => {
   const taskStore = useTaskStore();
 
   const activeForm = ref(null);
-
   const showModal = ref(false);
+  const modalData = ref(null);
 
-  const openModal = (form) => {
+  const openModal = (form, data = null) => {
     showModal.value = true;
     activeForm.value = form;
+    modalData.value = data ? reactive({ ...data }) : reactive({});
   };
 
   const closeModal = () => {
     activeForm.value = null;
     showModal.value = false;
-    mainStore.resetNewListInfo();
+    modalData.value = null;
+    mainStore.resetNewAppInfo();
     taskStore.resetNewTaskInfo();
   };
 
-  return { activeForm, showModal, modalFormsMap, openModal, closeModal };
+  return {
+    activeForm,
+    showModal,
+    modalData,
+    modalFormsMap,
+    openModal,
+    closeModal,
+  };
 });

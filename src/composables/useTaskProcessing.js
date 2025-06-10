@@ -6,16 +6,16 @@ export const useTaskProcessing = (
   category,
   status,
   priority,
-  tasksInActiveList,
+  tasksInActiveApp,
 ) => {
   const getPriorityOption = (value) =>
     priorityOptions.find((option) => option.value === value);
 
   const matchesFilter = (value, filterValue) =>
-    filterValue === "all" || filterValue === value;
+    filterValue === "" || filterValue === value;
 
   const finalTasks = computed(() => {
-    const filterResult = tasksInActiveList.value.filter(
+    const filterResult = tasksInActiveApp.value.filter(
       ({ taskCategory, taskStatus, taskPriority }) =>
         matchesFilter(taskCategory, category.value) &&
         matchesFilter(taskStatus, status.value) &&

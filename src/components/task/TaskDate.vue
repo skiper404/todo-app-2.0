@@ -11,5 +11,5 @@ const formatDate = (taskDate) => {
 </script>
 
 <template>
-  <div>{{ formatDate(taskDate) }}</div>
+  <div class="text-xs text-gray-500">{{ formatDate(taskDate) }}</div>
 </template>

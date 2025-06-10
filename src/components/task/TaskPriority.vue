@@ -6,10 +6,10 @@ const { getPriorityOption } = useTaskProcessing();
 </script>
 
 <template>
-  <div class="flex items-center">
+  <div class="flex items-center gap-1">
     <div
       :class="[
-        'h-2 w-2 rounded-full',
+        'h-4 w-4 rounded-full',
         {
           'bg-red-500': taskPriority === 'critical',
           'bg-orange-500': taskPriority === 'high',
@@ -19,6 +19,8 @@ const { getPriorityOption } = useTaskProcessing();
         },
       ]"
     ></div>
-    <div>{{ getPriorityOption(taskPriority).label }}</div>
+    <div>
+      {{ getPriorityOption(taskPriority).label }}
+    </div>
   </div>
 </template>

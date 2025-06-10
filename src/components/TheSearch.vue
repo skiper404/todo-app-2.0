@@ -8,7 +8,7 @@ const taskStore = useTaskStore();
 </script>
 
 <template>
-  <div class="relative mx-2 flex w-[600px] min-w-[200px] flex-1 items-center">
+  <div class="relative mx-2 flex w-full items-center">
     <BaseIcon name="search" class="absolute left-4" />
     <BaseInput
       id="searchId"

@@ -1,7 +1,6 @@
 <script setup>
 import { messages } from "@/messages";
 import { useTaskStore } from "@/stores/TaskStore";
-import { useModalStore } from "@/stores/ModalStore";
 import { priorityOptions, statusOptions, categoryOptions } from "@/constants";
 
 import BaseInput from "../BaseInput.vue";
@@ -14,15 +13,10 @@ const { emptyName, shortName } = messages;
 </script>
 
 <template>
-  <div
-    class="relative flex h-1/2 w-1/2 flex-col rounded-xl bg-gray-900 text-red-500"
-  >
-    <div class="m-2 flex flex-col">
-      <BaseButton name="plus" @click="taskStore.createTask"
-        >Create task</BaseButton
-      >
-
+  <div class="relative flex flex-col rounded-xl bg-gray-900 text-gray-500">
+    <div class="mt-10 flex flex-col gap-2 px-10">
       <BaseInput
+        class="px-2"
         id="taskName"
         label="Task name"
         placeholder="Task name..."
@@ -70,6 +64,13 @@ const { emptyName, shortName } = messages;
           :message="shortName"
         />
       </transition>
+      <BaseButton
+        name="plus"
+        @click="taskStore.createTask"
+        class="mx-auto my-4 rounded-xl bg-gray-600 p-2 text-gray-400 transition duration-300 hover:border-green-300 hover:bg-gray-700 hover:text-green-400"
+      >
+        Create task</BaseButton
+      >
     </div>
   </div>
 </template>

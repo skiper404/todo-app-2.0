@@ -9,7 +9,7 @@ const model = defineModel();
 </script>
 
 <template>
-  <div class="flex items-center">
+  <div class="flex items-center whitespace-nowrap">
     <label :for="id">
       <span>
         {{ label }}

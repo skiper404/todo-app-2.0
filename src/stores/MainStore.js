@@ -7,15 +7,16 @@ import { useSoundEffects } from "@/composables/useSoundEffects";
 import { useModalStore } from "./ModalStore";
 
 export const useMainStore = defineStore("MainStore", () => {
-  const mainList = ref([]);
-  const newListName = ref("");
-  const newListStatus = ref("a");
-  const activeListId = ref(null);
+  const appsList = ref([]);
+
+  const newAppName = ref("");
+  const newAppType = ref("desktop");
+  const activeAppId = ref(null);
 
   const modalStore = useModalStore();
   const { playSound } = useSoundEffects();
 
-  useLocalStorage(mainList, "list");
+  useLocalStorage(appsList, "AppTracker");
 
   const {
     showShortNameErrorMessage,
@@ -23,18 +24,19 @@ export const useMainStore = defineStore("MainStore", () => {
     emptyName,
     shortName,
   } = useValidation({
-    name: newListName,
+    name: newAppName,
   });
 
-  const resetNewListInfo = () => {
-    (newListName.value = ""), (newListStatus.value = "a");
+  const resetNewAppInfo = () => {
+    newAppName.value = "";
+    newAppType.value = "desktop";
   };
 
-  const setActiveId = async (listId) => {
-    activeListId.value = listId;
+  const setActiveAppId = async (appId) => {
+    activeAppId.value = appId;
   };
 
-  const createList = () => {
+  const createApp = () => {
     if (emptyName.value) {
       showEmptyNameErrorMessage.value = true;
       showShortNameErrorMessage.value = false;
@@ -47,38 +49,53 @@ export const useMainStore = defineStore("MainStore", () => {
       return;
     }
 
-    mainList.value = [
-      ...mainList.value,
+    appsList.value = [
+      ...appsList.value,
       {
-        listId: uuid(),
-        listName: newListName.value,
-        listStatus: newListStatus.value,
-        listTasks: [],
+        appId: uuid(),
+        appName: newAppName.value,
+        appType: newAppType.value,
+        appTasks: [],
       },
     ];
     showEmptyNameErrorMessage.value = false;
     showShortNameErrorMessage.value = false;
     modalStore.closeModal();
-    playSound("addList");
+    playSound("addApp");
   };
 
-  const removeList = (listIdToRemove) => {
-    mainList.value = mainList.value.filter(
-      ({ listId }) => listId !== listIdToRemove,
+  const updateApp = (updatedApp) => {
+    const targetApp = appsList.value.find(
+      (app) => app.appId === updatedApp.appId,
     );
-    playSound("removeList");
+
+    if (targetApp) {
+      targetApp.appName = updatedApp.appName;
+      targetApp.appType = updatedApp.appType;
+    }
+
+    modalStore.closeModal();
+  };
+
+  const removeApp = (appIdToRemove) => {
+    appsList.value = appsList.value.filter(
+      ({ appId }) => appId !== appIdToRemove,
+    );
+    playSound("removeApp");
+    modalStore.closeModal();
   };
 
   return {
-    mainList,
-    activeListId,
-    newListName,
-    newListStatus,
+    appsList,
+    activeAppId,
+    newAppName,
+    newAppType,
 
-    setActiveId,
-    createList,
-    removeList,
-    resetNewListInfo,
+    setActiveAppId,
+    createApp,
+    updateApp,
+    removeApp,
+    resetNewAppInfo,
 
     emptyName,
     shortName,

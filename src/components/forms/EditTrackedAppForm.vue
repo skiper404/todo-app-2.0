@@ -1,36 +1,36 @@
 <script setup>
 import { messages } from "@/messages";
 import { useMainStore } from "@/stores/MainStore";
-import { useModalStore } from "@/stores/ModalStore";
-import { listCategories } from "@/constants";
+import { appCategories } from "@/constants";
 
 import BaseInput from "../BaseInput.vue";
 import BaseButton from "../BaseButton.vue";
 import BaseMessage from "../BaseMessage.vue";
 import BaseSelect from "../BaseSelect.vue";
+import { useModalStore } from "@/stores/ModalStore";
 
 const mainStore = useMainStore();
+const modalStore = useModalStore();
 const { emptyName, shortName } = messages;
 </script>
 
 <template>
-  <div
-    class="relative flex h-1/2 w-1/2 flex-col rounded-xl bg-gray-900 text-red-500"
-  >
-    <div class="text-center">Create List</div>
-    <div class="flex flex-col whitespace-nowrap">
+  <div class="relative flex flex-col rounded-xl bg-gray-900 text-gray-400">
+    <div class="mt-10 flex flex-col whitespace-nowrap">
       <BaseInput
-        id="listName"
-        label="List name:"
-        placeholder="List name..."
-        v-model="mainStore.newListName"
-        @submit-enter="mainStore.createList"
+        class="px-10"
+        id="appId"
+        label="App name:"
+        placeholder="App name..."
+        v-model="modalStore.modalData.appName"
+        @submit-enter="mainStore.updateApp(modalStore.modalData)"
       />
       <BaseSelect
-        id="listId"
-        label="List Status:"
-        :options="listCategories"
-        v-model="mainStore.newListStatus"
+        id="appId"
+        label="App Status:"
+        :options="appCategories"
+        v-model="modalStore.modalData.appType"
+        class="px-10"
       />
       <transition
         mode="out-in"
@@ -50,8 +50,12 @@ const { emptyName, shortName } = messages;
           :message="shortName"
         />
       </transition>
-      <BaseButton name="plus" @click="mainStore.createList">
-        Create List
+      <BaseButton
+        name="plus"
+        @click="mainStore.updateApp(modalStore.modalData)"
+        class="mx-auto my-4 rounded-xl bg-gray-600 p-2 text-gray-400 transition duration-300 hover:border-green-300 hover:bg-gray-700 hover:text-green-400"
+      >
+        Update Tracked App
       </BaseButton>
     </div>
   </div>

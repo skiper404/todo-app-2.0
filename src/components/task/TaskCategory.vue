@@ -1,7 +1,7 @@
 <script setup>
-const props = defineProps({ taskCategory: String });
+const props = defineProps({ taskCategory: Object });
 </script>
 
 <template>
-  <div>{{ taskCategory }}</div>
+  <div :class="`${taskCategory.color}`">{{ taskCategory.label }}</div>
 </template>

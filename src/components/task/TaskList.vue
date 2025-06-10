@@ -15,10 +15,10 @@ const mainStore = useMainStore();
 const taskStore = useTaskStore();
 const dragStore = useDragStore();
 
-const activeListId = computed(() => route.params.listId);
+const activeAppId = computed(() => route.params.appId);
 
 watchEffect(async () => {
-  await mainStore.setActiveId(activeListId.value);
+  await mainStore.setActiveAppId(activeAppId.value);
 });
 
 const { noResults, emptyTaskList } = messages;
@@ -27,8 +27,10 @@ const { noResults, emptyTaskList } = messages;
 <template>
   <div
     :class="[
-      'flex rounded-xl border p-1 transition duration-500',
-      { 'border-yellow-400 bg-yellow-400/10': dragStore.isDraggableTask },
+      'rounded-xl p-1 transition duration-500',
+      {
+        'border border-yellow-400 bg-yellow-400/10': dragStore.isDraggableTask,
+      },
     ]"
   >
     <transition
@@ -38,7 +40,7 @@ const { noResults, emptyTaskList } = messages;
       move-class="transition duration-300"
     >
       <draggable
-        v-model="taskStore.tasksInActiveList"
+        v-model="taskStore.tasksInActiveApp"
         item-key="taskId"
         :handle="'.dragTask'"
         @start="dragStore.onDragTaskStart"
@@ -64,7 +66,7 @@ const { noResults, emptyTaskList } = messages;
       <BaseMessage
         v-if="
           taskStore.finalTasks.length === 0 &&
-          taskStore.tasksInActiveList.length !== 0
+          taskStore.tasksInActiveApp.length !== 0
         "
         :message="noResults"
       />
@@ -78,7 +80,7 @@ const { noResults, emptyTaskList } = messages;
       leave-to-class="opacity-0"
     >
       <BaseMessage
-        v-if="taskStore.tasksInActiveList.length === 0"
+        v-if="taskStore.tasksInActiveApp.length === 0"
         :message="emptyTaskList"
       />
     </transition>
