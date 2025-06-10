@@ -13,6 +13,7 @@ const props = defineProps({ name: String, size: { type: Number, default: 6 } });
         'hover:text-red-300': name === 'trash',
         'hover:text-blue-300': name === 'search',
         'hover:text-yellow-500': name === 'pencil' || 'menu',
+        'hover:cursor-move': name === 'drag',
       },
     ]"
   >

@@ -7,7 +7,7 @@ import { useSoundEffects } from "@/composables/useSoundEffects";
 import { useTaskProcessing } from "@/composables/useTaskProcessing";
 import { useModalStore } from "./ModalStore";
 
-export const useTaskStore = defineStore("taskStore", () => {
+export const useTaskStore = defineStore("TaskStore", () => {
   const mainStore = useMainStore();
   //refs
   const newTaskName = ref("");
@@ -15,8 +15,6 @@ export const useTaskStore = defineStore("taskStore", () => {
   const newTaskStatus = ref("pending");
   const newTaskPriority = ref("medium");
 
-  const sortLabel = ref("name");
-  const sortDirection = ref(true);
   const searchQuery = ref("");
   const category = ref("all");
   const status = ref("all");
@@ -29,7 +27,16 @@ export const useTaskStore = defineStore("taskStore", () => {
     mainStore.mainList.find(({ listId }) => listId === mainStore.activeListId),
   );
 
-  const tasksInActiveList = computed(() => activeList.value?.listTasks || []);
+  const tasksInActiveList = computed({
+    get() {
+      return activeList.value ? activeList.value.listTasks || [] : [];
+    },
+    set(newTasks) {
+      if (activeList.value) {
+        activeList.value.listTasks = newTasks;
+      }
+    },
+  });
 
   //stores, composables
   const modalStore = useModalStore();
@@ -42,8 +49,6 @@ export const useTaskStore = defineStore("taskStore", () => {
   } = useValidation({ name: newTaskName });
 
   const { finalTasks } = useTaskProcessing(
-    sortLabel,
-    sortDirection,
     searchQuery,
     category,
     status,
@@ -113,8 +118,6 @@ export const useTaskStore = defineStore("taskStore", () => {
     newTaskCategory,
     newTaskPriority,
     newTaskStatus,
-    sortDirection,
-    sortLabel,
     searchQuery,
     category,
     priority,

@@ -7,6 +7,7 @@ import TaskCategory from "./TaskCategory.vue";
 import TaskPriority from "./TaskPriority.vue";
 import TaskStatus from "./TaskStatus.vue";
 import { useModalStore } from "@/stores/ModalStore";
+import BaseIcon from "../BaseIcon.vue";
 
 const taskStore = useTaskStore();
 const modalStore = useModalStore();
@@ -19,8 +20,9 @@ const { taskId, taskName, taskDate, taskCategory, taskStatus, taskPriority } =
 
 <template>
   <div
-    class="flex w-full gap-2 truncate rounded-xl border p-2 hover:border-green-600"
+    class="my-2 flex w-full gap-1 rounded-xl border p-2 hover:border-green-600"
   >
+    <BaseIcon name="drag" class="dragTask" />
     <TaskName :taskName />
     <TaskDate :taskDate />
     <TaskCategory :taskCategory />

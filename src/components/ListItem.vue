@@ -1,6 +1,8 @@
 <script setup>
 import { useMainStore } from "@/stores/MainStore";
 import BaseButton from "./BaseButton.vue";
+import BaseIcon from "./BaseIcon.vue";
+
 import { useModalStore } from "@/stores/ModalStore";
 import { useMenuStore } from "@/stores/MenuStore";
 
@@ -16,7 +18,7 @@ const { listId, listName, listStatus } = props.list;
   <router-link
     :to="{ name: 'List', params: { listId: listId } }"
     :class="[
-      'mb-4 flex items-center justify-between rounded-xl border px-2',
+      'my-2 flex items-center justify-between rounded-xl border px-2',
       {
         'bg-gray-800': listId === mainStore.activeListId,
         'border-violet-800': listId === mainStore.activeListId,
@@ -25,6 +27,7 @@ const { listId, listName, listStatus } = props.list;
     @click="menuStore.closeMenu"
   >
     <div class="flex w-full items-center gap-2 p-2">
+      <BaseIcon name="drag" class="dragList" />
       <div
         :class="[
           'h-2 w-2 rounded-full',

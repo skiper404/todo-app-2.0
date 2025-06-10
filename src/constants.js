@@ -41,14 +41,6 @@ export const categoryOptions = [
   { label: "Collaboration", value: "collaboration" },
 ];
 
-export const sortingOptions = [
-  { label: "Name", value: "name" },
-  { label: "Date", value: "date" },
-  { label: "Category", value: "category" },
-  { label: "Status", value: "status" },
-  { label: "Priority", value: "priority" },
-];
-
 export const listCategories = [
   { label: "A", value: "a" },
   { label: "B", value: "b" },
