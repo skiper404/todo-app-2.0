@@ -1,5 +1,6 @@
 <script setup>
 import { useTaskProcessing } from "@/composables/useTaskProcessing";
+import BaseIcon from "../BaseIcon.vue";
 
 const props = defineProps({ taskPriority: String });
 const { getPriorityOption } = useTaskProcessing();
@@ -7,18 +8,17 @@ const { getPriorityOption } = useTaskProcessing();
 
 <template>
   <div class="flex items-center gap-1">
-    <div
-      :class="[
-        'h-4 w-4 rounded-full',
-        {
-          'bg-red-500': taskPriority === 'critical',
-          'bg-orange-500': taskPriority === 'high',
-          'bg-yellow-500': taskPriority === 'medium',
-          'bg-lime-500': taskPriority === 'low',
-          'bg-white': taskPriority === 'optional',
-        },
-      ]"
-    ></div>
+    <BaseIcon
+      name="priority"
+      :class="{
+        'text-red-500': taskPriority === 'critical',
+        'text-orange-500': taskPriority === 'high',
+        'text-yellow-500': taskPriority === 'medium',
+        'text-lime-500': taskPriority === 'low',
+        'text-white': taskPriority === 'optional',
+      }"
+    />
+
     <div>
       {{ getPriorityOption(taskPriority).label }}
     </div>

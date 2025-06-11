@@ -9,17 +9,17 @@ const taskStore = useTaskStore();
 
 <template>
   <div class="relative mx-2 flex w-full items-center">
-    <BaseIcon name="search" class="absolute left-4" />
+    <BaseIcon name="search" class="absolute left-2" />
     <BaseInput
       id="searchId"
       label=""
       placeholder="Search..."
       v-model="taskStore.searchQuery"
-      class="w-full rounded-full bg-[var(--color-primary-800)] py-1 pl-10 ring-1 ring-[var(--color-primary-600)] outline-none"
+      class="w-full rounded-full bg-gray-800 py-1 pl-10 outline-none"
     />
     <BaseButton
-      name="xmark"
-      class="absolute right-4"
+      name="cancel"
+      class="absolute right-1 hover:text-red-400"
       @click="taskStore.resetSearchQuery"
     />
   </div>

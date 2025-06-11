@@ -1,23 +1,27 @@
 <script setup>
+import BaseIcon from "./BaseIcon.vue";
+
 const props = defineProps({
   id: String,
   label: String,
   placeholder: String,
+  icon: String,
 });
 const emit = defineEmits(["submit-enter"]);
 const model = defineModel();
 </script>
 
 <template>
-  <div class="flex items-center whitespace-nowrap">
-    <label :for="id">
-      <span>
-        {{ label }}
-      </span>
+  <div class="whitespace-nowrap capitalize">
+    <label :for="id" class="flex items-center gap-2">
+      <div>
+        <BaseIcon :name="icon" />
+      </div>
+      {{ label }}
       <input
         :id="id"
         type="text"
-        class="mx-2 my-1 w-full outline-0"
+        class="w-full outline-0"
         :placeholder="placeholder"
         v-model="model"
         @keyup.enter="emit('submit-enter')"

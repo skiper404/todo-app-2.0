@@ -14,16 +14,14 @@ const menuStore = useMenuStore();
   >
     <div class="relative border-b border-gray-800 bg-gray-950 pt-20 pb-4">
       <BaseCreateBlock
-        label="Create list"
-        formType="createList"
+        label="Create App"
+        formType="createTrackedApp"
         class="absolute top-4 left-1/2 w-1/2 -translate-x-1/2"
       />
-
       <AsideLists />
-
       <BaseButton
-        name="xmark"
-        class="absolute top-9 right-9 rounded bg-gray-900 p-1"
+        name="close"
+        class="absolute top-4 right-4 rounded bg-gray-900 p-1"
         @click="menuStore.closeMenu"
       />
     </div>

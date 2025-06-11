@@ -2,6 +2,7 @@
 import { format } from "date-fns";
 import { enUS } from "date-fns/locale";
 import { onMounted, onUnmounted, ref } from "vue";
+import BaseIcon from "./BaseIcon.vue";
 
 const formattedDate = () => {
   const date = new Date();
@@ -20,8 +21,13 @@ onUnmounted(() => clearInterval(timer.value));
 
 <template>
   <div
-    class="hidden w-50 items-center justify-center rounded-xl bg-gray-900 px-2 py-1 md:flex"
+    class="hidden w-50 items-center justify-center gap-1 rounded-xl bg-gray-900 px-2 py-1 whitespace-nowrap md:flex"
   >
-    {{ time }}
+    <div>
+      <BaseIcon name="clock" />
+    </div>
+    <div>
+      {{ time }}
+    </div>
   </div>
 </template>

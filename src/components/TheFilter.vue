@@ -10,40 +10,55 @@ const taskStore = useTaskStore();
 
 <template>
   <div
-    class="mt-4 flex w-full cursor-ns-resize items-center justify-between gap-2"
+    class="mt-2 flex w-full flex-col items-center justify-between gap-2 lg:flex-row"
   >
     <div
-      :class="`flex rounded-2xl p-1 transition duration-300 ${taskStore.category ? 'bg-gray-600' : 'bg-gray-800'}`"
+      :class="`flex w-full flex-1 items-center justify-between rounded-2xl p-1 transition duration-300 ${taskStore.category ? 'bg-gray-600' : 'bg-gray-800'}`"
     >
       <BaseSelect
         id="categoryId"
-        label="Category"
+        label="category"
+        icon="category"
         :options="categoryOptions"
         v-model="taskStore.category"
       />
-      <BaseButton name="xmark" @click="taskStore.resetFilter('category')" />
+      <BaseButton
+        name="cancel"
+        @click="taskStore.resetFilter('category')"
+        class="hover:text-red-400"
+      />
     </div>
     <div
-      :class="`flex rounded-2xl p-1 transition duration-300 ${taskStore.priority ? 'bg-gray-600' : 'bg-gray-800'}`"
+      :class="`flex w-full flex-1 justify-between rounded-2xl p-1 transition duration-300 ${taskStore.priority ? 'bg-gray-600' : 'bg-gray-800'}`"
     >
       <BaseSelect
         id="priorityId"
-        label="Priority"
+        label="priority"
+        icon="priority"
         :options="priorityOptions"
         v-model="taskStore.priority"
       />
-      <BaseButton name="xmark" @click="taskStore.resetFilter('priority')" />
+      <BaseButton
+        name="cancel"
+        @click="taskStore.resetFilter('priority')"
+        class="hover:text-red-400"
+      />
     </div>
     <div
-      :class="`flex rounded-2xl p-1 transition duration-300 ${taskStore.status ? 'bg-gray-600' : 'bg-gray-800'}`"
+      :class="`flex w-full flex-1 justify-between rounded-2xl p-1 transition duration-300 ${taskStore.status ? 'bg-gray-600' : 'bg-gray-800'}`"
     >
       <BaseSelect
         id="statusId"
-        label="Status"
+        label="status"
+        icon="status"
         :options="statusOptions"
         v-model="taskStore.status"
       />
-      <BaseButton name="xmark" @click="taskStore.resetFilter('status')" />
+      <BaseButton
+        name="cancel"
+        @click="taskStore.resetFilter('status')"
+        class="hover:text-red-400"
+      />
     </div>
   </div>
 </template>

@@ -27,14 +27,7 @@ const props = defineProps({ app: Object });
     <div class="flex w-full items-center gap-2 p-2">
       <BaseIcon name="drag" class="dragList" />
 
-      <BaseIcon
-        :name="app.appType"
-        :class="[
-          { 'text-orange-500': app.appType === 'web' },
-          { 'text-teal-500': app.appType === 'mobile' },
-          { 'text-yellow-500': app.appType === 'desktop' },
-        ]"
-      />
+      <BaseIcon :name="app.appType" />
       <div
         :class="{
           'text-violet-500': app.appId === mainStore.activeAppId,
@@ -46,7 +39,6 @@ const props = defineProps({ app: Object });
     <div class="flex gap-2">
       <BaseButton
         name="pencil"
-        :size="4"
         @click="
           modalStore.openModal('editTrackedApp', {
             appId: app.appId,

@@ -1,5 +1,4 @@
 <script setup>
-import { useTaskStore } from "@/stores/TaskStore";
 import BaseButton from "../BaseButton.vue";
 import TaskName from "./TaskName.vue";
 import TaskDate from "./TaskDate.vue";
@@ -9,7 +8,6 @@ import TaskStatus from "./TaskStatus.vue";
 import { useModalStore } from "@/stores/ModalStore";
 import BaseIcon from "../BaseIcon.vue";
 
-const taskStore = useTaskStore();
 const modalStore = useModalStore();
 
 const props = defineProps({ task: Object });

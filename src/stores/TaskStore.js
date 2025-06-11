@@ -86,7 +86,7 @@ export const useTaskStore = defineStore("TaskStore", () => {
         taskId: uuid(),
         taskName: newTaskName.value,
         taskDate: new Date().getTime(),
-        taskCategory: { label: newTaskCategory.value, color: categoryColor },
+        taskCategory: newTaskCategory.value,
         taskStatus: newTaskStatus.value,
         taskPriority: newTaskPriority.value,
       },

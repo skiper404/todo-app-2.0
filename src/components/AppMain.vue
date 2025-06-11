@@ -4,9 +4,9 @@ import MainHeader from "./MainHeader.vue";
 </script>
 
 <template>
-  <main class="overflow-hidden pt-26 lg:mx-6 lg:ml-94">
+  <main class="overflow-hidden pt-16 lg:mx-4 lg:ml-88 lg:pt-24">
     <div
-      class="relative max-h-[calc(100vh-200px)] min-h-[calc(100vh-200px)] overflow-y-auto border-[var(--color-primary-600)] p-4 lg:rounded-3xl lg:border-2"
+      class="relative max-h-[calc(100vh-180px)] min-h-[calc(100vh-180px)] overflow-y-auto border-[var(--color-primary-600)] px-4 lg:rounded-3xl lg:border-2 lg:p-4"
     >
       <MainHeader />
       <BaseCreateBlock label="Create task" formType="createTask" />

@@ -14,18 +14,20 @@ const { emptyName, shortName } = messages;
 
 <template>
   <div class="relative flex flex-col rounded-xl bg-gray-900 text-gray-400">
-    <div class="mt-10 flex flex-col whitespace-nowrap">
+    <div class="mt-10 flex flex-col gap-2 whitespace-nowrap">
       <BaseInput
         class="px-10"
         id="appName"
         label="App name:"
+        icon="appName"
         placeholder="App name..."
         v-model="mainStore.newAppName"
         @submit-enter="mainStore.createApp"
       />
       <BaseSelect
         id="appId"
-        label="App Status:"
+        label="App Type:"
+        :icon="mainStore.newAppType"
         :options="appCategories"
         v-model="mainStore.newAppType"
         class="px-10"

@@ -13,12 +13,13 @@ const { emptyName, shortName } = messages;
 </script>
 
 <template>
-  <div class="relative flex flex-col rounded-xl bg-gray-900 text-gray-500">
+  <div class="relative flex flex-col rounded-xl bg-gray-900 text-gray-400">
     <div class="mt-10 flex flex-col gap-2 px-10">
       <BaseInput
         class="px-2"
         id="taskName"
-        label="Task name"
+        label="name:"
+        icon="appName"
         placeholder="Task name..."
         v-model="taskStore.newTaskName"
         @submit-enter="taskStore.createTask"
@@ -26,21 +27,24 @@ const { emptyName, shortName } = messages;
 
       <BaseSelect
         id="taskCategory"
-        label="Task Category:"
+        label="category:"
+        icon="category"
         :options="categoryOptions"
         v-model="taskStore.newTaskCategory"
       />
 
       <BaseSelect
         id="taskPriority"
-        label="Task Priority:"
+        label="priority:"
+        icon="priority"
         :options="priorityOptions"
         v-model="taskStore.newTaskPriority"
       />
 
       <BaseSelect
         id="taskStatus"
-        label="Task Status:"
+        label="status:"
+        :icon="taskStore.newTaskStatus"
         :options="statusOptions"
         v-model="taskStore.newTaskStatus"
       />

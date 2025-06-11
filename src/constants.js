@@ -15,7 +15,7 @@ export const priorityOptions = [
   { label: "High", value: "high", level: 2 },
   { label: "Medium", value: "medium", level: 3 },
   { label: "Low", value: "low", level: 4 },
-  { label: "Optionsl", value: "optional", level: 5 },
+  { label: "Optional", value: "optional", level: 5 },
 ];
 
 export const statusOptions = [
@@ -42,40 +42,17 @@ export const categoryOptions = [
   },
   { label: "DevOps", value: "devops", color: "text-blue-400" },
   { label: "Testing", value: "testing", color: "text-rose-400" },
-  {
-    label: "Performance",
-    value: "performance",
-    color: "text-orange-400",
-  },
   { label: "Security", value: "security", color: "text-red-400" },
   { label: "UX", value: "ux", color: "text-yellow-400" },
-  {
-    label: "Documentation",
-    value: "documentation",
-    color: "text-sky-400",
-  },
-  {
-    label: "Code Review",
-    value: "codeReview",
-    color: "text-purple-400",
-  },
+
   {
     label: "Integration",
     value: "integration",
     color: "text-teal-400",
   },
-  {
-    label: "Deployment",
-    value: "deployment",
-    color: "text-fuchsia-400",
-  },
 
   { label: "Product", value: "product", color: "text-cyan-400" },
-  {
-    label: "Maintenance",
-    value: "maintenance",
-    color: "text-lime-400",
-  },
+
   {
     label: "Analytics",
     value: "analytics",
@@ -85,11 +62,6 @@ export const categoryOptions = [
     label: "Marketing",
     value: "marketing",
     color: "text-amber-400",
-  },
-  {
-    label: "Collaboration",
-    value: "collaboration",
-    color: "text-zinc-400",
   },
 ];
 

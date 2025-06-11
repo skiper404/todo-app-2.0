@@ -12,9 +12,11 @@ const modalStore = useModalStore();
   <div class="relative flex flex-col rounded-xl bg-gray-900 text-gray-500">
     <div class="mt-10 flex flex-col gap-2 px-10">
       <div>
-        Are you really want delete
-        <span>{{ modalStore.modalData.taskName }}</span
-        >?
+        Are you really want remove
+        <span class="font-bold text-gray-400">{{
+          modalStore.modalData.taskName
+        }}</span>
+        ?
       </div>
       <div class="flex">
         <BaseButton

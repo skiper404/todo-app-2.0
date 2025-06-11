@@ -31,8 +31,8 @@ const modalStore = useModalStore();
           class="relative -top-40 flex w-full flex-col bg-gray-900 md:w-100 md:rounded-xl"
         >
           <BaseButton
-            class="absolute top-6 right-6 z-10 text-white"
-            name="xmark"
+            class="absolute top-6 right-6 z-10 rounded bg-gray-800 text-white"
+            name="close"
             @click="modalStore.closeModal"
           />
           <component

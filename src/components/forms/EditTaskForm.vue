@@ -20,7 +20,8 @@ const { emptyName, shortName } = messages;
       <BaseInput
         class="px-2"
         id="taskName"
-        label="Task name"
+        label="Task name:"
+        icon="appName"
         placeholder="Task name..."
         v-model="modalStore.modalData.taskName"
         @submit-enter="taskStore.updateTask(modalStore.modalData)"
@@ -29,13 +30,15 @@ const { emptyName, shortName } = messages;
       <BaseSelect
         id="taskCategory"
         label="Task Category:"
+        icon="category"
         :options="categoryOptions"
-        v-model="modalStore.modalData.taskCategory.label"
+        v-model="modalStore.modalData.taskCategory"
       />
 
       <BaseSelect
         id="taskPriority"
         label="Task Priority:"
+        icon="priority"
         :options="priorityOptions"
         v-model="modalStore.modalData.taskPriority"
       />
@@ -43,6 +46,7 @@ const { emptyName, shortName } = messages;
       <BaseSelect
         id="taskStatus"
         label="Task Status:"
+        icon="status"
         :options="statusOptions"
         v-model="modalStore.modalData.taskStatus"
       />

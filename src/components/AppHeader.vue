@@ -8,7 +8,7 @@ const menuStore = useMenuStore();
 
 <template>
   <header
-    class="fixed top-6 right-6 left-6 flex items-center justify-between rounded-2xl border-2 border-[var(--color-primary-600)] bg-gradient-to-r from-[var(--color-primary-700)] to-[var(--color-primary-600)] px-2 py-2 md:px-10"
+    class="fixed top-0 right-0 left-0 z-10 flex items-center justify-between border-[var(--color-primary-600)] bg-gradient-to-r from-[var(--color-primary-700)] to-[var(--color-primary-600)] p-4 md:px-10 lg:top-4 lg:right-4 lg:left-4 lg:rounded-3xl lg:border-2"
   >
     <TheTitle />
     <div class="flex gap-2">
