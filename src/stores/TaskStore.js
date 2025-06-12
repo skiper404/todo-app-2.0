@@ -3,7 +3,7 @@ import { v4 as uuid } from "uuid";
 import { defineStore } from "pinia";
 import { useMainStore } from "./MainStore";
 import { useValidation } from "@/composables/useValidation";
-import { useSoundEffects } from "@/composables/useSoundEffects";
+import { useSoundStore } from "@/stores/SoundStore";
 import { useTaskProcessing } from "@/composables/useTaskProcessing";
 import { useModalStore } from "./ModalStore";
 import { categoryOptions } from "@/constants";
@@ -42,7 +42,7 @@ export const useTaskStore = defineStore("TaskStore", () => {
 
   //stores, composables
   const modalStore = useModalStore();
-  const { playSound } = useSoundEffects();
+  const soundStore = useSoundStore();
   const {
     shortName,
     emptyName,
@@ -94,7 +94,7 @@ export const useTaskStore = defineStore("TaskStore", () => {
     showEmptyNameErrorMessage.value = false;
     showShortNameErrorMessage.value = false;
     modalStore.closeModal();
-    playSound("addTask");
+    soundStore.playSound("addTask");
   };
 
   const updateTask = (updatedTask) => {
@@ -132,7 +132,7 @@ export const useTaskStore = defineStore("TaskStore", () => {
     activeApp.value.appTasks = activeApp.value.appTasks.filter(
       ({ taskId }) => taskId !== taskIdToRemove,
     );
-    playSound("removeTask");
+    soundStore.playSound("removeTask");
     modalStore.closeModal();
   };
 

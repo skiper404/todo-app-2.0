@@ -15,16 +15,7 @@ const modalStore = useModalStore();
 <template>
   <div class="min-h-screen bg-black text-[var(--color-primary-500)]">
     <AppHeader />
-    <transition
-      enter-active-class="transition duration-300"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-active-class="transition duration-300"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
-    >
-      <BaseMenu v-if="menuStore.showMenu" />
-    </transition>
+    <BaseMenu />
     <TheAside />
     <AppMain />
     <AppFooter />

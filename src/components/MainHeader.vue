@@ -5,7 +5,7 @@ import TheFilter from "./TheFilter.vue";
 
 <template>
   <div
-    class="flex flex-col items-center justify-evenly border-[var(--color-primary-600)] p-1 text-sm"
+    class="hidden flex-col items-center justify-evenly border-[var(--color-primary-600)] p-1 text-sm lg:flex"
   >
     <TheSearch />
     <TheFilter />

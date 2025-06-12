@@ -13,7 +13,7 @@ const taskStore = useTaskStore();
     class="mt-2 flex w-full flex-col items-center justify-between gap-2 lg:flex-row"
   >
     <div
-      :class="`flex w-full flex-1 items-center justify-between rounded-2xl p-1 transition duration-300 ${taskStore.category ? 'bg-gray-600' : 'bg-gray-800'}`"
+      :class="`flex w-full flex-1 items-center justify-between rounded-2xl p-1 transition duration-300 ${taskStore.category ? 'bg-gray-800' : 'bg-gray-900'}`"
     >
       <BaseSelect
         id="categoryId"
@@ -29,7 +29,7 @@ const taskStore = useTaskStore();
       />
     </div>
     <div
-      :class="`flex w-full flex-1 justify-between rounded-2xl p-1 transition duration-300 ${taskStore.priority ? 'bg-gray-600' : 'bg-gray-800'}`"
+      :class="`flex w-full flex-1 justify-between rounded-2xl p-1 transition duration-300 ${taskStore.priority ? 'bg-gray-800' : 'bg-gray-900'}`"
     >
       <BaseSelect
         id="priorityId"
@@ -45,7 +45,7 @@ const taskStore = useTaskStore();
       />
     </div>
     <div
-      :class="`flex w-full flex-1 justify-between rounded-2xl p-1 transition duration-300 ${taskStore.status ? 'bg-gray-600' : 'bg-gray-800'}`"
+      :class="`flex w-full flex-1 justify-between rounded-2xl p-1 transition duration-300 ${taskStore.status ? 'bg-gray-800' : 'bg-gray-900'}`"
     >
       <BaseSelect
         id="statusId"

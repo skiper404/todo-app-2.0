@@ -3,27 +3,56 @@ import { useMenuStore } from "@/stores/MenuStore";
 import BaseButton from "./BaseButton.vue";
 import AsideLists from "./aside/AsideApps.vue";
 import BaseCreateBlock from "./BaseCreateBlock.vue";
+import TheSearch from "./TheSearch.vue";
+import TheFilter from "./TheFilter.vue";
 
 const menuStore = useMenuStore();
 </script>
 
 <template>
-  <div
-    class="absolute top-0 left-0 z-10 h-screen w-full bg-black/50 lg:hidden"
-    @click.self="menuStore.closeMenu"
+  <transition
+    enter-active-class="transition duration-500"
+    enter-from-class="opacity-0"
+    enter-to-class="opacity-100"
+    leave-active-class="transition duration-300"
+    leave-from-class="opacity-100"
+    leave-to-class="opacity-0"
   >
-    <div class="relative border-b border-gray-800 bg-gray-950 pt-20 pb-4">
+    <div
+      class="absolute top-0 left-0 z-10 h-screen w-full bg-black/70 lg:hidden"
+      @click.self="menuStore.closeMenu"
+      v-if="menuStore.showMenu"
+    ></div>
+  </transition>
+  <transition
+    enter-active-class="transition duration-300"
+    enter-from-class="opacity-0 -translate-y-full"
+    enter-to-class="opacity-100 translate-y-0"
+    leave-active-class="transition duration-500"
+    leave-from-class="opacity-100 translate-y-0"
+    leave-to-class="opacity-0 -translate-y-full"
+  >
+    <div
+      class="absolute top-0 right-0 left-0 z-10 rounded-b-2xl border-b-4 border-gray-800 bg-gray-950 pt-20 pb-2"
+      v-if="menuStore.showMenu"
+    >
       <BaseCreateBlock
         label="Create App"
         formType="createTrackedApp"
         class="absolute top-4 left-1/2 w-1/2 -translate-x-1/2"
       />
+      <div
+        class="flex-col items-center justify-evenly border-[var(--color-primary-600)] p-1 text-sm lg:flex"
+      >
+        <TheSearch />
+        <TheFilter />
+      </div>
       <AsideLists />
       <BaseButton
         name="close"
-        class="absolute top-4 right-4 rounded bg-gray-900 p-1"
+        class="absolute top-2 right-4 rounded bg-gray-900 p-1"
         @click="menuStore.closeMenu"
       />
     </div>
-  </div>
+  </transition>
 </template>

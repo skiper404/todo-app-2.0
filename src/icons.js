@@ -18,6 +18,8 @@ import {
   ChartBarIcon,
   ClockIcon,
   CubeIcon,
+  SpeakerWaveIcon,
+  SpeakerXMarkIcon,
 } from "@heroicons/vue/24/outline";
 
 export const icons = {
@@ -40,4 +42,6 @@ export const icons = {
   priority: FireIcon,
   status: ChartBarIcon,
   clock: ClockIcon,
+  soundOn: SpeakerWaveIcon,
+  soundOff: SpeakerXMarkIcon,
 };

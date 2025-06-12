@@ -8,14 +8,14 @@ const taskStore = useTaskStore();
 </script>
 
 <template>
-  <div class="relative mx-2 flex w-full items-center">
+  <div class="relative flex w-full items-center">
     <BaseIcon name="search" class="absolute left-2" />
     <BaseInput
       id="searchId"
       label=""
       placeholder="Search..."
       v-model="taskStore.searchQuery"
-      class="w-full rounded-full bg-gray-800 py-1 pl-10 outline-none"
+      class="w-full rounded-full bg-gray-900 py-1 pl-3 text-lg outline-none"
     />
     <BaseButton
       name="cancel"

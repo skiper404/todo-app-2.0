@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { v4 as uuid } from "uuid";
 import { useLocalStorage } from "@/composables/useLocalStorage";
 import { useValidation } from "@/composables/useValidation";
-import { useSoundEffects } from "@/composables/useSoundEffects";
+import { useSoundStore } from "@/stores/SoundStore";
 import { useModalStore } from "./ModalStore";
 
 export const useMainStore = defineStore("MainStore", () => {
@@ -14,7 +14,7 @@ export const useMainStore = defineStore("MainStore", () => {
   const activeAppId = ref(null);
 
   const modalStore = useModalStore();
-  const { playSound } = useSoundEffects();
+  const soundStore = useSoundStore();
 
   useLocalStorage(appsList, "AppTracker");
 
@@ -61,7 +61,7 @@ export const useMainStore = defineStore("MainStore", () => {
     showEmptyNameErrorMessage.value = false;
     showShortNameErrorMessage.value = false;
     modalStore.closeModal();
-    playSound("addApp");
+    soundStore.playSound("addApp");
   };
 
   const updateApp = (updatedApp) => {
@@ -81,7 +81,7 @@ export const useMainStore = defineStore("MainStore", () => {
     appsList.value = appsList.value.filter(
       ({ appId }) => appId !== appIdToRemove,
     );
-    playSound("removeApp");
+    soundStore.playSound("removeApp");
     modalStore.closeModal();
   };
 

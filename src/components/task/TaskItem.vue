@@ -15,21 +15,21 @@ const props = defineProps({ task: Object });
 
 <template>
   <div
-    class="mb-4 flex rounded-xl border border-blue-700 px-4 py-2 text-xs text-gray-400 capitalize"
+    class="mb-4 flex rounded-xl border border-blue-700 text-xs text-gray-400 capitalize"
   >
-    <div class="flex items-center pr-4">
-      <BaseIcon name="drag" class="dragTask" />
+    <div class="flex items-center">
+      <BaseIcon name="drag" class="dragTask mx-2" />
     </div>
     <div class="flex flex-col">
       <TaskName :taskName="task.taskName" />
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2 py-1">
         <TaskPriority :taskPriority="task.taskPriority" />
         <TaskStatus :taskStatus="task.taskStatus" />
         <TaskCategory :taskCategory="task.taskCategory" />
         <TaskDate :taskDate="task.taskDate" />
       </div>
     </div>
-    <div class="ml-auto flex items-center justify-center gap-2">
+    <div class="ml-auto flex gap-1 pr-2">
       <BaseButton
         name="pencil"
         @click="

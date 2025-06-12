@@ -12,7 +12,7 @@ const model = defineModel();
 </script>
 
 <template>
-  <div class="whitespace-nowrap capitalize">
+  <div class="capitalize">
     <label :for="id" class="flex items-center gap-2">
       <div>
         <BaseIcon :name="icon" />

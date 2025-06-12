@@ -22,7 +22,6 @@ const props = defineProps({ app: Object });
         'border-violet-800': app.appId === mainStore.activeAppId,
       },
     ]"
-    @click="menuStore.closeMenu"
   >
     <div class="flex w-full items-center gap-2 p-2">
       <BaseIcon name="drag" class="dragList" />

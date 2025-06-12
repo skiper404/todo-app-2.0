@@ -6,7 +6,16 @@ const props = defineProps({ taskStatus: String });
 
 <template>
   <div class="flex items-center gap-1">
-    <BaseIcon :name="taskStatus" />
+    <div
+      :class="[
+        'h-3 w-3 rounded-full',
+        {
+          'bg-amber-400': taskStatus === 'pending',
+          'bg-blue-400': taskStatus === 'inProgress',
+          'bg-green-400': taskStatus === 'done',
+        },
+      ]"
+    ></div>
     <div>{{ taskStatus }}</div>
   </div>
 </template>
