@@ -2,16 +2,22 @@
 import { useModalStore } from "@/stores/ModalStore";
 import { useMainStore } from "@/stores/MainStore";
 import BaseButton from "../BaseButton.vue";
+import { messages } from "@/messages";
+import { useI18n } from "vue-i18n";
 
 const mainStore = useMainStore();
 const modalStore = useModalStore();
+
+const { t } = useI18n();
 </script>
 
 <template>
-  <div class="relative flex flex-col rounded-xl bg-gray-900 text-gray-500">
+  <div
+    class="relative flex flex-col rounded-xl bg-gray-200 dark:bg-gray-900 dark:text-gray-400"
+  >
     <div class="mt-10 flex flex-col gap-2 px-10">
       <div>
-        Are you really want remove
+        {{ t("removeQuestion") }}
         <span class="font-bold text-gray-400">{{
           modalStore.modalData.appName
         }}</span>

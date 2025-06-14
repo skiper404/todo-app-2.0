@@ -9,6 +9,7 @@ import { computed, watchEffect } from "vue";
 import TaskItem from "./TaskItem.vue";
 import BaseMessage from "../BaseMessage.vue";
 import draggable from "vuedraggable";
+import BaseButton from "../BaseButton.vue";
 
 const route = useRoute();
 const mainStore = useMainStore();
@@ -27,9 +28,9 @@ const { noResults, emptyTaskList } = messages;
 <template>
   <div
     :class="[
-      'rounded-xl p-1 transition duration-500',
+      'flex flex-col rounded-xl p-1 transition duration-500',
       {
-        'border border-yellow-400 bg-yellow-400/10': dragStore.isDraggableTask,
+        'bg-blue-800/30': dragStore.isDraggableTask,
       },
     ]"
   >

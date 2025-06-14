@@ -5,7 +5,7 @@ export const useValidation = ({ name }) => {
   const showShortNameErrorMessage = ref(false);
 
   const emptyName = computed(() => name.value.length === 0);
-  const shortName = computed(() => name.value.length < 4);
+  const shortName = computed(() => name.value.length < 3);
 
   return {
     emptyName,

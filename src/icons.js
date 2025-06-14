@@ -20,7 +20,10 @@ import {
   CubeIcon,
   SpeakerWaveIcon,
   SpeakerXMarkIcon,
-} from "@heroicons/vue/24/outline";
+  MoonIcon,
+  SunIcon,
+  TvIcon,
+} from "@heroicons/vue/16/solid";
 
 export const icons = {
   appName: CubeIcon,
@@ -36,7 +39,7 @@ export const icons = {
   drag: Bars2Icon,
   close: XMarkIcon,
   trash: TrashIcon,
-  pencil: PencilIcon,
+  edit: PencilIcon,
   search: MagnifyingGlassIcon,
   category: BriefcaseIcon,
   priority: FireIcon,
@@ -44,4 +47,7 @@ export const icons = {
   clock: ClockIcon,
   soundOn: SpeakerWaveIcon,
   soundOff: SpeakerXMarkIcon,
+  dark: MoonIcon,
+  light: SunIcon,
+  system: TvIcon,
 };

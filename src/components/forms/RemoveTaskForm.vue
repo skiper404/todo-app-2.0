@@ -9,11 +9,13 @@ const modalStore = useModalStore();
 </script>
 
 <template>
-  <div class="relative flex flex-col rounded-xl bg-gray-900 text-gray-500">
+  <div
+    class="relative flex flex-col rounded-xl bg-gray-200 dark:bg-gray-900 dark:text-gray-400"
+  >
     <div class="mt-10 flex flex-col gap-2 px-10">
       <div>
         Are you really want remove
-        <span class="font-bold text-gray-400">{{
+        <span class="font-bold dark:text-gray-400">{{
           modalStore.modalData.taskName
         }}</span>
         ?
@@ -22,14 +24,14 @@ const modalStore = useModalStore();
         <BaseButton
           name="cancel"
           @click="modalStore.closeModal"
-          class="mx-auto my-4 rounded-xl bg-gray-600 p-2 text-red-400 transition duration-300 hover:bg-gray-700"
+          class="mx-auto my-4 rounded-xl bg-gray-300 p-2 text-red-400 transition duration-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-700"
         >
           No</BaseButton
         >
         <BaseButton
           name="done"
           @click="taskStore.removeTask(modalStore.modalData.taskId)"
-          class="mx-auto my-4 rounded-xl bg-gray-600 p-2 text-green-400 transition duration-300 hover:bg-gray-700"
+          class="mx-auto my-4 rounded-xl bg-gray-300 p-2 text-green-400 transition duration-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-700"
         >
           Yes</BaseButton
         >

@@ -15,7 +15,7 @@ const { emptyMainList } = messages;
   <nav
     :class="[
       'rounded-xl p-1 transition duration-500',
-      { 'border border-blue-300 bg-blue-300/10': dragStore.isDraggableList },
+      { 'bg-blue-800/30': dragStore.isDraggableList },
     ]"
   >
     <draggable

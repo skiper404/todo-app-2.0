@@ -13,12 +13,14 @@ const { emptyName, shortName } = messages;
 </script>
 
 <template>
-  <div class="relative flex flex-col rounded-xl bg-gray-900 text-gray-400">
-    <div class="mt-10 flex flex-col gap-2 whitespace-nowrap">
+  <div
+    class="relative flex flex-col rounded-xl bg-gray-200 dark:bg-gray-900 dark:text-gray-400"
+  >
+    <div class="mt-12 flex flex-col gap-2 whitespace-nowrap">
       <BaseInput
         class="px-10"
         id="appName"
-        label="App name:"
+        label="labels.taskName"
         icon="appName"
         placeholder="App name..."
         v-model="mainStore.newAppName"
@@ -26,9 +28,10 @@ const { emptyName, shortName } = messages;
       />
       <BaseSelect
         id="appId"
-        label="App Type:"
+        label="labels.appType"
         :icon="mainStore.newAppType"
         :options="appCategories"
+        i18n-path="appType"
         v-model="mainStore.newAppType"
         class="px-10"
       />
@@ -51,9 +54,8 @@ const { emptyName, shortName } = messages;
         />
       </transition>
       <BaseButton
-        name="plus"
         @click="mainStore.createApp"
-        class="mx-auto my-4 rounded-xl bg-gray-600 p-2 text-gray-400 transition duration-300 hover:border-green-300 hover:bg-gray-700 hover:text-green-400"
+        class="mx-auto my-4 rounded-xl bg-green-500 p-2 text-gray-50 transition duration-300 hover:border-green-300 hover:bg-gray-700 dark:bg-gray-600 dark:text-gray-400"
       >
         Create Tracked App
       </BaseButton>

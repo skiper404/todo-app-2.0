@@ -6,7 +6,7 @@ const { appName, appVersion } = appInfo;
 <template>
   <router-link class="flex items-center" :to="{ name: 'Home' }">
     <div
-      class="bg-gradient-to-r from-green-500 to-indigo-500 bg-clip-text text-2xl font-extralight tracking-wide text-transparent"
+      class="text-2xl font-extralight tracking-wide text-amber-50 dark:text-indigo-500"
     >
       {{ appName }}
     </div>

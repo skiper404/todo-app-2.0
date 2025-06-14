@@ -11,11 +11,11 @@ export const appInfo = {
 };
 
 export const priorityOptions = [
-  { label: "Critical", value: "critical", level: 1 },
-  { label: "High", value: "high", level: 2 },
-  { label: "Medium", value: "medium", level: 3 },
-  { label: "Low", value: "low", level: 4 },
-  { label: "Optional", value: "optional", level: 5 },
+  { label: "critical", value: "critical", level: 1 },
+  { label: "high", value: "high", level: 2 },
+  { label: "medium", value: "medium", level: 3 },
+  { label: "low", value: "low", level: 4 },
+  { label: "optional", value: "optional", level: 5 },
 ];
 
 export const statusOptions = [
@@ -28,40 +28,34 @@ export const categoryOptions = [
   {
     label: "Frontend",
     value: "frontend",
-    color: "text-pink-400",
   },
   {
     label: "Backend",
     value: "backend",
-    color: "text-indigo-400",
   },
   {
     label: "Database",
     value: "database",
-    color: "text-emerald-400",
   },
-  { label: "DevOps", value: "devops", color: "text-blue-400" },
-  { label: "Testing", value: "testing", color: "text-rose-400" },
-  { label: "Security", value: "security", color: "text-red-400" },
-  { label: "UX", value: "ux", color: "text-yellow-400" },
+  { label: "DevOps", value: "devops" },
+  { label: "Testing", value: "testing" },
+  { label: "Security", value: "security" },
+  { label: "UX", value: "ux" },
 
   {
     label: "Integration",
     value: "integration",
-    color: "text-teal-400",
   },
 
-  { label: "Product", value: "product", color: "text-cyan-400" },
+  { label: "Product", value: "product" },
 
   {
     label: "Analytics",
     value: "analytics",
-    color: "text-violet-400",
   },
   {
     label: "Marketing",
     value: "marketing",
-    color: "text-amber-400",
   },
 ];
 

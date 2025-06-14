@@ -1,7 +1,8 @@
 <script setup>
-import BaseIcon from "../BaseIcon.vue";
-
+import { useI18n } from "vue-i18n";
 const props = defineProps({ taskStatus: String });
+
+const { t } = useI18n();
 </script>
 
 <template>
@@ -16,6 +17,8 @@ const props = defineProps({ taskStatus: String });
         },
       ]"
     ></div>
-    <div>{{ taskStatus }}</div>
+    <span class="text-gray-500">
+      {{ t(`status.${taskStatus}`) }}
+    </span>
   </div>
 </template>

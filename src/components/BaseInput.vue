@@ -1,5 +1,7 @@
 <script setup>
 import BaseIcon from "./BaseIcon.vue";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
 
 const props = defineProps({
   id: String,
@@ -12,17 +14,17 @@ const model = defineModel();
 </script>
 
 <template>
-  <div class="capitalize">
+  <div class="">
     <label :for="id" class="flex items-center gap-2">
       <div>
         <BaseIcon :name="icon" />
       </div>
-      {{ label }}
+      {{ t(label) }}
       <input
         :id="id"
         type="text"
         class="w-full outline-0"
-        :placeholder="placeholder"
+        :placeholder="`${t('labels.appName')}...`"
         v-model="model"
         @keyup.enter="emit('submit-enter')"
       />

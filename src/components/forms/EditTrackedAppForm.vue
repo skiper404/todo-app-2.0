@@ -15,12 +15,14 @@ const { emptyName, shortName } = messages;
 </script>
 
 <template>
-  <div class="relative flex flex-col rounded-xl bg-gray-900 text-gray-400">
+  <div
+    class="relative flex flex-col rounded-xl bg-gray-200 dark:bg-gray-900 dark:text-gray-400"
+  >
     <div class="mt-10 flex flex-col gap-2 whitespace-nowrap">
       <BaseInput
         class="px-10"
         id="appId"
-        label="App name:"
+        label="labels.appName"
         icon="appName"
         placeholder="App name..."
         v-model="modalStore.modalData.appName"
@@ -28,7 +30,8 @@ const { emptyName, shortName } = messages;
       />
       <BaseSelect
         id="appId"
-        label="App status:"
+        label="labels.appType"
+        i18n-path="appType"
         :icon="modalStore.modalData.appType"
         :options="appCategories"
         v-model="modalStore.modalData.appType"
@@ -53,7 +56,6 @@ const { emptyName, shortName } = messages;
         />
       </transition>
       <BaseButton
-        name="plus"
         @click="mainStore.updateApp(modalStore.modalData)"
         class="mx-auto my-4 rounded-xl bg-gray-600 p-2 text-gray-400 transition duration-300 hover:border-green-300 hover:bg-gray-700 hover:text-green-400"
       >

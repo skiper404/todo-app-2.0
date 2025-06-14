@@ -21,7 +21,7 @@ onUnmounted(() => clearInterval(timer.value));
 
 <template>
   <div
-    class="hidden w-50 items-center justify-center gap-1 rounded-xl bg-gray-900 px-2 py-1 whitespace-nowrap md:flex"
+    class="hidden w-50 items-center justify-center gap-1 rounded-xl bg-gray-100 px-2 py-1 whitespace-nowrap md:flex dark:bg-gray-900 dark:text-gray-200"
   >
     <div>
       <BaseIcon name="clock" />

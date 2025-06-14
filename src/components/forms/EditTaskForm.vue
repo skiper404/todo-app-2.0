@@ -15,12 +15,14 @@ const { emptyName, shortName } = messages;
 </script>
 
 <template>
-  <div class="relative flex flex-col rounded-xl bg-gray-900 text-gray-500">
+  <div
+    class="relative flex flex-col rounded-xl bg-gray-200 dark:bg-gray-900 dark:text-gray-400"
+  >
     <div class="mt-10 flex flex-col gap-2 px-10">
       <BaseInput
         class="px-2"
         id="taskName"
-        label="Task name:"
+        label="labels.taskName"
         icon="appName"
         placeholder="Task name..."
         v-model="modalStore.modalData.taskName"
@@ -29,24 +31,27 @@ const { emptyName, shortName } = messages;
 
       <BaseSelect
         id="taskCategory"
-        label="Task Category:"
+        label="labels.category"
         icon="category"
+        i18n-path="category"
         :options="categoryOptions"
         v-model="modalStore.modalData.taskCategory"
       />
 
       <BaseSelect
         id="taskPriority"
-        label="Task Priority:"
+        label="labels.priority"
         icon="priority"
+        i18n-path="priority"
         :options="priorityOptions"
         v-model="modalStore.modalData.taskPriority"
       />
 
       <BaseSelect
         id="taskStatus"
-        label="Task Status:"
+        label="labels.status"
         icon="status"
+        i18n-path="status"
         :options="statusOptions"
         v-model="modalStore.modalData.taskStatus"
       />
@@ -71,9 +76,8 @@ const { emptyName, shortName } = messages;
         />
       </transition>
       <BaseButton
-        name="plus"
         @click="taskStore.updateTask(modalStore.modalData)"
-        class="mx-auto my-4 rounded-xl bg-gray-600 p-2 text-gray-400 transition duration-300 hover:border-green-300 hover:bg-gray-700 hover:text-green-400"
+        class="x-auto my-4 rounded-xl bg-green-500 p-2 text-gray-50 transition duration-300 hover:border-green-300 hover:bg-gray-700 dark:bg-gray-600 dark:text-gray-400"
       >
         Update task</BaseButton
       >

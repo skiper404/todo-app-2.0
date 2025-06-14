@@ -1,4 +1,5 @@
 <script setup>
+import { useI18n } from "vue-i18n";
 import BaseIcon from "./BaseIcon.vue";
 
 const props = defineProps({
@@ -6,12 +7,15 @@ const props = defineProps({
   label: String,
   options: Object,
   icon: String,
+  i18nPath: String,
 });
 const model = defineModel();
+
+const { t } = useI18n();
 </script>
 
 <template>
-  <div class="flex w-full items-center justify-between px-2 capitalize">
+  <div class="flex w-full items-center justify-between px-2">
     <label :for="id" class="flex items-center gap-2">
       <BaseIcon
         :name="icon"
@@ -20,7 +24,7 @@ const model = defineModel();
           'text-orange-500': model === 'high',
           'text-yellow-500': model === 'medium',
           'text-lime-500': model === 'low',
-          'text-white': model === 'optional',
+          'text-gray-400': model === 'optional',
           'text-amber-400': model === 'pending',
           'text-blue-400': model === 'inProgress',
           'text-green-400': model === 'done',
@@ -37,11 +41,11 @@ const model = defineModel();
           'text-amber-500': model === 'marketing',
         }"
       />
-      {{ label }}
+      {{ t(label) }}
     </label>
     <select :id="id" v-model="model" class="flex-1 text-right">
-      <option v-for="{ label, value } in options" :value="value">
-        {{ label }}
+      <option v-for="{ value } in options" :value="value">
+        {{ t(`${i18nPath}.${value}`) }}
       </option>
     </select>
   </div>

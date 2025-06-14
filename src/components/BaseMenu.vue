@@ -33,13 +33,13 @@ const menuStore = useMenuStore();
     leave-to-class="opacity-0 -translate-y-full"
   >
     <div
-      class="absolute top-0 right-0 left-0 z-10 rounded-b-2xl border-b-4 border-gray-800 bg-gray-950 pt-20 pb-2"
+      class="absolute top-0 right-0 left-0 z-10 bg-gray-100 pt-16 dark:bg-gray-950"
       v-if="menuStore.showMenu"
     >
       <BaseCreateBlock
-        label="Create App"
+        label="buttons.createApp"
         formType="createTrackedApp"
-        class="absolute top-4 left-1/2 w-1/2 -translate-x-1/2"
+        class="absolute top-1 left-1/2 w-1/2 -translate-x-1/2"
       />
       <div
         class="flex-col items-center justify-evenly border-[var(--color-primary-600)] p-1 text-sm lg:flex"
@@ -50,7 +50,7 @@ const menuStore = useMenuStore();
       <AsideLists />
       <BaseButton
         name="close"
-        class="absolute top-2 right-4 rounded bg-gray-900 p-1"
+        class="absolute top-4 right-4 rounded bg-gray-300 p-1 text-gray-950 dark:bg-gray-800"
         @click="menuStore.closeMenu"
       />
     </div>

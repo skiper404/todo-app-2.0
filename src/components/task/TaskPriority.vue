@@ -1,9 +1,12 @@
 <script setup>
 import { useTaskProcessing } from "@/composables/useTaskProcessing";
 import BaseIcon from "../BaseIcon.vue";
+import { useI18n } from "vue-i18n";
 
 const props = defineProps({ taskPriority: String });
 const { getPriorityOption } = useTaskProcessing();
+
+const { t } = useI18n();
 </script>
 
 <template>
@@ -15,12 +18,12 @@ const { getPriorityOption } = useTaskProcessing();
         'text-orange-500': taskPriority === 'high',
         'text-yellow-500': taskPriority === 'medium',
         'text-lime-500': taskPriority === 'low',
-        'text-white': taskPriority === 'optional',
+        'text-gray-400': taskPriority === 'optional',
       }"
     />
 
-    <div>
-      {{ getPriorityOption(taskPriority).label }}
-    </div>
+    <span class="text-gray-500">
+      {{ t(`priority.${getPriorityOption(taskPriority).label}`) }}
+    </span>
   </div>
 </template>

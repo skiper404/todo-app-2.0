@@ -15,7 +15,7 @@ const props = defineProps({ task: Object });
 
 <template>
   <div
-    class="mb-4 flex rounded-xl border border-blue-700 text-xs text-gray-400 capitalize"
+    class="mx-2 mb-4 flex rounded-xl bg-[#eff0f0] text-xs capitalize dark:bg-gray-900"
   >
     <div class="flex items-center">
       <BaseIcon name="drag" class="dragTask mx-2" />
@@ -31,7 +31,7 @@ const props = defineProps({ task: Object });
     </div>
     <div class="ml-auto flex gap-1 pr-2">
       <BaseButton
-        name="pencil"
+        name="edit"
         @click="
           modalStore.openModal('editTask', {
             taskId: task.taskId,

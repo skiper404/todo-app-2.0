@@ -144,6 +144,12 @@ export const useTaskStore = defineStore("TaskStore", () => {
     filterMap[filter].value = "";
   };
 
+  const resetAllFilters = () => {
+    category.value = "";
+    status.value = "";
+    priority.value = "";
+  };
+
   return {
     //refs
     newTaskName,
@@ -175,5 +181,6 @@ export const useTaskStore = defineStore("TaskStore", () => {
     removeTask,
     resetSearchQuery,
     resetFilter,
+    resetAllFilters,
   };
 });

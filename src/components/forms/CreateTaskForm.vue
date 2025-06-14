@@ -13,12 +13,14 @@ const { emptyName, shortName } = messages;
 </script>
 
 <template>
-  <div class="relative flex flex-col rounded-xl bg-gray-900 text-gray-400">
+  <div
+    class="relative flex flex-col rounded-xl bg-gray-200 dark:bg-gray-900 dark:text-gray-400"
+  >
     <div class="mt-10 flex flex-col gap-2 px-10">
       <BaseInput
         class="px-2"
         id="taskName"
-        label="name:"
+        label="labels.taskName"
         icon="appName"
         placeholder="Task name..."
         v-model="taskStore.newTaskName"
@@ -27,23 +29,26 @@ const { emptyName, shortName } = messages;
 
       <BaseSelect
         id="taskCategory"
-        label="category:"
+        label="labels.category"
         icon="category"
+        i18n-path="category"
         :options="categoryOptions"
         v-model="taskStore.newTaskCategory"
       />
 
       <BaseSelect
         id="taskPriority"
-        label="priority:"
+        label="labels.priority"
         icon="priority"
+        i18n-path="priority"
         :options="priorityOptions"
         v-model="taskStore.newTaskPriority"
       />
 
       <BaseSelect
         id="taskStatus"
-        label="status:"
+        label="labels.status"
+        i18n-path="status"
         :icon="taskStore.newTaskStatus"
         :options="statusOptions"
         v-model="taskStore.newTaskStatus"
@@ -69,7 +74,6 @@ const { emptyName, shortName } = messages;
         />
       </transition>
       <BaseButton
-        name="plus"
         @click="taskStore.createTask"
         class="mx-auto my-4 rounded-xl bg-gray-600 p-2 text-gray-400 transition duration-300 hover:border-green-300 hover:bg-gray-700 hover:text-green-400"
       >
