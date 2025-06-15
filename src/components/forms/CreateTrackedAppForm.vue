@@ -1,5 +1,4 @@
 <script setup>
-import { messages } from "@/messages";
 import { useMainStore } from "@/stores/MainStore";
 import { appCategories } from "@/constants";
 
@@ -9,16 +8,18 @@ import BaseMessage from "../BaseMessage.vue";
 import BaseSelect from "../BaseSelect.vue";
 
 const mainStore = useMainStore();
-const { emptyName, shortName } = messages;
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 </script>
 
 <template>
   <div
     class="relative flex flex-col rounded-xl bg-gray-200 dark:bg-gray-900 dark:text-gray-400"
   >
-    <div class="mt-12 flex flex-col gap-2 whitespace-nowrap">
+    <div class="mt-12 flex flex-col gap-2">
       <BaseInput
-        class="px-10"
+        class="mx-10 rounded-2xl bg-gray-300 px-2 py-1 dark:bg-gray-800"
         id="appName"
         label="labels.taskName"
         icon="appName"
@@ -33,7 +34,7 @@ const { emptyName, shortName } = messages;
         :options="appCategories"
         i18n-path="appType"
         v-model="mainStore.newAppType"
-        class="px-10"
+        class="mx-10 rounded-2xl bg-gray-300 py-1 dark:bg-gray-800"
       />
       <transition
         mode="out-in"
@@ -46,18 +47,18 @@ const { emptyName, shortName } = messages;
       >
         <BaseMessage
           v-if="mainStore.showEmptyNameErrorMessage"
-          :message="emptyName"
+          message="errors.emptyName"
         />
         <BaseMessage
           v-else-if="mainStore.showShortNameErrorMessage"
-          :message="shortName"
+          message="errors.shortName"
         />
       </transition>
       <BaseButton
         @click="mainStore.createApp"
-        class="mx-auto my-4 rounded-xl bg-green-500 p-2 text-gray-50 transition duration-300 hover:border-green-300 hover:bg-gray-700 dark:bg-gray-600 dark:text-gray-400"
+        class="mx-auto my-4 rounded-xl bg-green-500 p-2 text-gray-50 transition duration-300 hover:bg-green-400 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-green-400"
       >
-        Create Tracked App
+        {{ t("buttons.createApp") }}
       </BaseButton>
     </div>
   </div>

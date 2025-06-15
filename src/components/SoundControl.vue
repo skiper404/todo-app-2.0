@@ -1,15 +1,15 @@
 <script setup>
-import { computed } from "vue";
+import { useSettingsStore } from "@/stores/SettingsStore";
 import BaseButton from "./BaseButton.vue";
-import { useSoundStore } from "@/stores/SoundStore";
 
-const soundStore = useSoundStore();
-
-const name = computed(() => (soundStore.isSoundOn ? "soundOn" : "soundOff"));
+const settingsStore = useSettingsStore();
 </script>
 
 <template>
   <div class="flex">
-    <BaseButton :name="name" @click="soundStore.toggleSound" />
+    <BaseButton
+      :name="settingsStore.isSoundOn ? 'soundOn' : 'soundOff'"
+      @click="settingsStore.toggleSound"
+    />
   </div>
 </template>

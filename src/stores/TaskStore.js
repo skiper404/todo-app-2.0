@@ -6,7 +6,6 @@ import { useValidation } from "@/composables/useValidation";
 import { useSoundStore } from "@/stores/SoundStore";
 import { useTaskProcessing } from "@/composables/useTaskProcessing";
 import { useModalStore } from "./ModalStore";
-import { categoryOptions } from "@/constants";
 
 export const useTaskStore = defineStore("TaskStore", () => {
   const mainStore = useMainStore();
@@ -48,6 +47,7 @@ export const useTaskStore = defineStore("TaskStore", () => {
     emptyName,
     showEmptyNameErrorMessage,
     showShortNameErrorMessage,
+    resetValidation,
   } = useValidation({ name: newTaskName });
 
   const { finalTasks } = useTaskProcessing(
@@ -61,10 +61,6 @@ export const useTaskStore = defineStore("TaskStore", () => {
   // methods
 
   const createTask = () => {
-    const categoryColor = categoryOptions.find(
-      (cat) => cat.value === newTaskCategory.value,
-    ).color;
-
     modalStore.openModal("createTask");
     if (emptyName.value) {
       showEmptyNameErrorMessage.value = true;
@@ -145,9 +141,10 @@ export const useTaskStore = defineStore("TaskStore", () => {
   };
 
   const resetAllFilters = () => {
-    category.value = "";
-    status.value = "";
-    priority.value = "";
+    for (const key in filterMap) {
+      filterMap[key].value = "";
+    }
+    resetSearchQuery();
   };
 
   return {
@@ -170,6 +167,7 @@ export const useTaskStore = defineStore("TaskStore", () => {
     emptyName,
     showEmptyNameErrorMessage,
     showShortNameErrorMessage,
+    resetValidation,
 
     //useTaskProcessing
     finalTasks,

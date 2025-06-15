@@ -30,7 +30,7 @@ const { noResults, emptyTaskList } = messages;
     :class="[
       'flex flex-col rounded-xl p-1 transition duration-500',
       {
-        'bg-blue-800/30': dragStore.isDraggableTask,
+        'bg-blue-400/50': dragStore.isDraggableTask,
       },
     ]"
   >
@@ -69,7 +69,7 @@ const { noResults, emptyTaskList } = messages;
           taskStore.finalTasks.length === 0 &&
           taskStore.tasksInActiveApp.length !== 0
         "
-        :message="noResults"
+        message="noResults"
       />
     </transition>
     <transition
@@ -82,7 +82,7 @@ const { noResults, emptyTaskList } = messages;
     >
       <BaseMessage
         v-if="taskStore.tasksInActiveApp.length === 0"
-        :message="emptyTaskList"
+        message="noTasks"
       />
     </transition>
   </div>

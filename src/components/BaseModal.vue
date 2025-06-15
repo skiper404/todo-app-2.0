@@ -28,7 +28,7 @@ const modalStore = useModalStore();
       >
         <div
           v-if="modalStore.showModal"
-          class="relative -top-40 flex flex-col rounded-xl dark:bg-gray-900"
+          class="relative -top-30 mx-2 flex flex-col rounded-xl dark:bg-gray-900"
         >
           <BaseButton
             class="absolute top-4 right-4 z-10 rounded bg-gray-50 p-1 text-white dark:bg-gray-800 dark:text-gray-950"

@@ -1,5 +1,4 @@
 <script setup>
-import { messages } from "@/messages";
 import { useTaskStore } from "@/stores/TaskStore";
 import { useModalStore } from "@/stores/ModalStore";
 import { categoryOptions, priorityOptions, statusOptions } from "@/constants";
@@ -11,16 +10,18 @@ import BaseSelect from "../BaseSelect.vue";
 
 const taskStore = useTaskStore();
 const modalStore = useModalStore();
-const { emptyName, shortName } = messages;
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 </script>
 
 <template>
   <div
     class="relative flex flex-col rounded-xl bg-gray-200 dark:bg-gray-900 dark:text-gray-400"
   >
-    <div class="mt-10 flex flex-col gap-2 px-10">
+    <div class="mt-12 flex flex-col gap-2 px-10">
       <BaseInput
-        class="px-2"
+        class="mx-10 rounded-2xl bg-gray-300 px-2 py-1 dark:bg-gray-800"
         id="taskName"
         label="labels.taskName"
         icon="appName"
@@ -30,6 +31,7 @@ const { emptyName, shortName } = messages;
       />
 
       <BaseSelect
+        class="mx-10 rounded-2xl bg-gray-300 px-2 py-1 dark:bg-gray-800"
         id="taskCategory"
         label="labels.category"
         icon="category"
@@ -39,6 +41,7 @@ const { emptyName, shortName } = messages;
       />
 
       <BaseSelect
+        class="mx-10 rounded-2xl bg-gray-300 px-2 py-1 dark:bg-gray-800"
         id="taskPriority"
         label="labels.priority"
         icon="priority"
@@ -48,6 +51,7 @@ const { emptyName, shortName } = messages;
       />
 
       <BaseSelect
+        class="mx-10 rounded-2xl bg-gray-300 px-2 py-1 dark:bg-gray-800"
         id="taskStatus"
         label="labels.status"
         icon="status"
@@ -67,19 +71,19 @@ const { emptyName, shortName } = messages;
         <BaseMessage
           v-if="taskStore.showEmptyNameErrorMessage"
           :key="'empty'"
-          :message="emptyName"
+          message="errors.emptyName"
         />
         <BaseMessage
           v-else-if="taskStore.showShortNameErrorMessage"
           :key="'short'"
-          :message="shortName"
+          message="errors.shortName"
         />
       </transition>
       <BaseButton
         @click="taskStore.updateTask(modalStore.modalData)"
-        class="x-auto my-4 rounded-xl bg-green-500 p-2 text-gray-50 transition duration-300 hover:border-green-300 hover:bg-gray-700 dark:bg-gray-600 dark:text-gray-400"
+        class="mx-auto my-4 rounded-xl bg-green-500 p-2 text-gray-50 transition duration-300 hover:bg-green-400 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-green-400"
       >
-        Update task</BaseButton
+        {{ t("buttons.update") }}</BaseButton
       >
     </div>
   </div>

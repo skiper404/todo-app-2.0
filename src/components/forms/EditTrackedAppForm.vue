@@ -12,15 +12,18 @@ import { useModalStore } from "@/stores/ModalStore";
 const mainStore = useMainStore();
 const modalStore = useModalStore();
 const { emptyName, shortName } = messages;
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 </script>
 
 <template>
   <div
     class="relative flex flex-col rounded-xl bg-gray-200 dark:bg-gray-900 dark:text-gray-400"
   >
-    <div class="mt-10 flex flex-col gap-2 whitespace-nowrap">
+    <div class="mt-12 flex flex-col gap-2">
       <BaseInput
-        class="px-10"
+        class="mx-10 rounded-2xl bg-gray-300 px-2 py-1 whitespace-nowrap dark:bg-gray-800"
         id="appId"
         label="labels.appName"
         icon="appName"
@@ -35,7 +38,7 @@ const { emptyName, shortName } = messages;
         :icon="modalStore.modalData.appType"
         :options="appCategories"
         v-model="modalStore.modalData.appType"
-        class="px-10"
+        class="mx-10 rounded-2xl bg-gray-300 px-2 py-1 dark:bg-gray-800"
       />
       <transition
         mode="out-in"
@@ -57,9 +60,9 @@ const { emptyName, shortName } = messages;
       </transition>
       <BaseButton
         @click="mainStore.updateApp(modalStore.modalData)"
-        class="mx-auto my-4 rounded-xl bg-gray-600 p-2 text-gray-400 transition duration-300 hover:border-green-300 hover:bg-gray-700 hover:text-green-400"
+        class="mx-auto my-4 rounded-xl bg-green-500 p-2 text-gray-50 transition duration-300 hover:bg-green-400 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-green-400"
       >
-        Update Tracked App
+        {{ t("buttons.update") }}
       </BaseButton>
     </div>
   </div>

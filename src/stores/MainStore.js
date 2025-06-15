@@ -10,7 +10,7 @@ export const useMainStore = defineStore("MainStore", () => {
   const appsList = ref([]);
 
   const newAppName = ref("");
-  const newAppType = ref("desktop");
+  const newAppType = ref("web");
   const activeAppId = ref(null);
 
   const modalStore = useModalStore();
@@ -23,6 +23,7 @@ export const useMainStore = defineStore("MainStore", () => {
     showEmptyNameErrorMessage,
     emptyName,
     shortName,
+    resetValidation,
   } = useValidation({
     name: newAppName,
   });
@@ -101,5 +102,6 @@ export const useMainStore = defineStore("MainStore", () => {
     shortName,
     showShortNameErrorMessage,
     showEmptyNameErrorMessage,
+    resetValidation,
   };
 });

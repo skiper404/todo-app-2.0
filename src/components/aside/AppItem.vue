@@ -16,34 +16,38 @@ const props = defineProps({ app: Object });
     :class="[
       'my-2 flex items-center justify-between rounded-xl px-2',
       {
-        'bg-[#5184fd] dark:bg-gray-800': app.appId == mainStore.activeAppId,
-        'bg-gray-100 dark:bg-gray-900': app.appId !== mainStore.activeAppId,
+        'bg-[#5184fd]': app.appId == mainStore.activeAppId,
+        'bg-gray-100 dark:bg-gray-800': app.appId !== mainStore.activeAppId,
       },
     ]"
   >
-    <div class="flex items-center gap-2 p-2">
+    <div class="flex items-center gap-2 overflow-hidden p-2">
       <BaseIcon name="drag" class="dragList" />
+
       <BaseIcon :name="app.appType" />
+
       <div
         :class="[
-          'h-16 w-36 border',
+          'truncate',
+          'w-full lg:w-36',
           {
-            'text-gray-100 dark:text-gray-400':
+            'text-gray-200 dark:text-gray-100':
               app.appId === mainStore.activeAppId,
             'text-gray-500 dark:text-gray-500':
               app.appId !== mainStore.activeAppId,
           },
         ]"
       >
-        <p class="line-clamp-2">
-          {{ app.appName }}
-        </p>
+        {{ app.appName }}
       </div>
     </div>
     <div class="flex gap-2">
       <BaseButton
         :class="{
-          'text-black dark:text-gray-400': app.appId === mainStore.activeAppId,
+          'text-gray-100 dark:text-gray-500':
+            app.appId === mainStore.activeAppId,
+          'text-gray-500 dark:text-gray-500':
+            app.appId !== mainStore.activeAppId,
         }"
         name="edit"
         @click="
@@ -56,6 +60,12 @@ const props = defineProps({ app: Object });
       />
       <BaseButton
         name="trash"
+        :class="{
+          'text-gray-100 dark:text-gray-500':
+            app.appId === mainStore.activeAppId,
+          'text-gray-700 dark:text-gray-500':
+            app.appId !== mainStore.activeAppId,
+        }"
         @click="
           modalStore.openModal('removeTrackedApp', {
             appId: app.appId,

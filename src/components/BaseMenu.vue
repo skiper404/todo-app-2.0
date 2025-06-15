@@ -33,7 +33,7 @@ const menuStore = useMenuStore();
     leave-to-class="opacity-0 -translate-y-full"
   >
     <div
-      class="absolute top-0 right-0 left-0 z-10 bg-gray-100 pt-16 dark:bg-gray-950"
+      class="absolute top-0 right-0 left-0 z-10 bg-gray-100 pt-16 lg:hidden dark:bg-gray-950"
       v-if="menuStore.showMenu"
     >
       <BaseCreateBlock

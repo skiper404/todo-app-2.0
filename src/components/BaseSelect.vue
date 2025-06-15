@@ -15,7 +15,7 @@ const { t } = useI18n();
 </script>
 
 <template>
-  <div class="flex w-full items-center justify-between px-2">
+  <div class="flex flex-1 items-center px-2">
     <label :for="id" class="flex items-center gap-2">
       <BaseIcon
         :name="icon"

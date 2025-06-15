@@ -3,8 +3,8 @@ import addApp from "@/assets/sounds/addApp.mp3";
 import addTask from "@/assets/sounds/addTask.wav";
 import removeApp from "@/assets/sounds/removeApp.mp3";
 import removeTask from "@/assets/sounds/removeTask.mp3";
-import { ref } from "vue";
 import { defineStore } from "pinia";
+import { useSettingsStore } from "./SettingsStore";
 
 const soundsMap = {
   addApp: new Howl({ src: addApp }),
@@ -14,15 +14,10 @@ const soundsMap = {
 };
 
 export const useSoundStore = defineStore("SoundStore", () => {
-  const isSoundOn = ref(true);
-
-  const toggleSound = () => {
-    isSoundOn.value = !isSoundOn.value;
-    console.log(isSoundOn.value);
-  };
+  const settingsStore = useSettingsStore();
 
   const playSound = (key) => {
-    if (!isSoundOn.value) {
+    if (!settingsStore.isSoundOn) {
       return;
     }
     const sound = soundsMap[key];
@@ -32,8 +27,6 @@ export const useSoundStore = defineStore("SoundStore", () => {
   };
 
   return {
-    isSoundOn,
     playSound,
-    toggleSound,
   };
 });

@@ -8,14 +8,13 @@ import { useDragStore } from "@/stores/DragStore";
 
 const mainStore = useMainStore();
 const dragStore = useDragStore();
-const { emptyMainList } = messages;
 </script>
 
 <template>
   <nav
     :class="[
       'rounded-xl p-1 transition duration-500',
-      { 'bg-blue-800/30': dragStore.isDraggableList },
+      { 'bg-blue-400/50': dragStore.isDraggableList },
     ]"
   >
     <draggable
@@ -40,10 +39,7 @@ const { emptyMainList } = messages;
       leave-from-class="opacity-100"
       leave-to-class="opacity-0"
     >
-      <BaseMessage
-        v-if="mainStore.appsList.length === 0"
-        :message="emptyMainList"
-      />
+      <BaseMessage v-if="mainStore.appsList.length === 0" message="noApps" />
     </transition>
   </nav>
 </template>

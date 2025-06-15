@@ -15,7 +15,7 @@ const props = defineProps({ task: Object });
 
 <template>
   <div
-    class="mx-2 mb-4 flex rounded-xl bg-[#eff0f0] text-xs capitalize dark:bg-gray-900"
+    class="m-3 flex rounded-xl bg-[#dff0f0] text-xs capitalize dark:bg-gray-900"
   >
     <div class="flex items-center">
       <BaseIcon name="drag" class="dragTask mx-2" />

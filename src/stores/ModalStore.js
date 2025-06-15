@@ -24,6 +24,8 @@ export const useModalStore = defineStore("ModalStore", () => {
     modalData.value = null;
     mainStore.resetNewAppInfo();
     taskStore.resetNewTaskInfo();
+    mainStore.resetValidation();
+    taskStore.resetValidation();
   };
 
   return {

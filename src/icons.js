@@ -23,6 +23,7 @@ import {
   MoonIcon,
   SunIcon,
   TvIcon,
+  Cog6ToothIcon,
 } from "@heroicons/vue/16/solid";
 
 export const icons = {
@@ -50,4 +51,5 @@ export const icons = {
   dark: MoonIcon,
   light: SunIcon,
   system: TvIcon,
+  settings: Cog6ToothIcon,
 };

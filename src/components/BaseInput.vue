@@ -14,13 +14,14 @@ const model = defineModel();
 </script>
 
 <template>
-  <div class="">
+  <div>
     <label :for="id" class="flex items-center gap-2">
       <div>
         <BaseIcon :name="icon" />
       </div>
       {{ t(label) }}
       <input
+        maxlength="30"
         :id="id"
         type="text"
         class="w-full outline-0"

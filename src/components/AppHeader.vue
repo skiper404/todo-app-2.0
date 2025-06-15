@@ -1,13 +1,22 @@
 <script setup>
 import { useMenuStore } from "@/stores/MenuStore";
-
+import { ref } from "vue";
 import TheTitle from "./TheTitle.vue";
 import BaseButton from "./BaseButton.vue";
-import SoundControl from "./SoundControl.vue";
-import ThemeControl from "./ThemeControl.vue";
-import LangComp from "./LangComp.vue";
+import TheSettings from "./TheSettings.vue";
+import { onClickOutside } from "@vueuse/core";
 
 const menuStore = useMenuStore();
+const showSettings = ref(false);
+const settingsRef = ref(null);
+
+const openSettings = () => {
+  showSettings.value = true;
+};
+
+onClickOutside(settingsRef, () => {
+  showSettings.value = false;
+});
 </script>
 
 <template>
@@ -16,13 +25,15 @@ const menuStore = useMenuStore();
   >
     <TheTitle />
     <div class="flex items-center gap-2">
-      <!-- <TheDate /> -->
-      <LangComp />
-      <ThemeControl />
-      <SoundControl />
+      <TheSettings v-if="showSettings" ref="settingsRef" />
+      <BaseButton
+        name="settings"
+        @click="openSettings"
+        :class="{ 'pointer-events-none': showSettings }"
+      />
       <BaseButton
         name="menu"
-        class="rounded bg-gray-50 p-1 lg:hidden dark:bg-gray-800"
+        class="rounded bg-gray-50 p-1 lg:hidden dark:bg-gray-700"
         @click="menuStore.openMenu"
       />
     </div>

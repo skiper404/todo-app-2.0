@@ -8,12 +8,16 @@ export const messages = {
       priority: "Priority",
       status: "Status",
       appName: "App name",
-      appType: "Type",
+      appType: "App type",
       taskName: "Name",
     },
     buttons: {
       createTask: "Create task",
       createApp: "Add application",
+      update: "Save",
+      yes: "Yes",
+      no: "No",
+      resetFilters: "Reset filters",
     },
     priority: {
       critical: "Critical",
@@ -45,6 +49,13 @@ export const messages = {
       mobile: "Mobile",
       web: "Web",
     },
+    errors: {
+      emptyName: "Enter app name.",
+      shortName: "App name must be at least 3 characters.",
+    },
+    noApps: "You don't have any tracking apps.",
+    noTasks: "You don't have any tasks.",
+    noResults: "No results.",
     removeQuestion: "Are you really want remove tracking",
   },
   ru: {
@@ -60,6 +71,10 @@ export const messages = {
     buttons: {
       createTask: "Создать задачу",
       createApp: "Добавить приложение",
+      update: "Сохранить",
+      yes: "Да",
+      no: "Нет",
+      resetFilters: "Сбросить фильтры",
     },
     priority: {
       critical: "Критично",
@@ -87,10 +102,17 @@ export const messages = {
       marketing: "Маркетинг",
     },
     appType: {
-      desktop: "Настольное",
+      desktop: "Десктоп",
       mobile: "Мобильное",
       web: "Веб",
     },
+    errors: {
+      emptyName: "Введите название.",
+      shortName: "Название должно быть не мeнee 3 символов.",
+    },
+    noApps: "У вас нет отслеживаемых приложений.",
+    noTasks: "Список задач пуст.",
+    noResults: "Ничего не найдено.",
     removeQuestion: "Вы действительно хотите удалить трекинг",
   },
 
@@ -107,6 +129,10 @@ export const messages = {
     buttons: {
       createTask: "Створити задачу",
       createApp: "Додати застосунок",
+      update: "Зберегти",
+      yes: "Так",
+      no: "Нi",
+      resetFilters: "Скинути фільтри",
     },
     priority: {
       critical: "Критично",
@@ -138,6 +164,13 @@ export const messages = {
       mobile: "Мобільний",
       web: "Веб",
     },
+    errors: {
+      emptyName: "Введіть назву.",
+      shortName: "Назва має бути не менше 3 символів.",
+    },
+    noApps: "У вас жодного відстежуваного застосунка.",
+    noTasks: "Список задач пустий.",
+    noResults: "Нічого не знайдено.",
     removeQuestion: "Ви дійсно бажаєте видалити трекинг",
   },
 };

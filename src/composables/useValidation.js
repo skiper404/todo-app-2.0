@@ -7,10 +7,16 @@ export const useValidation = ({ name }) => {
   const emptyName = computed(() => name.value.length === 0);
   const shortName = computed(() => name.value.length < 3);
 
+  const resetValidation = () => {
+    showEmptyNameErrorMessage.value = false;
+    showShortNameErrorMessage.value = false;
+  };
+
   return {
     emptyName,
     shortName,
-    showShortNameErrorMessage,
+    resetValidation,
     showEmptyNameErrorMessage,
+    showShortNameErrorMessage,
   };
 };

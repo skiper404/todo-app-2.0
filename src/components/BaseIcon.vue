@@ -8,7 +8,7 @@ const props = defineProps({
 <template>
   <div
     :class="[
-      `flex size-5 items-center justify-center transition duration-300`,
+      `size-5 flex-shrink-0 transition duration-500`,
       {
         'text-gray-400': name === 'plus',
         'text-gray-400': name === 'cancel',
@@ -18,13 +18,15 @@ const props = defineProps({
         'text-blue-500 hover:text-blue-300': name === 'menu',
         'hover:text-red-300 dark:text-gray-400': name === 'trash',
         'text-gray-400': name === 'search',
-        'dark:text-gray-400': name === 'soundOn',
-        'text-gray-600': name === 'soundOff',
+        'dark:text-gray-200': name === 'soundOn',
+        'text-gray-500': name === 'soundOff',
         'text-gray-900 hover:cursor-move dark:text-gray-100': name === 'drag',
         'text-blue-400 dark:text-blue-500': name === 'close',
-        'hover:text-blue-500 dark:text-gray-400': name === 'edit',
+        'text-gray-400 hover:text-violet-500': name === 'edit',
         'text-gray-300': name === 'dark',
         'text-gray-600': name === 'light',
+        'text-gray-100 hover:text-gray-300 dark:text-gray-400':
+          name === 'settings',
       },
     ]"
   >
