@@ -15,7 +15,7 @@ const modalStore = useModalStore();
     leave-to-class="opacity-0"
   >
     <div
-      class="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/50"
+      class="no-reset-activeId absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/50"
       @click.self="modalStore.closeModal"
     >
       <transition

@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 import { useDark, useStorage } from "@vueuse/core";
 import { useI18n } from "vue-i18n";
-import { useSoundStore } from "./SoundStore";
 import { watch, ref } from "vue";
 
 export const useSettingsStore = defineStore("SettingsStore", () => {

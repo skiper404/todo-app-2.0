@@ -4,19 +4,27 @@ import BaseButton from "../BaseButton.vue";
 import BaseIcon from "../BaseIcon.vue";
 import { useModalStore } from "@/stores/ModalStore";
 
+import { useRouter } from "vue-router";
+
 const mainStore = useMainStore();
 const modalStore = useModalStore();
-
 const props = defineProps({ app: Object });
+
+const router = useRouter();
+
+const selectApp = () => {
+  router.push({ name: "App", params: { appId: props.app.appId } });
+  mainStore.setActiveAppId(props.app.appId);
+};
 </script>
 
 <template>
-  <router-link
-    :to="{ name: 'App', params: { appId: app.appId } }"
+  <div
+    @click="selectApp"
     :class="[
-      'my-2 flex items-center justify-between rounded-xl px-2',
+      'no-reset-activeId my-2 flex cursor-pointer items-center justify-between rounded-xl px-2',
       {
-        'bg-[#5184fd]': app.appId == mainStore.activeAppId,
+        'bg-[#5184fd]': app.appId === mainStore.activeAppId,
         'bg-gray-100 dark:bg-gray-800': app.appId !== mainStore.activeAppId,
       },
     ]"
@@ -74,7 +82,7 @@ const props = defineProps({ app: Object });
         "
       />
     </div>
-  </router-link>
+  </div>
 </template>
 
 <style lang="css" scoped>

@@ -25,6 +25,7 @@ const props = defineProps({
         'text-gray-400 hover:text-violet-500': name === 'edit',
         'text-gray-300': name === 'dark',
         'text-gray-600': name === 'light',
+        // 'text-gray-500': name === 'start',
         'text-gray-100 hover:text-gray-300 dark:text-gray-400':
           name === 'settings',
       },

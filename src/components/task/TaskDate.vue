@@ -11,7 +11,7 @@ const formatDate = (taskDate) => {
 </script>
 
 <template>
-  <div class="hidden text-xs whitespace-nowrap text-gray-500 md:block">
+  <div class="hidden text-xs whitespace-nowrap text-gray-500 sm:block">
     {{ formatDate(taskDate) }}
   </div>
 </template>

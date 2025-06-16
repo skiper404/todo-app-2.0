@@ -7,15 +7,17 @@ import TaskPriority from "./TaskPriority.vue";
 import TaskStatus from "./TaskStatus.vue";
 import { useModalStore } from "@/stores/ModalStore";
 import BaseIcon from "../BaseIcon.vue";
+import { useTaskStore } from "@/stores/TaskStore";
 
 const modalStore = useModalStore();
+const taskStore = useTaskStore();
 
 const props = defineProps({ task: Object });
 </script>
 
 <template>
   <div
-    class="m-3 flex rounded-xl bg-[#dff0f0] text-xs capitalize dark:bg-gray-900"
+    class="no-reset-activeId m-3 flex rounded-xl bg-[#dff0f0] text-xs capitalize dark:bg-gray-900"
   >
     <div class="flex items-center">
       <BaseIcon name="drag" class="dragTask mx-2" />
@@ -29,7 +31,17 @@ const props = defineProps({ task: Object });
         <TaskDate :taskDate="task.taskDate" />
       </div>
     </div>
-    <div class="ml-auto flex gap-1 pr-2">
+    <div class="no-reset-activeId ml-auto flex gap-1 pr-2">
+      <BaseButton
+        :name="task.taskStatus"
+        :class="{
+          'text-orange-400': task.taskStatus === 'pending',
+          'text-blue-400': task.taskStatus === 'inProgress',
+          'text-green-400': task.taskStatus === 'done',
+        }"
+        @click="taskStore.changeStatus(task)"
+        >
+      </BaseButton>
       <BaseButton
         name="edit"
         @click="

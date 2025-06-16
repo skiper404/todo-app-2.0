@@ -3,13 +3,11 @@ import { useRoute } from "vue-router";
 import { useMainStore } from "@/stores/MainStore";
 import { useTaskStore } from "@/stores/TaskStore";
 import { useDragStore } from "@/stores/DragStore";
-import { messages } from "@/messages";
 import { computed, watchEffect } from "vue";
 
 import TaskItem from "./TaskItem.vue";
 import BaseMessage from "../BaseMessage.vue";
 import draggable from "vuedraggable";
-import BaseButton from "../BaseButton.vue";
 
 const route = useRoute();
 const mainStore = useMainStore();
@@ -21,14 +19,12 @@ const activeAppId = computed(() => route.params.appId);
 watchEffect(async () => {
   await mainStore.setActiveAppId(activeAppId.value);
 });
-
-const { noResults, emptyTaskList } = messages;
 </script>
 
 <template>
   <div
     :class="[
-      'flex flex-col rounded-xl p-1 transition duration-500',
+      'no-reset-activeId flex flex-col rounded-xl p-1 transition duration-500',
       {
         'bg-blue-400/50': dragStore.isDraggableTask,
       },

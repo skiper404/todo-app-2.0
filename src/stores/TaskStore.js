@@ -14,6 +14,7 @@ export const useTaskStore = defineStore("TaskStore", () => {
   const newTaskCategory = ref("frontend");
   const newTaskStatus = ref("pending");
   const newTaskPriority = ref("medium");
+  const newTaskDate = ref(null);
 
   const searchQuery = ref("");
   const category = ref("");
@@ -108,6 +109,7 @@ export const useTaskStore = defineStore("TaskStore", () => {
         taskCategory: updatedTask.taskCategory,
         taskStatus: updatedTask.taskStatus,
         taskPriority: updatedTask.taskPriority,
+        taskDate: new Date().getTime(),
       };
 
       activeApp.value.appTasks.splice(index, 1, updated);
@@ -147,6 +149,13 @@ export const useTaskStore = defineStore("TaskStore", () => {
     resetSearchQuery();
   };
 
+  const changeStatus = (task) => {
+    const target = tasksInActiveApp.value.find(
+      ({ taskId }) => taskId === task.taskId,
+    );
+    target.taskStatus = target.taskStatus === "pending" ? "inProgress" : "done";
+  };
+
   return {
     //refs
     newTaskName,
@@ -180,5 +189,6 @@ export const useTaskStore = defineStore("TaskStore", () => {
     resetSearchQuery,
     resetFilter,
     resetAllFilters,
+    changeStatus,
   };
 });

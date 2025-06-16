@@ -5,8 +5,10 @@ import { useLocalStorage } from "@/composables/useLocalStorage";
 import { useValidation } from "@/composables/useValidation";
 import { useSoundStore } from "@/stores/SoundStore";
 import { useModalStore } from "./ModalStore";
+import { useRouter } from "vue-router";
 
 export const useMainStore = defineStore("MainStore", () => {
+  const router = useRouter();
   const appsList = ref([]);
 
   const newAppName = ref("");
@@ -63,6 +65,7 @@ export const useMainStore = defineStore("MainStore", () => {
     showShortNameErrorMessage.value = false;
     modalStore.closeModal();
     soundStore.playSound("addApp");
+    router.push({ name: "App", params: { appId: activeAppId.value } });
   };
 
   const updateApp = (updatedApp) => {
@@ -86,6 +89,8 @@ export const useMainStore = defineStore("MainStore", () => {
     modalStore.closeModal();
   };
 
+  const resetActiveAppId = () => (activeAppId.value = null);
+
   return {
     appsList,
     activeAppId,
@@ -97,6 +102,7 @@ export const useMainStore = defineStore("MainStore", () => {
     updateApp,
     removeApp,
     resetNewAppInfo,
+    resetActiveAppId,
 
     emptyName,
     shortName,

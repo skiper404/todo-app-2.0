@@ -24,6 +24,10 @@ import {
   SunIcon,
   TvIcon,
   Cog6ToothIcon,
+  PlayCircleIcon,
+  ChevronRightIcon,
+  ChevronDoubleRightIcon,
+  ArrowPathIcon,
 } from "@heroicons/vue/16/solid";
 
 export const icons = {
@@ -33,8 +37,8 @@ export const icons = {
   web: GlobeAltIcon,
   mobile: DevicePhoneMobileIcon,
   desktop: ComputerDesktopIcon,
-  pending: MinusCircleIcon,
-  inProgress: EllipsisHorizontalCircleIcon,
+  pending: PlayCircleIcon,
+  inProgress: ArrowPathIcon,
   plus: PlusIcon,
   menu: Bars3Icon,
   drag: Bars2Icon,
