@@ -1,4 +1,5 @@
 <script setup>
+import { useChartOptions } from "@/composables/useChartOptions";
 import { provide } from "vue";
 import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
@@ -20,17 +21,17 @@ use([
 
 provide(THEME_KEY, "dark");
 
-const props = defineProps({ options: Object });
+const props = defineProps({ type: String });
+
+const { option } = useChartOptions(props.type);
 </script>
 
 <template>
   <div class="h-50">
     <v-chart
       class="chart overflow-hidden rounded-3xl"
-      :option="options"
+      :option="option"
       autoresize
     />
   </div>
 </template>
-
-<style></style>

@@ -29,14 +29,10 @@ export const useChartsStore = defineStore("ChartsStore", () => {
     );
   };
 
-  const formatTooltip = (params) => {
-    return `${params.name.split(",")[0]}: ${params.value} (${params.percent})%`;
-  };
-
   const showLegend = ref(false);
 
-  const totalDesktop = getTotalByType("desktop");
   const totalApps = computed(() => mainStore.appsList.length);
+  const totalDesktop = getTotalByType("desktop");
   const totalMobile = getTotalByType("mobile");
   const totalWeb = getTotalByType("web");
   const totalCritical = getTotalTasksByPriority("critical");
@@ -62,6 +58,5 @@ export const useChartsStore = defineStore("ChartsStore", () => {
     totalInProgress,
     totalDone,
     showLegend,
-    formatTooltip,
   };
 });
