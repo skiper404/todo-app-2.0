@@ -4,16 +4,11 @@ const { appName, appVersion } = appInfo;
 </script>
 
 <template>
-  <router-link class="flex items-center" :to="{ name: 'Home' }">
+  <router-link :to="{ name: 'Home' }">
     <div
       class="text-2xl font-extralight tracking-wide text-amber-50 dark:text-indigo-500"
     >
       {{ appName }}
-    </div>
-    <div
-      class="hidden items-center rounded bg-clip-text px-2 text-sm font-thin text-gray-400 md:flex"
-    >
-      {{ appVersion }}
     </div>
   </router-link>
 </template>

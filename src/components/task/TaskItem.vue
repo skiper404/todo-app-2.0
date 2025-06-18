@@ -24,10 +24,10 @@ const props = defineProps({ task: Object });
     </div>
     <div class="flex flex-col">
       <TaskName :taskName="task.taskName" />
-      <div class="flex items-center gap-2 py-1">
+      <div class="grid grid-cols-2 items-center gap-2 py-1 lg:flex">
         <TaskPriority :taskPriority="task.taskPriority" />
-        <TaskStatus :taskStatus="task.taskStatus" />
         <TaskCategory :taskCategory="task.taskCategory" />
+        <TaskStatus :taskStatus="task.taskStatus" />
         <TaskDate :taskDate="task.taskDate" />
       </div>
     </div>
@@ -35,12 +35,12 @@ const props = defineProps({ task: Object });
       <BaseButton
         :name="task.taskStatus"
         :class="{
-          'text-orange-400': task.taskStatus === 'pending',
+          'text-amber-400': task.taskStatus === 'pending',
           'text-blue-400': task.taskStatus === 'inProgress',
           'text-green-400': task.taskStatus === 'done',
         }"
         @click="taskStore.changeStatus(task)"
-        >
+      >
       </BaseButton>
       <BaseButton
         name="edit"

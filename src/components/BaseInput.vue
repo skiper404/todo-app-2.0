@@ -21,7 +21,7 @@ const model = defineModel();
       </div>
       {{ t(label) }}
       <input
-        maxlength="30"
+        maxlength="100"
         :id="id"
         type="text"
         class="w-full outline-0"

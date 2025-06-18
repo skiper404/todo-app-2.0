@@ -11,6 +11,10 @@ const mainStore = useMainStore();
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
+import { onKeyStroke } from "@vueuse/core";
+
+onKeyStroke("Escape", () => modalStore.closeModal());
+onKeyStroke("Enter", () => mainStore.createApp());
 </script>
 
 <template>

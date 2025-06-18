@@ -23,7 +23,7 @@ onClickOutside(settingsRef, () => {
 
 <template>
   <header
-    class="fixed top-0 right-0 left-0 z-10 flex items-center justify-between bg-[#5184fd] p-4 md:px-10 lg:top-4 lg:right-4 lg:left-4 lg:rounded-3xl dark:bg-gray-800"
+    class="no-reset-activeId fixed top-0 right-0 left-0 z-10 flex items-center justify-between bg-[#5184fd] p-4 md:top-4 md:right-4 md:left-4 md:rounded-3xl md:px-10 dark:bg-gray-800"
   >
     <TheTitle @click="mainStore.resetActiveAppId" />
     <div class="flex items-center gap-2">
@@ -35,7 +35,7 @@ onClickOutside(settingsRef, () => {
       />
       <BaseButton
         name="menu"
-        class="rounded bg-gray-50 p-1 lg:hidden dark:bg-gray-700"
+        class="rounded bg-gray-50 p-1 md:hidden dark:bg-gray-700"
         @click="menuStore.openMenu"
       />
     </div>

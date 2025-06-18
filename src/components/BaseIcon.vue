@@ -14,7 +14,7 @@ const props = defineProps({
         'text-gray-400': name === 'cancel',
         'text-orange-400': name === 'web',
         'text-teal-500': name === 'mobile',
-        'text-yellow-500': name === 'desktop',
+        'text-yellow-300': name === 'desktop',
         'text-blue-500 hover:text-blue-300': name === 'menu',
         'hover:text-red-300 dark:text-gray-400': name === 'trash',
         'text-gray-400': name === 'search',

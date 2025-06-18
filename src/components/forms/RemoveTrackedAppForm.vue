@@ -2,12 +2,15 @@
 import { useModalStore } from "@/stores/ModalStore";
 import { useMainStore } from "@/stores/MainStore";
 import BaseButton from "../BaseButton.vue";
+import { useI18n } from "vue-i18n";
+import { onKeyStroke } from "@vueuse/core";
+const { t } = useI18n();
 
 const mainStore = useMainStore();
 const modalStore = useModalStore();
 
-import { useI18n } from "vue-i18n";
-const { t } = useI18n();
+onKeyStroke("Escape", () => modalStore.closeModal());
+onKeyStroke("Enter", () => mainStore.removeApp(modalStore.modalData.appId));
 </script>
 
 <template>

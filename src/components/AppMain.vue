@@ -9,15 +9,14 @@ import { useMainStore } from "@/stores/MainStore";
 const mainStore = useMainStore();
 const taskStore = useTaskStore();
 const { t } = useI18n();
-
 </script>
 
 <template>
   <main
-    class="no-reset-activeId overflow-hidden pt-16 lg:mx-4 lg:ml-88 lg:pt-24"
+    class="no-reset-activeId overflow-hidden pt-16 md:mx-4 md:ml-86 md:pt-24"
   >
     <div
-      class="relative max-h-[calc(100vh-220px)] min-h-[calc(100vh-120px)] overflow-y-auto bg-gray-100 lg:max-h-[calc(100vh-180px)] lg:min-h-[calc(100vh-180px)] lg:rounded-3xl lg:p-4 lg:px-4 dark:bg-transparent"
+      class="relative max-h-[calc(100vh-220px)] min-h-[calc(100vh-160px)] overflow-y-auto md:min-h-[calc(100vh-160px)] lg:max-h-[calc(100vh-140px)] dark:bg-transparent"
     >
       <MainHeader />
       <BaseCreateBlock

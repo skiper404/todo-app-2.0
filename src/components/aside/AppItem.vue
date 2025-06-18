@@ -3,9 +3,10 @@ import { useMainStore } from "@/stores/MainStore";
 import BaseButton from "../BaseButton.vue";
 import BaseIcon from "../BaseIcon.vue";
 import { useModalStore } from "@/stores/ModalStore";
-
+import { useMenuStore } from "@/stores/MenuStore";
 import { useRouter } from "vue-router";
 
+const menuStore = useMenuStore();
 const mainStore = useMainStore();
 const modalStore = useModalStore();
 const props = defineProps({ app: Object });
@@ -15,6 +16,7 @@ const router = useRouter();
 const selectApp = () => {
   router.push({ name: "App", params: { appId: props.app.appId } });
   mainStore.setActiveAppId(props.app.appId);
+  menuStore.closeMenu();
 };
 </script>
 

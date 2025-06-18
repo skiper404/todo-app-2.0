@@ -2,6 +2,7 @@
 import { useTaskStore } from "@/stores/TaskStore";
 import { useModalStore } from "@/stores/ModalStore";
 import { categoryOptions, priorityOptions, statusOptions } from "@/constants";
+const { t } = useI18n();
 
 import BaseInput from "../BaseInput.vue";
 import BaseButton from "../BaseButton.vue";
@@ -11,8 +12,10 @@ import BaseSelect from "../BaseSelect.vue";
 const taskStore = useTaskStore();
 const modalStore = useModalStore();
 import { useI18n } from "vue-i18n";
+import { onKeyStroke } from "@vueuse/core";
 
-const { t } = useI18n();
+onKeyStroke("Escape", () => modalStore.closeModal());
+onKeyStroke("Enter", () => taskStore.updateTask(modalStore.modalData));
 </script>
 
 <template>

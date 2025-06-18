@@ -13,8 +13,12 @@ const mainStore = useMainStore();
 const modalStore = useModalStore();
 const { emptyName, shortName } = messages;
 import { useI18n } from "vue-i18n";
+import { onKeyStroke } from "@vueuse/core";
 
 const { t } = useI18n();
+
+onKeyStroke("Escape", () => modalStore.closeModal());
+onKeyStroke("Enter", () => mainStore.updateApp(modalStore.modalData));
 </script>
 
 <template>

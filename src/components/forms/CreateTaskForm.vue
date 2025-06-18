@@ -11,6 +11,10 @@ const taskStore = useTaskStore();
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
+import { onKeyStroke } from "@vueuse/core";
+
+onKeyStroke("Escape", () => modalStore.closeModal());
+onKeyStroke("Enter", () => taskStore.createTask);
 </script>
 
 <template>

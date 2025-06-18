@@ -1,17 +1,9 @@
 <script setup>
-import { format } from "date-fns";
-import { enUS } from "date-fns/locale";
-
-const props = defineProps({ taskDate: Number });
-
-const formatDate = (taskDate) => {
-  const date = new Date(taskDate);
-  return format(date, "E, d MMMM HH:mm:ss", { locale: enUS });
-};
+const props = defineProps({ taskDate: String });
 </script>
 
 <template>
-  <div class="hidden text-xs whitespace-nowrap text-gray-500 sm:block">
-    {{ formatDate(taskDate) }}
+  <div class="truncate overflow-ellipsis text-gray-500">
+    {{ taskDate }}
   </div>
 </template>

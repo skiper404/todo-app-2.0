@@ -10,8 +10,6 @@ import {
   DevicePhoneMobileIcon,
   ComputerDesktopIcon,
   CheckCircleIcon,
-  MinusCircleIcon,
-  EllipsisHorizontalCircleIcon,
   XCircleIcon,
   FireIcon,
   BriefcaseIcon,

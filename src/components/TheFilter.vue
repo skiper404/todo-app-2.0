@@ -11,7 +11,7 @@ const { t } = useI18n();
 
 <template>
   <div
-    class="mt-2 flex w-full flex-col items-center justify-between gap-2 text-lg lg:flex-row"
+    class="mt-2 flex w-full flex-col items-center justify-between gap-2 text-lg xl:flex-row"
   >
     <div
       :class="[

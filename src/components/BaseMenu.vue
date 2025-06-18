@@ -19,7 +19,7 @@ const menuStore = useMenuStore();
     leave-to-class="opacity-0"
   >
     <div
-      class="absolute top-0 left-0 z-10 h-screen w-full bg-black/70 lg:hidden"
+      class="no-reset-activeId absolute top-0 left-0 z-10 h-screen w-full bg-black/70 md:hidden"
       @click.self="menuStore.closeMenu"
       v-if="menuStore.showMenu"
     ></div>
@@ -33,7 +33,7 @@ const menuStore = useMenuStore();
     leave-to-class="opacity-0 -translate-y-full"
   >
     <div
-      class="absolute top-0 right-0 left-0 z-10 bg-gray-100 pt-16 lg:hidden dark:bg-gray-950"
+      class="no-reset-activeId absolute top-0 right-0 left-0 z-10 bg-gray-100 pt-16 md:hidden dark:bg-gray-950"
       v-if="menuStore.showMenu"
     >
       <BaseCreateBlock
@@ -41,9 +41,7 @@ const menuStore = useMenuStore();
         formType="createTrackedApp"
         class="absolute top-1 left-1/2 w-1/2 -translate-x-1/2"
       />
-      <div
-        class="flex-col items-center justify-evenly border-[var(--color-primary-600)] p-1 text-sm lg:flex"
-      >
+      <div class="border-[var(--color-primary-600)] p-1 text-sm">
         <TheSearch />
         <TheFilter />
       </div>

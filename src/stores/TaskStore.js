@@ -6,6 +6,8 @@ import { useValidation } from "@/composables/useValidation";
 import { useSoundStore } from "@/stores/SoundStore";
 import { useTaskProcessing } from "@/composables/useTaskProcessing";
 import { useModalStore } from "./ModalStore";
+import { format } from "date-fns";
+import { enUS } from "date-fns/locale";
 
 export const useTaskStore = defineStore("TaskStore", () => {
   const mainStore = useMainStore();
@@ -14,7 +16,6 @@ export const useTaskStore = defineStore("TaskStore", () => {
   const newTaskCategory = ref("frontend");
   const newTaskStatus = ref("pending");
   const newTaskPriority = ref("medium");
-  const newTaskDate = ref(null);
 
   const searchQuery = ref("");
   const category = ref("");
@@ -82,7 +83,7 @@ export const useTaskStore = defineStore("TaskStore", () => {
       {
         taskId: uuid(),
         taskName: newTaskName.value,
-        taskDate: new Date().getTime(),
+        taskDate: format(new Date(), "E, d MMMM HH:mm", { locale: enUS }),
         taskCategory: newTaskCategory.value,
         taskStatus: newTaskStatus.value,
         taskPriority: newTaskPriority.value,
@@ -109,7 +110,7 @@ export const useTaskStore = defineStore("TaskStore", () => {
         taskCategory: updatedTask.taskCategory,
         taskStatus: updatedTask.taskStatus,
         taskPriority: updatedTask.taskPriority,
-        taskDate: new Date().getTime(),
+        taskDate: format(new Date(), "E, d MMMM HH:mm", { locale: enUS }),
       };
 
       activeApp.value.appTasks.splice(index, 1, updated);

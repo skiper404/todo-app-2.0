@@ -20,10 +20,10 @@ const { t } = useI18n();
       <BaseIcon
         :name="icon"
         :class="{
-          'text-red-500': model === 'critical',
-          'text-orange-500': model === 'high',
-          'text-yellow-500': model === 'medium',
-          'text-lime-500': model === 'low',
+          'text-red-400': model === 'critical',
+          'text-orange-400': model === 'high',
+          'text-yellow-300': model === 'medium',
+          'text-lime-400': model === 'low',
           'text-gray-400': model === 'optional',
           'text-amber-400': model === 'pending',
           'text-blue-400': model === 'inProgress',
@@ -33,7 +33,7 @@ const { t } = useI18n();
           'text-pink-400': model === 'database',
           'text-blue-500': model === 'devops',
           'text-rose-400': model === 'testing',
-          'text-red-400': model === 'security',
+          'text-red-400/90': model === 'security',
           'text-yellow-400': model === 'ux',
           'text-teal-400': model === 'integration',
           'text-cyan-400': model === 'product',
