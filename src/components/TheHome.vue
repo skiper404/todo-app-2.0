@@ -7,5 +7,6 @@ import BaseChart from "./BaseChart.vue";
     <BaseChart type="apps" />
     <BaseChart type="priority" />
     <BaseChart type="status" />
+    <BaseChart type="category" />
   </div>
 </template>

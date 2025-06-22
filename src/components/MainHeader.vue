@@ -1,13 +1,11 @@
 <script setup>
 import TheSearch from "./TheSearch.vue";
-import TheFilter from "./TheFilter.vue";
+import TheFilters from "./TheFilters.vue";
 </script>
 
 <template>
-  <div
-    class="hidden flex-col items-center justify-evenly border-[var(--color-primary-600)] p-1 text-sm md:flex"
-  >
+  <div class="hidden flex-col items-center justify-evenly p-1 text-sm md:flex">
     <TheSearch />
-    <TheFilter />
+    <TheFilters />
   </div>
 </template>

@@ -7,6 +7,8 @@ import BaseInput from "../BaseInput.vue";
 import BaseButton from "../BaseButton.vue";
 import BaseMessage from "../BaseMessage.vue";
 import BaseSelect from "../BaseSelect.vue";
+import BaseIcon from "../BaseIcon.vue";
+
 import { useModalStore } from "@/stores/ModalStore";
 
 const mainStore = useMainStore();
@@ -23,27 +25,43 @@ onKeyStroke("Enter", () => mainStore.updateApp(modalStore.modalData));
 
 <template>
   <div
-    class="relative flex flex-col rounded-xl bg-gray-200 dark:bg-gray-900 dark:text-gray-400"
+    class="bg-primary-bg relative flex flex-col rounded-xl px-4 whitespace-nowrap"
   >
-    <div class="mt-12 flex flex-col gap-2">
-      <BaseInput
-        class="mx-10 rounded-2xl bg-gray-300 px-2 py-1 whitespace-nowrap dark:bg-gray-800"
-        id="appId"
-        label="labels.appName"
-        icon="appName"
-        placeholder="App name..."
-        v-model="modalStore.modalData.appName"
-        @submit-enter="mainStore.updateApp(modalStore.modalData)"
-      />
-      <BaseSelect
-        id="appId"
-        label="labels.appType"
-        i18n-path="appType"
-        :icon="modalStore.modalData.appType"
-        :options="appCategories"
-        v-model="modalStore.modalData.appType"
-        class="mx-10 rounded-2xl bg-gray-300 px-2 py-1 dark:bg-gray-800"
-      />
+    <div class="mt-14 flex flex-col gap-2">
+      <div
+        class="bg-secondary-bg text-secondary-text mx-2 flex items-center rounded-2xl px-2 py-1"
+      >
+        <BaseIcon name="app" />
+        <BaseInput
+          id="appId"
+          label="labels.appName"
+          placeholder="App name..."
+          v-model="modalStore.modalData.appName"
+          @submit-enter="mainStore.updateApp(modalStore.modalData)"
+        />
+      </div>
+      <div
+        class="bg-secondary-bg text-secondary-text mx-2 flex items-center rounded-2xl px-2 py-1"
+      >
+        <BaseIcon
+          :name="modalStore.modalData.appType"
+          :class="{
+            'text-[var(--color-desktop-icon)]':
+              modalStore.modalData.appType === 'desktop',
+            'text-[var(--color-mobile-icon)]':
+              modalStore.modalData.appType === 'mobile',
+            'text-[var(--color-web-icon)]':
+              modalStore.modalData.appType === 'web',
+          }"
+        />
+        <BaseSelect
+          id="appId"
+          label="labels.appType"
+          i18n-path="appType"
+          :options="appCategories"
+          v-model="modalStore.modalData.appType"
+        />
+      </div>
       <transition
         mode="out-in"
         enter-active-class="transition duration-300"
@@ -63,8 +81,9 @@ onKeyStroke("Enter", () => mainStore.updateApp(modalStore.modalData));
         />
       </transition>
       <BaseButton
+        text="Save"
         @click="mainStore.updateApp(modalStore.modalData)"
-        class="mx-auto my-4 rounded-xl bg-green-500 p-2 text-gray-50 transition duration-300 hover:bg-green-400 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-green-400"
+        class="bg-create-button text-primary-text hover:bg-create-button-hover mx-auto my-4 w-fit rounded-xl p-2 transition duration-300"
       >
         {{ t("buttons.update") }}
       </BaseButton>

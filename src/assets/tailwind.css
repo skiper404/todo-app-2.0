@@ -2,10 +2,112 @@
 
 @custom-variant dark (&:where(.dark, .dark * ));
 
-:root {
-  --color-primary-900: #0c0c19;
-  --color-primary-800: #080825;
-  --color-primary-700: #1a1a51;
-  --color-primary-600: #3c3d75;
-  --color-primary-500: #4083e3;
+@theme {
+  --color-primary-text: #eeeeee;
+  --color-secondary-text: #444444;
+
+  --color-warning-text: #f59e0b;
+
+  --color-app-bg: #f3f3f3;
+  --color-primary-bg: #52a8eb;
+  --color-secondary-bg: #dfeaff;
+  --color-accent-bg: #aad8ff;
+
+  --color-button-default: #dddddd;
+  --color-button-hover: #bbbbbb;
+
+  --color-main-layout: #000000aa;
+  --color-active-sound: #666666;
+  --color-default-sound: #999999;
+  --color-theme-icon: #666666;
+  --color-active-locale: #666666;
+  --color-default-locale: #999999;
+
+  --color-create-button: #5bc660;
+  --color-create-button-hover: #4ab550;
+
+  --color-clear-icon: #ed6e6c;
+  --color-search-icon: #ed6e6c;
+  --color-desktop-icon: #ff7420;
+  --color-mobile-icon: #00a892;
+  --color-web-icon: #ffd32b;
+  --color-edit-icon: #54b9f9;
+  --color-remove-icon: #ed6e6c;
+  --color-pending-icon: #f2c743;
+  --color-inProgress-icon: #3e94fd;
+  --color-done-icon: #00d25c;
+  --color-critical-icon: #e74340;
+  --color-high-icon: #f08f36;
+  --color-medium-icon: #fae051;
+  --color-low-icon: #5bc660;
+  --color-optional-icon: #c7d1fb;
+  --color-frontend-icon: #4e79a7;
+  --color-backend-icon: #f28e2b;
+  --color-database-icon: #e15759;
+  --color-devops-icon: #76b7b2;
+  --color-testing-icon: #59a14f;
+  --color-security-icon: #edc948;
+  --color-ux-icon: #b07aa1;
+  --color-integration-icon: #ff9da7;
+  --color-product-icon: #9c755f;
+  --color-analytics-icon: #bab0ab;
+  --color-marketing-icon: #3c5f85;
+
+  --color-task-pending-bg: #fcedd7;
+  --color-task-inProgress-bg: #dee9fc;
+  --color-task-done-bg: #e2fbe8;
+}
+
+.dark {
+  --color-primary-text: #eeeeee;
+  --color-secondary-text: #eeeeee;
+
+  --color-app-bg: #111111;
+  --color-primary-bg: #333333;
+  --color-secondary-bg: #222222;
+  --color-accent-bg: #444444;
+
+  --color-button-default: #555555;
+  --color-button-hover: #777777;
+
+  --color-main-layout: #000000aa;
+  --color-active-sound: #bbbbbb;
+  --color-default-sound: #888888;
+  --color-theme-icon: #111111;
+  --color-active-locale: #111111;
+  --color-default-locale: #eeeeee;
+
+  --color-create-button: #5bc660;
+  --color-create-button-hover: #4ab550;
+
+  --color-clear-icon: #ed6e6c;
+  --color-search-icon: #ed6e6c;
+  --color-desktop-icon: #ff7420;
+  --color-mobile-icon: #00a892;
+  --color-web-icon: #ffd32b;
+  --color-edit-icon: #54b9f9;
+  --color-remove-icon: #ed6e6c;
+  --color-pending-icon: #f2c743;
+  --color-inProgress-icon: #3e94fd;
+  --color-done-icon: #00d25c;
+  --color-critical-icon: #e74340;
+  --color-high-icon: #f08f36;
+  --color-medium-icon: #fae051;
+  --color-low-icon: #5bc660;
+  --color-optional-icon: #c7d1fb;
+  --color-frontend-icon: #4e79a7;
+  --color-backend-icon: #f28e2b;
+  --color-database-icon: #e15759;
+  --color-devops-icon: #76b7b2;
+  --color-testing-icon: #59a14f;
+  --color-security-icon: #edc948;
+  --color-ux-icon: #b07aa1;
+  --color-integration-icon: #ff9da7;
+  --color-product-icon: #9c755f;
+  --color-analytics-icon: #bab0ab;
+  --color-marketing-icon: #3c5f85;
+
+  --color-task-pending-bg: #3b2908;
+  --color-task-inProgress-bg: #192353;
+  --color-task-done-bg: #112d18;
 }

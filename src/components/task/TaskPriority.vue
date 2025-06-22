@@ -14,15 +14,14 @@ const { t } = useI18n();
     <BaseIcon
       name="priority"
       :class="{
-        'text-red-500': taskPriority === 'critical',
-        'text-orange-500': taskPriority === 'high',
-        'text-yellow-500': taskPriority === 'medium',
-        'text-lime-500': taskPriority === 'low',
-        'text-gray-400': taskPriority === 'optional',
+        'text-[var(--color-critical-icon)]': taskPriority === 'critical',
+        'text-[var(--color-high-icon)]': taskPriority === 'high',
+        'text-[var(--color-medium-icon)]': taskPriority === 'medium',
+        'text-[var(--color-low-icon)]': taskPriority === 'low',
+        'text-[var(--color-optional-icon)]': taskPriority === 'optional',
       }"
     />
-
-    <span class="text-gray-500">
+    <span class="">
       {{ t(`priority.${getPriorityOption(taskPriority).label}`) }}
     </span>
   </div>

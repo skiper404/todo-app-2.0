@@ -1,46 +1,34 @@
 <script setup>
 import { useSettingsStore } from "@/stores/SettingsStore";
+import BaseButton from "./BaseButton.vue";
 
 const settingsStore = useSettingsStore();
 </script>
 
 <template>
-  <div class="flex gap-1 dark:text-gray-400">
-    <button
+  <div class="text-default-locale flex gap-2">
+    <BaseButton
+      text="en"
       @click="settingsStore.setLocale('en')"
       :class="[
-        'p-1',
         {
-          'rounded bg-gray-100 p-1 text-gray-900 transition duration-500 dark:bg-gray-800 dark:text-gray-100':
-            settingsStore.locale === 'en',
+          'text-primary-text bg-gray-500': settingsStore.locale === 'en',
         },
       ]"
-    >
-      en
-    </button>
-    <button
+    />
+    <BaseButton
+      text="ru"
       @click="settingsStore.setLocale('ru')"
-      :class="[
-        'p-1',
-        {
-          'rounded bg-gray-100 p-1 text-gray-900 transition duration-500 dark:bg-gray-800 dark:text-gray-100':
-            settingsStore.locale === 'ru',
-        },
-      ]"
-    >
-      ru
-    </button>
-    <button
+      :class="{
+        'text-primary-text bg-gray-500': settingsStore.locale === 'ru',
+      }"
+    />
+    <BaseButton
+      text="ua"
       @click="settingsStore.setLocale('ua')"
-      :class="[
-        'p-1',
-        {
-          'rounded bg-gray-100 p-1 transition duration-500 dark:bg-gray-800 dark:text-gray-100':
-            settingsStore.locale === 'ua',
-        },
-      ]"
-    >
-      ua
-    </button>
+      :class="{
+        'text-primary-text bg-gray-500': settingsStore.locale === 'ua',
+      }"
+    />
   </div>
 </template>

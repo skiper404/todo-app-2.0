@@ -16,22 +16,18 @@ onKeyStroke("Enter", () => taskStore.removeTask(modalStore.modalData.taskId));
 </script>
 
 <template>
-  <div
-    class="relative flex flex-col rounded-xl bg-gray-200 dark:bg-gray-900 dark:text-gray-400"
-  >
-    <div class="mt-12 flex flex-col gap-2 px-10">
-      <div>
+  <div class="bg-primary-bg relative flex flex-col rounded-xl px-4">
+    <div class="mt-14 flex flex-col gap-2">
+      <div class="text-primary-text mx-6">
         {{ t("removeQuestion") }}
-        <span class="font-bold dark:text-gray-300">{{
-          modalStore.modalData.taskName
-        }}</span>
+        <span class="font-bold">{{ modalStore.modalData.taskName }}</span>
         ?
       </div>
-      <div class="flex">
+      <div class="flex items-center justify-center gap-8">
         <BaseButton
-          name="cancel"
+          name="clear"
           @click="modalStore.closeModal"
-          class="mx-auto my-4 rounded-xl bg-gray-300 p-2 text-red-400 transition duration-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-700"
+          class="text-clear-icon my-4 rounded-xl p-2 transition duration-300"
         >
           <span class="pl-1">
             {{ t("buttons.no") }}
@@ -40,7 +36,7 @@ onKeyStroke("Enter", () => taskStore.removeTask(modalStore.modalData.taskId));
         <BaseButton
           name="done"
           @click="taskStore.removeTask(modalStore.modalData.taskId)"
-          class="mx-auto my-4 rounded-xl bg-gray-300 p-2 text-green-400 transition duration-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-700"
+          class="text-done-icon my-4 rounded-xl transition duration-300"
         >
           <span class="pl-1">
             {{ t("buttons.yes") }}

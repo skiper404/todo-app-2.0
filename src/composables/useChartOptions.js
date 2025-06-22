@@ -1,6 +1,9 @@
 import { useChartsStore } from "@/stores/ChartsStore";
 import { useSettingsStore } from "@/stores/SettingsStore";
 import { computed } from "vue";
+import { schemeTableau10 } from "d3-scale-chromatic";
+
+const palette = schemeTableau10;
 
 export const useChartOptions = (type) => {
   const chartsStore = useChartsStore();
@@ -59,7 +62,7 @@ export const useChartOptions = (type) => {
             {
               name: "Optional",
               value: chartsStore.totalOptional,
-              itemStyle: { color: "#8e97a5" },
+              itemStyle: { color: "#c7d1fb" },
             },
           ],
         };
@@ -86,17 +89,79 @@ export const useChartOptions = (type) => {
           ],
         };
 
+      case "category":
+        return {
+          title: `Total ${capitalize(type)}`,
+          data: [
+            {
+              name: "Frontend",
+              value: chartsStore.totalFrontend,
+              itemStyle: { color: palette[0] },
+            },
+            {
+              name: "Backend",
+              value: chartsStore.totalBackend,
+              itemStyle: { color: palette[1] },
+            },
+            {
+              name: "Database",
+              value: chartsStore.totalDatabase,
+              itemStyle: { color: palette[3] },
+            },
+            {
+              name: "DevOps",
+              value: chartsStore.totalDevops,
+              itemStyle: { color: palette[4] },
+            },
+            {
+              name: "Testing",
+              value: chartsStore.totalTesting,
+              itemStyle: { color: palette[5] },
+            },
+            {
+              name: "Security",
+              value: chartsStore.totalSecurity,
+              itemStyle: { color: palette[6] },
+            },
+            {
+              name: "UX",
+              value: chartsStore.totalUX,
+              itemStyle: { color: palette[7] },
+            },
+            {
+              name: "Integration",
+              value: chartsStore.totalIntegration,
+              itemStyle: { color: palette[8] },
+            },
+            {
+              name: "Product",
+              value: chartsStore.totalProduct,
+              itemStyle: { color: palette[9] },
+            },
+            {
+              name: "Analytics",
+              value: chartsStore.totalAnalytics,
+              itemStyle: { color: palette[10] },
+            },
+            {
+              name: "Marketing",
+              value: chartsStore.totalMarketing,
+              itemStyle: { color: palette[11] },
+            },
+          ],
+        };
+
       default:
         break;
     }
   });
 
   const option = computed(() => ({
-    backgroundColor: settingsStore.isDark ? "#111724" : "#d1f0ff",
+    backgroundColor: settingsStore.isDark ? "#222222" : "#dfeaff",
 
     title: {
       text: chartData.value.title,
-      top: "5px",
+      top: "2px",
       left: "center",
       textStyle: {
         fontSize: "16px",
@@ -132,7 +197,7 @@ export const useChartOptions = (type) => {
     series: [
       {
         type: "pie",
-        radius: [30, 50],
+        radius: [40, 60],
         center: ["50%", "50%"],
         roseType: "rose",
         padAngle: 4,

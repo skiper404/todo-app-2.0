@@ -2,13 +2,17 @@
 import BaseIcon from "./BaseIcon.vue";
 const props = defineProps({
   name: { type: String },
-  size: { type: Number, default: 6 },
+  text: { text: String },
 });
 </script>
 
 <template>
-  <button class="flex items-center justify-center">
+  <button
+    class="bg-button-default hover:bg-button-hover flex h-7 w-7 items-center justify-center rounded-full"
+  >
+    <span>
+      {{ text }}
+    </span>
     <BaseIcon :name="name" v-if="name" />
-    <slot />
   </button>
 </template>

@@ -10,6 +10,9 @@ const settingsStore = useSettingsStore();
     <BaseButton
       :name="settingsStore.isSoundOn ? 'soundOn' : 'soundOff'"
       @click="settingsStore.toggleSound"
+      :class="[
+        settingsStore.isSoundOn ? 'text-active-sound' : 'text-default-sound',
+      ]"
     />
   </div>
 </template>

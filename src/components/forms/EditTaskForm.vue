@@ -8,6 +8,7 @@ import BaseInput from "../BaseInput.vue";
 import BaseButton from "../BaseButton.vue";
 import BaseMessage from "../BaseMessage.vue";
 import BaseSelect from "../BaseSelect.vue";
+import BaseIcon from "../BaseIcon.vue";
 
 const taskStore = useTaskStore();
 const modalStore = useModalStore();
@@ -19,49 +20,101 @@ onKeyStroke("Enter", () => taskStore.updateTask(modalStore.modalData));
 </script>
 
 <template>
-  <div
-    class="relative flex flex-col rounded-xl bg-gray-200 dark:bg-gray-900 dark:text-gray-400"
-  >
-    <div class="mt-12 flex flex-col gap-2 px-10">
-      <BaseInput
-        class="mx-10 rounded-2xl bg-gray-300 px-2 py-1 dark:bg-gray-800"
-        id="taskName"
-        label="labels.taskName"
-        icon="appName"
-        placeholder="Task name..."
-        v-model="modalStore.modalData.taskName"
-        @submit-enter="taskStore.updateTask(modalStore.modalData)"
-      />
+  <div class="bg-primary-bg relative flex flex-col rounded-xl px-4">
+    <div class="mt-14 flex flex-col gap-2">
+      <div
+        class="bg-secondary-bg text-secondary-text mx-2 flex items-center rounded-2xl px-2 py-1"
+      >
+        <BaseIcon name="app" />
+        <BaseInput
+          class="rounded-2xl px-2 py-1"
+          id="taskName"
+          label="labels.taskName"
+          placeholder="Task name..."
+          v-model="modalStore.modalData.taskName"
+          @submit-enter="taskStore.updateTask(modalStore.modalData)"
+        />
+      </div>
 
-      <BaseSelect
-        class="mx-10 rounded-2xl bg-gray-300 px-2 py-1 dark:bg-gray-800"
-        id="taskCategory"
-        label="labels.category"
-        icon="category"
-        i18n-path="category"
-        :options="categoryOptions"
-        v-model="modalStore.modalData.taskCategory"
-      />
-
-      <BaseSelect
-        class="mx-10 rounded-2xl bg-gray-300 px-2 py-1 dark:bg-gray-800"
-        id="taskPriority"
-        label="labels.priority"
-        icon="priority"
-        i18n-path="priority"
-        :options="priorityOptions"
-        v-model="modalStore.modalData.taskPriority"
-      />
-
-      <BaseSelect
-        class="mx-10 rounded-2xl bg-gray-300 px-2 py-1 dark:bg-gray-800"
-        id="taskStatus"
-        label="labels.status"
-        icon="status"
-        i18n-path="status"
-        :options="statusOptions"
-        v-model="modalStore.modalData.taskStatus"
-      />
+      <div
+        class="bg-secondary-bg text-secondary-text mx-2 flex items-center rounded-2xl px-2 py-1"
+      >
+        <BaseIcon
+          name="category"
+          :class="{
+            'text-frontend-icon':
+              modalStore.modalData.taskCategory === 'frontend',
+            'text-backend-icon':
+              modalStore.modalData.taskCategory === 'backend',
+            'text-database-icon':
+              modalStore.modalData.taskCategory === 'database',
+            'text-devops-icon': modalStore.modalData.taskCategory === 'devops',
+            'text-testing-icon':
+              modalStore.modalData.taskCategory === 'testing',
+            'text-security-icon':
+              modalStore.modalData.taskCategory === 'security',
+            'text-ux-icon': modalStore.modalData.taskCategory === 'ux',
+            'text-integration-icon':
+              modalStore.modalData.taskCategory === 'integration',
+            'text-product-icon':
+              modalStore.modalData.taskCategory === 'product',
+            'text-analytics-icon':
+              modalStore.modalData.taskCategory === 'analytics',
+            'text-marketing-icon':
+              modalStore.modalData.taskCategory === 'marketing',
+          }"
+        />
+        <BaseSelect
+          id="taskCategory"
+          label="labels.category"
+          i18n-path="category"
+          :options="categoryOptions"
+          v-model="modalStore.modalData.taskCategory"
+        />
+      </div>
+      <div
+        class="bg-secondary-bg text-secondary-text mx-2 flex items-center rounded-2xl px-2 py-1"
+      >
+        <BaseIcon
+          name="priority"
+          :class="{
+            'text-critical-icon':
+              modalStore.modalData.taskPriority === 'critical',
+            'text-high-icon': modalStore.modalData.taskPriority === 'high',
+            'text-medium-icon': modalStore.modalData.taskPriority === 'medium',
+            'text-low-icon': modalStore.modalData.taskPriority === 'low',
+            'text-optional-icon':
+              modalStore.modalData.taskPriority === 'optional',
+          }"
+        />
+        <BaseSelect
+          id="taskPriority"
+          label="labels.priority"
+          i18n-path="priority"
+          :options="priorityOptions"
+          v-model="modalStore.modalData.taskPriority"
+        />
+      </div>
+      <div
+        class="bg-secondary-bg text-secondary-text mx-2 flex items-center rounded-2xl px-2 py-1"
+      >
+        <BaseIcon
+          :name="modalStore.modalData.taskStatus"
+          :class="{
+            'text-pending-icon': modalStore.modalData.taskStatus === 'pending',
+            'text-inProgress-icon':
+              modalStore.modalData.taskStatus === 'inProgress',
+            'text-done-icon': modalStore.modalData.taskStatus === 'done',
+          }"
+        />
+        <BaseSelect
+          id="taskStatus"
+          label="labels.status"
+          i18n-path="status"
+          :options="statusOptions"
+          v-model="modalStore.modalData.taskStatus"
+        />
+      </div>
 
       <transition
         enter-active-class="transition duration-300"
@@ -83,8 +136,9 @@ onKeyStroke("Enter", () => taskStore.updateTask(modalStore.modalData));
         />
       </transition>
       <BaseButton
+        text="Save"
         @click="taskStore.updateTask(modalStore.modalData)"
-        class="mx-auto my-4 rounded-xl bg-green-500 p-2 text-gray-50 transition duration-300 hover:bg-green-400 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-green-400"
+        class="bg-create-button text-primary-text hover:bg-create-button-hover mx-auto my-4 w-fit rounded-xl p-2 transition duration-300"
       >
         {{ t("buttons.update") }}</BaseButton
       >

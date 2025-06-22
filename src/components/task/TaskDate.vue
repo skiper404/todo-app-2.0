@@ -3,7 +3,7 @@ const props = defineProps({ taskDate: String });
 </script>
 
 <template>
-  <div class="truncate overflow-ellipsis text-gray-500">
+  <div class="truncate overflow-ellipsis">
     {{ taskDate }}
   </div>
 </template>

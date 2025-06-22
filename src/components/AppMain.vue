@@ -1,7 +1,7 @@
 <script setup>
 import { useI18n } from "vue-i18n";
 import BaseButton from "./BaseButton.vue";
-import BaseCreateBlock from "./BaseCreateBlock.vue";
+import BaseCreate from "./BaseCreate.vue";
 import MainHeader from "./MainHeader.vue";
 import { useTaskStore } from "@/stores/TaskStore";
 import { useMainStore } from "@/stores/MainStore";
@@ -16,10 +16,10 @@ const { t } = useI18n();
     class="no-reset-activeId overflow-hidden pt-16 md:mx-4 md:ml-86 md:pt-24"
   >
     <div
-      class="relative max-h-[calc(100vh-220px)] min-h-[calc(100vh-160px)] overflow-y-auto md:min-h-[calc(100vh-160px)] lg:max-h-[calc(100vh-140px)] dark:bg-transparent"
+      class="relative max-h-[calc(100vh-100px)] min-h-[calc(100vh-200px)] overflow-y-auto md:max-h-[calc(100vh-154px)] lg:max-h-[calc(100vh-180px)]"
     >
       <MainHeader />
-      <BaseCreateBlock
+      <BaseCreate
         label="buttons.createTask"
         formType="createTask"
         v-if="mainStore.activeAppId"
@@ -29,7 +29,8 @@ const { t } = useI18n();
           taskStore.finalTasks.length === 0 &&
           taskStore.tasksInActiveApp.length !== 0
         "
-        class="mx-auto rounded-xl bg-blue-500 p-2 text-gray-50 transition duration-300 hover:bg-blue-400 dark:bg-gray-700 dark:hover:bg-gray-800"
+        text="Reset filters"
+        class="text-primary-text hover:bg-accent-bg mx-auto w-fit rounded-xl bg-gray-500 p-2 transition duration-300"
         @click="taskStore.resetAllFilters"
         >{{ t("buttons.resetFilters") }}</BaseButton
       >

@@ -10,14 +10,15 @@ const { t } = useI18n();
 </script>
 
 <template>
-  <div class="relative flex w-full items-center">
+  <div
+    class="bg-secondary-bg text-secondary-text relative flex w-full items-center rounded-2xl"
+  >
     <BaseIcon
       name="search"
       :class="[
-        'absolute left-4 text-gray-900',
+        'absolute left-2',
         {
-          'dark:text-gray-400': taskStore.searchQuery,
-          'dark:text-gray-600': !taskStore.searchQuery,
+          'text-search-icon': taskStore.searchQuery,
         },
       ]"
     />
@@ -27,23 +28,19 @@ const { t } = useI18n();
       :placeholder="t('labels.search')"
       v-model="taskStore.searchQuery"
       :class="[
-        'w-full rounded-full bg-gray-50 py-1 pl-4 text-lg outline-none',
+        'w-full rounded-full px-10 py-1 text-lg',
         {
-          'bg-gray-300 dark:bg-gray-800 dark:text-gray-400':
-            taskStore.searchQuery,
-          'bg-gray-200 dark:bg-gray-900 dark:text-gray-500':
-            !taskStore.searchQuery,
+          'bg-accent-bg': taskStore.searchQuery,
         },
       ]"
     />
     <BaseButton
-      name="cancel"
+      name="clear"
       :class="[
-        'absolute right-2',
-        {
-          'dark:text-gray-400': taskStore.searchQuery,
-          'dark:text-gray-600': !taskStore.searchQuery,
-        },
+        'absolute right-2 hover:text-[var(--color-clear-icon-hover)]',
+        taskStore.searchQuery
+          ? 'text-[var(--color-clear-icon)]'
+          : 'text-[var(--color-clear-default-icon)]',
       ]"
       @click="taskStore.resetSearchQuery"
     />

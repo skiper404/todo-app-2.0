@@ -32,7 +32,7 @@ onMounted(() =>
 </script>
 
 <template>
-  <div class="min-h-screen bg-[#fafafa] dark:bg-gray-950">
+  <div class="bg-app-bg min-h-screen">
     <AppHeader />
     <BaseMenu />
     <TheAside />

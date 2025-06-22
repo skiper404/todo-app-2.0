@@ -25,41 +25,40 @@ const selectApp = () => {
     @click="selectApp"
     :class="[
       'no-reset-activeId my-2 flex cursor-pointer items-center justify-between rounded-xl px-2',
-      {
-        'bg-[#5184fd]': app.appId === mainStore.activeAppId,
-        'bg-gray-100 dark:bg-gray-800': app.appId !== mainStore.activeAppId,
-      },
+      app.appId === mainStore.activeAppId
+        ? 'bg-primary-bg text-primary-text'
+        : 'bg-accent-bg text-secondary-text',
     ]"
   >
     <div class="flex items-center gap-2 overflow-hidden p-2">
-      <BaseIcon name="drag" class="dragList" />
-
-      <BaseIcon :name="app.appType" />
-
-      <div
+      <BaseIcon
+        name="drag"
         :class="[
-          'truncate',
-          'w-full lg:w-36',
+          'dragList hover:cursor-move',
           {
-            'text-gray-200 dark:text-gray-100':
-              app.appId === mainStore.activeAppId,
-            'text-gray-500 dark:text-gray-500':
-              app.appId !== mainStore.activeAppId,
+            'text-drag-active': app.appId === mainStore.activeAppId,
+            'text-drag-no-active': app.appId !== mainStore.activeAppId,
           },
         ]"
-      >
+      />
+
+      <BaseIcon
+        :name="app.appType"
+        :class="{
+          'text-desktop-icon': app.appType === 'desktop',
+          'text-mobile-icon': app.appType === 'mobile',
+          'text-web-icon': app.appType === 'web',
+        }"
+      />
+
+      <div class="w-full truncate lg:w-36">
         {{ app.appName }}
       </div>
     </div>
     <div class="flex gap-2">
       <BaseButton
-        :class="{
-          'text-gray-100 dark:text-gray-500':
-            app.appId === mainStore.activeAppId,
-          'text-gray-500 dark:text-gray-500':
-            app.appId !== mainStore.activeAppId,
-        }"
         name="edit"
+        :class="'text-edit-icon'"
         @click="
           modalStore.openModal('editTrackedApp', {
             appId: app.appId,
@@ -70,12 +69,7 @@ const selectApp = () => {
       />
       <BaseButton
         name="trash"
-        :class="{
-          'text-gray-100 dark:text-gray-500':
-            app.appId === mainStore.activeAppId,
-          'text-gray-700 dark:text-gray-500':
-            app.appId !== mainStore.activeAppId,
-        }"
+        class="text-remove-icon"
         @click="
           modalStore.openModal('removeTrackedApp', {
             appId: app.appId,
@@ -88,7 +82,7 @@ const selectApp = () => {
 </template>
 
 <style lang="css" scoped>
-bg-green-500 text-gray-50 .dragList {
+.dragList {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;

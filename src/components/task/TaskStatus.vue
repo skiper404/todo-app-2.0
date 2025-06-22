@@ -17,8 +17,6 @@ const { t } = useI18n();
         },
       ]"
     ></div>
-    <span class="text-gray-500">
-      {{ t(`status.${taskStatus}`) }}
-    </span>
+    {{ t(`status.${taskStatus}`) }}
   </div>
 </template>

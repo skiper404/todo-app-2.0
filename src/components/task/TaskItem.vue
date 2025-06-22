@@ -17,7 +17,14 @@ const props = defineProps({ task: Object });
 
 <template>
   <div
-    class="no-reset-activeId m-3 flex rounded-xl bg-[#dff0f0] text-xs capitalize dark:bg-gray-900"
+    :class="[
+      'no-reset-activeId text-secondary-text m-3 flex rounded-xl text-xs capitalize',
+      {
+        'bg-task-pending-bg': task.taskStatus === 'pending',
+        'bg-task-inProgress-bg': task.taskStatus === 'inProgress',
+        'bg-task-done-bg': task.taskStatus === 'done',
+      },
+    ]"
   >
     <div class="flex items-center">
       <BaseIcon name="drag" class="dragTask mx-2" />
@@ -31,19 +38,20 @@ const props = defineProps({ task: Object });
         <TaskDate :taskDate="task.taskDate" />
       </div>
     </div>
-    <div class="no-reset-activeId ml-auto flex gap-1 pr-2">
+    <div class="no-reset-activeId ml-auto flex items-center gap-1 pr-2">
       <BaseButton
         :name="task.taskStatus"
         :class="{
-          'text-amber-400': task.taskStatus === 'pending',
-          'text-blue-400': task.taskStatus === 'inProgress',
-          'text-green-400': task.taskStatus === 'done',
+          'text-pending-icon': task.taskStatus === 'pending',
+          'text-inProgress-icon': task.taskStatus === 'inProgress',
+          'text-done-icon': task.taskStatus === 'done',
         }"
         @click="taskStore.changeStatus(task)"
       >
       </BaseButton>
       <BaseButton
         name="edit"
+        :class="'text-edit-icon'"
         @click="
           modalStore.openModal('editTask', {
             taskId: task.taskId,
@@ -56,6 +64,7 @@ const props = defineProps({ task: Object });
       />
       <BaseButton
         name="trash"
+        class="text-remove-icon"
         @click="
           modalStore.openModal('removeTask', {
             taskId: task.taskId,

@@ -15,7 +15,7 @@ const modalStore = useModalStore();
     leave-to-class="opacity-0"
   >
     <div
-      class="no-reset-activeId absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/50"
+      class="no-reset-activeId bg-main-layout absolute inset-0 z-20 flex flex-col items-center justify-center"
       @click.self="modalStore.closeModal"
     >
       <transition
@@ -28,11 +28,11 @@ const modalStore = useModalStore();
       >
         <div
           v-if="modalStore.showModal"
-          class="relative -top-30 mx-2 flex flex-col rounded-xl dark:bg-gray-900"
+          class="relative -top-30 mx-2 flex flex-col rounded-xl"
         >
           <BaseButton
-            class="absolute top-4 right-4 z-10 rounded bg-gray-50 p-1 text-white dark:bg-gray-800 dark:text-gray-950"
-            name="close"
+            class="text-clear-default-icon hover:text-clear-icon-hover absolute top-4 right-4 z-10 rounded p-1"
+            name="clear"
             @click="modalStore.closeModal"
           />
           <component
