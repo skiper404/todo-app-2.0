@@ -1,45 +1,18 @@
 <script setup>
-import { useModalStore } from "./stores/ModalStore";
-import AppHeader from "@/components/AppHeader.vue";
-import TheAside from "./components/aside/TheAside.vue";
-import AppMain from "./components/AppMain.vue";
-import AppFooter from "./components/AppFooter.vue";
-import BaseModal from "./components/BaseModal.vue";
-import BaseMenu from "./components/BaseMenu.vue";
-import { onMounted } from "vue";
-import { useRouter } from "vue-router";
-import { useMainStore } from "./stores/MainStore";
+import Header from "./components/Header.vue";
+import Main from "./components/Main.vue";
+import Footer from "./components/Footer.vue";
+import TheMenu from "./components/TheMenu.vue";
+import { useMainStore } from "./stores";
 
-const modalStore = useModalStore();
 const mainStore = useMainStore();
-const router = useRouter();
-
-const handleGlobalClick = (event) => {
-  const path = event.composedPath?.() || [];
-  const shouldIgnore = path.some((el) => {
-    return el.classList?.contains("no-reset-activeId");
-  });
-
-  if (!shouldIgnore) {
-    router.push({ name: "Home" });
-    mainStore.resetActiveAppId();
-  }
-};
-
-onMounted(() =>
-  document.addEventListener("click", (event) => handleGlobalClick(event)),
-);
 </script>
 
 <template>
-  <div class="bg-app-bg min-h-screen">
-    <AppHeader />
-    <BaseMenu />
-    <TheAside />
-    <AppMain />
-    <AppFooter />
-    <teleport to="body">
-      <BaseModal v-show="modalStore.showModal" />
-    </teleport>
+  <div class="relative min-h-screen bg-gray-800 text-white">
+    <TheMenu v-if="mainStore.isShowMenu" />
+    <Header />
+    <Main />
+    <Footer />
   </div>
 </template>

@@ -1,18 +1,12 @@
 <script setup>
-import BaseIcon from "./BaseIcon.vue";
-const props = defineProps({
-  name: { type: String },
-  text: { text: String },
+const { label, classes } = defineProps({
+  label: { type: String, default: "button" },
+  classes: { type: String },
 });
 </script>
 
 <template>
-  <button
-    class="bg-button-default hover:bg-button-hover flex h-7 w-7 items-center justify-center rounded-full"
-  >
-    <span>
-      {{ text }}
-    </span>
-    <BaseIcon :name="name" v-if="name" />
+  <button :class="classes" class="flex items-center justify-center capitalize">
+    {{ label }}
   </button>
 </template>

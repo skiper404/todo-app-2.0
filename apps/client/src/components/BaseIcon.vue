@@ -1,12 +1,15 @@
 <script setup>
-import { icons } from "@/icons";
-const props = defineProps({
-  name: { type: String },
+import { ICONS } from "@/shared/icons";
+import { computed } from "vue";
+
+const { name, classes } = defineProps({
+  name: { type: String, default: "close" },
+  classes: { type: String, default: "size-10" },
 });
+
+const icon = computed(() => ICONS[name]);
 </script>
 
 <template>
-  <div class="size-5 flex-shrink-0">
-    <component :is="icons[name]" />
-  </div>
+  <component :is="icon" :class="classes" />
 </template>
