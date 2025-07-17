@@ -1,9 +1,9 @@
 <script setup>
 import BaseIcon from "./BaseIcon.vue";
 import TheLogo from "./TheLogo.vue";
-import { useMainStore } from "@/stores";
+import { useMenuStore } from "@/stores";
 
-const mainStore = useMainStore();
+const menuStore = useMenuStore();
 </script>
 
 <template>
@@ -14,7 +14,7 @@ const mainStore = useMainStore();
     <BaseIcon
       name="menu"
       classes="size-10 text-indigo-500"
-      @click="mainStore.openMenu"
+      @click="menuStore.openMenu"
     />
   </header>
 </template>

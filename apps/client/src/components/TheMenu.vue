@@ -1,8 +1,8 @@
 <script setup>
 import BaseIcon from "./BaseIcon.vue";
-import { useMainStore } from "@/stores";
+import { useMenuStore } from "@/stores";
 
-const mainStore = useMainStore();
+const menuStore = useMenuStore();
 </script>
 
 <template>
@@ -12,7 +12,7 @@ const mainStore = useMainStore();
     <BaseIcon
       name="close"
       classes="size-8 text-red-500 hover:text-red-400 border rounded-full border-2 absolute top-4 right-4"
-      @click="mainStore.closeMenu"
+      @click="menuStore.closeMenu"
     />
     <div>Menu</div>
   </div>

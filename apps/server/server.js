@@ -19,36 +19,69 @@ app.use(express.json());
 const start = async () => {
   try {
     await client.connect();
-  } catch (error) {
-    console.log('Error:', error.message);
+  } catch (e) {
+    console.log('Error:', e.message);
   }
 
   app.get('/api/apps', async (req, res) => {
     try {
       const apps = await appsColl.find().toArray();
-      res.send({ success: true, message: 'Fetch apps', data: { apps }, meta: null, error: null });
-    } catch (error) {
-      res.send({ success: false, error: error.messaage });
+      res.status(200).send({ success: true, message: 'Fetch apps', data: { apps }, meta: null, error: null });
+    } catch (e) {
+      res.status(500).send({ success: false, error: e.message });
     }
   });
 
   app.post('/api/create-app', async (req, res) => {
     try {
-      const appName = req.body.appName;
-      await appsColl.insertOne({ name: appName });
-      res.send({ success: true, message: `App ${appName} created!`, data: null, meta: null, error: null });
-    } catch (error) {
-      res.send({ success: false, error: error.messaage });
+      const app = req.body.app;
+      await appsColl.insertOne(app);
+      res.status(200).send({ success: true, message: `App ${app.appName} created!`, data: null, meta: null, error: null });
+    } catch (e) {
+      res.status(500).send({ success: false, error: e.message });
     }
   });
 
-  app.delete('/api/delete-app/:appId', async (req, res) => {
-    const appId = new ObjectId(req.params.appId);
+  app.delete('/api/remove-app/:id', async (req, res) => {
     try {
-      await appsColl.deleteOne({ _id: appId });
-      res.send({ success: true, message: `App ${appId} deleted!`, data: null, meta: null, error: null });
-    } catch (error) {
-      res.send({ success: false, error: error.messaage });
+      const id = new ObjectId(req.params.id);
+      const name = req.body.appName;
+      await appsColl.deleteOne({ _id: id });
+      res.status(200).send({ success: true, message: `App '${name}' deleted!`, data: null, meta: null, error: null });
+    } catch (e) {
+      res.status(500).send({ success: false, error: e.message });
+    }
+  });
+
+  //======================================================================tasks=====================================================
+
+  app.get('/api/tasks', async (req, res) => {
+    try {
+      const tasks = await tasksColl.find({}).toArray();
+      res.status(200).send({ success: true, message: `Fetch tasks`, data: { tasks }, meta: null, error: null });
+    } catch (e) {
+      res.status(500).send({ success: false, error: e.message });
+    }
+  });
+
+  app.post('/api/create-task', async (req, res) => {
+    try {
+      const task = req.body.task;
+      await tasksColl.insertOne(task);
+      res.send({ success: true, message: `Task ${task.taskName} created!`, data: null, meta: null, error: null });
+    } catch (e) {
+      res.status(500).send({ success: false, error: e.message });
+    }
+  });
+
+  app.delete('/api/remove-task/:id', async (req, res) => {
+    try {
+      const id = new ObjectId(req.params.id);
+      const name = req.body.taskName;
+      await tasksColl.deleteOne({ _id: id });
+      res.status(200).send({ success: true, message: `Task '${name}' deleted!`, data: null, meta: null, error: null });
+    } catch (e) {
+      res.status(500).send({ success: false, error: e.message });
     }
   });
 
