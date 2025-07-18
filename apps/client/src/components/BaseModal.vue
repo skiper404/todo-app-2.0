@@ -22,13 +22,8 @@ const forms = {
 
 <template>
   <div
-    class="absolute inset-0 z-20 flex items-center justify-center bg-gray-900"
+    class="absolute inset-0 z-10 flex items-center justify-center bg-black/50"
   >
     <component :is="forms[modalStore.modalType]" />
-    <BaseIcon
-      name="close"
-      classes="size-8 text-red-500 hover:text-red-400 absolute top-4 right-4"
-      @click="modalStore.closeModal"
-    />
   </div>
 </template>

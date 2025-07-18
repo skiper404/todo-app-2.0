@@ -1,33 +1,78 @@
 <script setup>
+import BaseButton from "../BaseButton.vue";
+import BaseInput from "../BaseInput.vue";
+import BaseLabel from "../BaseLabel.vue";
+
 import { useAppsStore, useModalStore } from "@/stores";
+import BaseSelect from "../BaseSelect.vue";
+import BaseIcon from "../BaseIcon.vue";
 const appsStore = useAppsStore();
 const modalStore = useModalStore();
 
-const handleClick = () => {
-  appsStore.updateApp(modalStore.modalData);
+const handleSubmit = async () => {
+  await appsStore.updateApp(modalStore.modalData);
   modalStore.closeModal();
 };
+
+const options = [
+  { label: "Desktop", value: "desktop" },
+  { label: "Mobile", value: "mobile" },
+  { label: "Web", value: "web" },
+];
 </script>
 
 <template>
-  <div class="h-1/2 border">
-    <pre>{{ modalStore.modalData }}</pre>
-    <div class="text-center text-indigo-300">Edit App form</div>
-    <div class="m-4 flex flex-col gap-2">
-      <input
-        type="text"
-        class="border"
-        v-model="modalStore.modalData.appName"
-      />
-      <select v-model="modalStore.modalData.appType">
-        <option value="desktop">Desktop</option>
-        <option value="mobile">Mobile</option>
-        <option value="web">Web</option>
-      </select>
-      <button class="border hover:text-green-500" @click="handleClick">
-        Edit
-      </button>
+  <form
+    @submit.prevent="handleSubmit"
+    class="relative z-20 flex h-1/2 w-100 flex-col rounded-3xl bg-gray-800 p-4"
+  >
+    <BaseIcon
+      name="close"
+      classes="size-8 text-red-500 hover:text-red-400 absolute top-4 right-4"
+      @click="modalStore.closeModal"
+    />
+    <div class="text-indigo-30 mt-2 text-center text-xl text-indigo-500">
+      Edit App
     </div>
-  </div>
+    <div class="text-center text-sm text-gray-400">Edit tracking apps</div>
+    <BaseLabel
+      for="name"
+      classes="pl-4 mt-4 text-indigo-400"
+      label="App Name"
+    />
+    <BaseInput
+      id="name"
+      classes="outline-0 rounded-full bg-gray-900 py-2 px-4 w-full text-gray-400"
+      v-model="modalStore.modalData.appName"
+      placeholder="Enter App"
+      @remove="modalStore.modalData.appName = ''"
+    />
+    <BaseLabel
+      for="type"
+      classes="pl-4 mt-4 text-indigo-400"
+      label="App Type"
+    />
+    <BaseSelect
+      id="type"
+      :options="options"
+      classes="bg-gray-900 rounded-full w-full py-2 px-4 text-gray-400"
+      v-model="modalStore.modalData.appType"
+    />
+    <BaseIcon
+      :name="modalStore.modalData.appType"
+      :classes="[
+        'absolute opacity-5 left-1/2 -translate-x-1/2 top-30 -translate-y-12 size-80  -z-10',
+        {
+          'text-orange-500': modalStore.modalData.appType === 'desktop',
+          'text-teal-300': modalStore.modalData.appType === 'mobile',
+          'text-yellow-400': modalStore.modalData.appType === 'web',
+        },
+      ]"
+    />
+    <BaseButton
+      type="submit"
+      label="Update"
+      classes="rounded-full text-gray-400 bg-gray-900 px-6 py-1 mt-auto hover:bg-green-600 transition duration-300 hover:text-gray-100"
+    />
+  </form>
 </template>
-;

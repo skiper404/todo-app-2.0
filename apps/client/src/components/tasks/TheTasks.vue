@@ -15,7 +15,7 @@ const modalStore = useModalStore();
       @click="modalStore.openModal('createTask')"
     />
     <pre>{{ appsStore.activeApp }}</pre>
-    <ul>
+    <ul class="flex flex-col gap-2">
       <TaskItem />
     </ul>
   </div>

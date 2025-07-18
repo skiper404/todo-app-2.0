@@ -11,7 +11,5 @@ const icon = computed(() => ICONS[name]);
 </script>
 
 <template>
-  <div>
-    <component :is="icon" :class="classes" />
-  </div>
+  <component :is="icon" :class="classes" />
 </template>

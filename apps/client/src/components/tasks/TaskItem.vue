@@ -20,15 +20,25 @@ onMounted(() => {
       taskCategory,
       taskPriority,
       taskStatus,
-      taskCreatedAt,
     } in tasksStore.tasks"
-    class="flex gap-2 border p-2"
+    :key="_id"
+    :class="[
+      `flex items-center gap-2 rounded-3xl px-4 py-2 transition duration-150 ${_id === appsStore.activeApp ? 'bg-blue-900' : 'bg-gray-800 hover:bg-gray-700'}`,
+    ]"
   >
-    <div class="text-blue-500">{{ taskName }}</div>
-    <div class="text-indigo-300">{{ taskCategory }}</div>
-    <div class="text-indigo-300">{{ taskPriority }}</div>
-    <div class="text-indigo-300">{{ taskStatus }}</div>
-    <div class="text-indigo-300">{{ taskCreatedAt }}</div>
+    <div>
+      {{ taskName }}
+    </div>
+    <div>
+      {{ taskCategory }}
+    </div>
+    <div>
+      {{ taskPriority }}
+    </div>
+    <div>
+      {{ taskStatus }}
+    </div>
+
     <div class="ml-auto flex gap-2">
       <BaseIcon
         name="edit"
@@ -46,7 +56,12 @@ onMounted(() => {
       <BaseIcon
         name="remove"
         classes="text-indigo-500 size-6 hover:text-indigo-400"
-        @click="modalStore.openModal('removeTask', { _id, taskName })"
+        @click="
+          modalStore.openModal('removeTask', {
+            _id,
+            taskName,
+          })
+        "
       />
     </div>
   </li>
