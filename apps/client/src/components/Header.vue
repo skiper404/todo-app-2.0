@@ -8,7 +8,7 @@ const menuStore = useMenuStore();
 
 <template>
   <header
-    class="fixed top-0 right-0 left-0 flex h-16 items-center justify-between bg-gray-900 px-4"
+    class="fixed top-0 right-0 left-0 flex h-16 items-center justify-between bg-gray-950 px-4"
   >
     <TheLogo />
     <BaseIcon

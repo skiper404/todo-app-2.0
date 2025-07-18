@@ -4,6 +4,7 @@ import {
   fetchTasksRequest,
   createTaskRequest,
   removeTaskRequest,
+  updateTaskRequest,
 } from "@/features/taskaAPi";
 
 export const useTasksStore = defineStore("TasksStore", () => {
@@ -60,6 +61,16 @@ export const useTasksStore = defineStore("TasksStore", () => {
     }
   };
 
+  const updateTask = async (data) => {
+    try {
+      const res = await updateTaskRequest(data);
+      await getTasks();
+      message.value = res.message;
+    } catch (e) {
+      message.value = e.message;
+    }
+  };
+
   return {
     tasks,
     newTask,
@@ -70,6 +81,7 @@ export const useTasksStore = defineStore("TasksStore", () => {
     getTasks,
     createTask,
     removeTask,
+    updateTask,
     message,
   };
 });

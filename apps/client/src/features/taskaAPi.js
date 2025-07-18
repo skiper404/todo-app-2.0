@@ -18,3 +18,10 @@ export const removeTaskRequest = async ({ _id, taskName }) => {
   });
   return { message: data.message };
 };
+
+export const updateTaskRequest = async (task) => {
+  const { data } = await axios.post(`${API_URL}/api/update-task/${task._id}`, {
+    task,
+  });
+  return { message: data.message };
+};

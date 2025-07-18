@@ -1,12 +1,15 @@
 <script setup>
 const { label, classes } = defineProps({
   label: { type: String, default: "button" },
-  classes: { type: String },
+  classes: {
+    type: String,
+    default: "flex items-center justify-center capitalize",
+  },
 });
 </script>
 
 <template>
-  <button :class="classes" class="flex items-center justify-center capitalize">
+  <button :class="classes">
     {{ label }}
   </button>
 </template>

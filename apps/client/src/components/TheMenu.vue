@@ -7,11 +7,11 @@ const menuStore = useMenuStore();
 
 <template>
   <div
-    class="absolute inset-0 z-10 flex items-center justify-center bg-black/80"
+    class="absolute inset-0 z-10 flex items-center justify-center bg-gray-900"
   >
     <BaseIcon
       name="close"
-      classes="size-8 text-red-500 hover:text-red-400 border rounded-full border-2 absolute top-4 right-4"
+      classes="size-8 text-red-500 hover:text-red-400 absolute top-4 right-4"
       @click="menuStore.closeMenu"
     />
     <div>Menu</div>

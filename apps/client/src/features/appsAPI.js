@@ -18,3 +18,10 @@ export const removeAppRequest = async ({ _id, appName }) => {
   });
   return { message: data.message };
 };
+
+export const updateAppRequest = async (app) => {
+  const { data } = await axios.post(`${API_URL}/api/update-app/${app._id}`, {
+    app,
+  });
+  return { message: data.message };
+};

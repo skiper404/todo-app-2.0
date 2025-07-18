@@ -26,9 +26,9 @@ const start = async () => {
   app.get('/api/apps', async (req, res) => {
     try {
       const apps = await appsColl.find().toArray();
-      res.status(200).send({ success: true, message: 'Fetch apps', data: { apps }, meta: null, error: null });
+      res.status(200).json({ success: true, message: 'Fetch apps', data: { apps }, meta: null, error: null });
     } catch (e) {
-      res.status(500).send({ success: false, error: e.message });
+      res.status(500).json({ success: false, error: e.message });
     }
   });
 
@@ -36,9 +36,9 @@ const start = async () => {
     try {
       const app = req.body.app;
       await appsColl.insertOne(app);
-      res.status(200).send({ success: true, message: `App ${app.appName} created!`, data: null, meta: null, error: null });
+      res.status(200).json({ success: true, message: `App ${app.appName} created!`, data: null, meta: null, error: null });
     } catch (e) {
-      res.status(500).send({ success: false, error: e.message });
+      res.status(500).json({ success: false, error: e.message });
     }
   });
 
@@ -47,9 +47,9 @@ const start = async () => {
       const id = new ObjectId(req.params.id);
       const name = req.body.appName;
       await appsColl.deleteOne({ _id: id });
-      res.status(200).send({ success: true, message: `App '${name}' deleted!`, data: null, meta: null, error: null });
+      res.status(200).json({ success: true, message: `App '${name}' deleted!`, data: null, meta: null, error: null });
     } catch (e) {
-      res.status(500).send({ success: false, error: e.message });
+      res.status(500).json({ success: false, error: e.message });
     }
   });
 
@@ -58,9 +58,9 @@ const start = async () => {
   app.get('/api/tasks', async (req, res) => {
     try {
       const tasks = await tasksColl.find({}).toArray();
-      res.status(200).send({ success: true, message: `Fetch tasks`, data: { tasks }, meta: null, error: null });
+      res.status(200).json({ success: true, message: `Fetch tasks`, data: { tasks }, meta: null, error: null });
     } catch (e) {
-      res.status(500).send({ success: false, error: e.message });
+      res.status(500).json({ success: false, error: e.message });
     }
   });
 
@@ -68,9 +68,9 @@ const start = async () => {
     try {
       const task = req.body.task;
       await tasksColl.insertOne(task);
-      res.send({ success: true, message: `Task ${task.taskName} created!`, data: null, meta: null, error: null });
+      res.json({ success: true, message: `Task ${task.taskName} created!`, data: null, meta: null, error: null });
     } catch (e) {
-      res.status(500).send({ success: false, error: e.message });
+      res.status(500).json({ success: false, error: e.message });
     }
   });
 
@@ -79,9 +79,31 @@ const start = async () => {
       const id = new ObjectId(req.params.id);
       const name = req.body.taskName;
       await tasksColl.deleteOne({ _id: id });
-      res.status(200).send({ success: true, message: `Task '${name}' deleted!`, data: null, meta: null, error: null });
+      res.status(200).json({ success: true, message: `Task '${name}' deleted!`, data: null, meta: null, error: null });
     } catch (e) {
-      res.status(500).send({ success: false, error: e.message });
+      res.status(500).json({ success: false, error: e.message });
+    }
+  });
+
+  app.post('/api/update-app/:id', async (req, res) => {
+    try {
+      const id = new ObjectId(req.params.id);
+      const { appName, appType } = req.body.app;
+      await appsColl.findOneAndUpdate({ _id: id }, { $set: { appName, appType } });
+      res.status(200).json({ success: true, message: `App ${appName} has updated!`, data: null, meta: null, error: null });
+    } catch (e) {
+      res.status(500).json({ success: false, error: e.message });
+    }
+  });
+
+  app.post('/api/update-task/:id', async (req, res) => {
+    try {
+      const id = new ObjectId(req.params.id);
+      const { taskName, taskCategory, taskStatus, taskPriority } = req.body.task;
+      await tasksColl.findOneAndUpdate({ _id: id }, { $set: { taskName, taskCategory, taskPriority, taskStatus } });
+      res.status(200).json({ success: true, message: `Task ${taskName} has updated!`, data: null, meta: null, error: null });
+    } catch (e) {
+      res.status(500).json({ success: false, error: e.message });
     }
   });
 

@@ -4,12 +4,14 @@ import { computed } from "vue";
 
 const { name, classes } = defineProps({
   name: { type: String, default: "close" },
-  classes: { type: String, default: "size-10" },
+  classes: { type: [Array, String], default: "size-10" },
 });
 
 const icon = computed(() => ICONS[name]);
 </script>
 
 <template>
-  <component :is="icon" :class="classes" />
+  <div>
+    <component :is="icon" :class="classes" />
+  </div>
 </template>

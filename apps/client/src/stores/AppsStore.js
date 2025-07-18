@@ -4,11 +4,13 @@ import {
   fetchAppsRequest,
   createAppRequest,
   removeAppRequest,
+  updateAppRequest,
 } from "@/features/appsAPI";
 
 export const useAppsStore = defineStore("AppsStore", () => {
   const apps = ref([]);
-
+  const activeApp = ref(null);
+  const message = ref("");
   const newAppName = ref("");
   const newAppType = ref("desktop");
 
@@ -17,12 +19,14 @@ export const useAppsStore = defineStore("AppsStore", () => {
     appType: newAppType.value,
   }));
 
+  const setActiveApp = (id) => {
+    activeApp.value = id;
+  };
+
   const resetNewAppFields = () => {
     newAppName.value = "";
     newAppType.value = "desktop";
   };
-
-  const message = ref("");
 
   const getApps = async () => {
     try {
@@ -45,6 +49,16 @@ export const useAppsStore = defineStore("AppsStore", () => {
     }
   };
 
+  const updateApp = async (data) => {
+    try {
+      const res = await updateAppRequest(data);
+      await getApps();
+      message.value = res.message;
+    } catch (e) {
+      message.value = e.message;
+    }
+  };
+
   const removeApp = async (app) => {
     try {
       const res = await removeAppRequest(app);
@@ -61,8 +75,11 @@ export const useAppsStore = defineStore("AppsStore", () => {
     newAppName,
     newAppType,
     message,
+    activeApp,
     getApps,
     createApp,
     removeApp,
+    setActiveApp,
+    updateApp,
   };
 });
