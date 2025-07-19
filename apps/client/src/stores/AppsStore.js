@@ -9,7 +9,7 @@ import {
 
 export const useAppsStore = defineStore("AppsStore", () => {
   const apps = ref([]);
-  const activeApp = ref(null);
+  const activeAppId = ref(null);
   const message = ref("");
   const newAppName = ref("");
   const newAppType = ref("desktop");
@@ -19,8 +19,8 @@ export const useAppsStore = defineStore("AppsStore", () => {
     appType: newAppType.value,
   }));
 
-  const setActiveApp = (id) => {
-    activeApp.value = id;
+  const setActiveAppId = (id) => {
+    activeAppId.value = id;
   };
 
   const resetNewAppFields = () => {
@@ -75,11 +75,11 @@ export const useAppsStore = defineStore("AppsStore", () => {
     newAppName,
     newAppType,
     message,
-    activeApp,
+    activeAppId,
     getApps,
     createApp,
     removeApp,
-    setActiveApp,
+    setActiveAppId,
     updateApp,
   };
 });

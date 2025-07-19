@@ -15,7 +15,7 @@ const modalStore = useModalStore();
 </script>
 
 <template>
-  <div class="relative min-h-screen bg-gray-900 text-white">
+  <div class="relative min-h-screen overflow-hidden bg-gray-900 text-white">
     <BaseTransitionMenuWrapper>
       <TheMenu v-if="menuStore.isShowMenu" />
     </BaseTransitionMenuWrapper>

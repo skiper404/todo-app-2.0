@@ -98,7 +98,7 @@ const statusOptions = [
 
     <BaseButton
       type="submit"
-      label="Create"
+      label="Update"
       classes="rounded-full text-gray-400 bg-gray-900 px-6 py-1 mt-auto hover:bg-green-600 transition duration-300 hover:text-gray-100"
     />
   </form>

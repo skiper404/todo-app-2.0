@@ -8,9 +8,13 @@ const appsStore = useAppsStore();
 const tasksStore = useTasksStore();
 const modalStore = useModalStore();
 
+const handleClick = async (id) => {
+  await tasksStore.getTasks(id);
+  appsStore.setActiveAppId(id);
+};
+
 onMounted(() => {
   appsStore.getApps();
-  tasksStore.getTasks();
 });
 </script>
 
@@ -19,9 +23,9 @@ onMounted(() => {
     v-for="{ _id, appName, appType } in appsStore.apps"
     :key="_id"
     :class="[
-      `flex items-center gap-2 rounded-3xl px-4 py-2 transition duration-150 ${_id === appsStore.activeApp ? 'bg-blue-900' : 'bg-gray-800 hover:bg-gray-700'}`,
+      `flex items-center gap-2 rounded-3xl px-4 py-2 transition duration-150 ${_id === appsStore.activeAppId ? 'bg-blue-900' : 'bg-gray-800 hover:bg-gray-700'}`,
     ]"
-    @click="appsStore.setActiveApp(_id)"
+    @click="handleClick(_id)"
   >
     <BaseIcon
       :name="appType"
@@ -36,7 +40,7 @@ onMounted(() => {
     />
     <div
       :class="[
-        `text-lg font-bold transition duration-150 ${_id === appsStore.activeApp ? 'text-white' : 'text-gray-400'}`,
+        `text-lg font-bold transition duration-150 ${_id === appsStore.activeAppId ? 'text-white' : 'text-gray-400'}`,
       ]"
     >
       {{ appName }}

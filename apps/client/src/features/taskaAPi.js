@@ -2,13 +2,16 @@ import axios from "axios";
 
 const API_URL = "http://localhost:3000";
 
-export const fetchTasksRequest = async () => {
-  const { data } = await axios.get(`${API_URL}/api/tasks`);
+export const fetchTasksRequest = async (appId) => {
+  const { data } = await axios.get(`${API_URL}/api/tasks/${appId}`);
   return { tasks: data.data.tasks, message: data.message };
 };
 
-export const createTaskRequest = async (task) => {
-  const { data } = await axios.post(`${API_URL}/api/create-task`, { task });
+export const createTaskRequest = async (task, appId) => {
+  const { data } = await axios.post(`${API_URL}/api/create-task`, {
+    task,
+    appId,
+  });
   return { message: data.message };
 };
 

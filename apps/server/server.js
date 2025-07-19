@@ -55,9 +55,10 @@ const start = async () => {
 
   //======================================================================tasks=====================================================
 
-  app.get('/api/tasks', async (req, res) => {
+  app.get('/api/tasks/:appId', async (req, res) => {
     try {
-      const tasks = await tasksColl.find({}).toArray();
+      const appId = new ObjectId(req.params.appId);
+      const tasks = await tasksColl.find({ appId: appId }).toArray();
       res.status(200).json({ success: true, message: `Fetch tasks`, data: { tasks }, meta: null, error: null });
     } catch (e) {
       res.status(500).json({ success: false, error: e.message });
@@ -67,7 +68,8 @@ const start = async () => {
   app.post('/api/create-task', async (req, res) => {
     try {
       const task = req.body.task;
-      await tasksColl.insertOne(task);
+      const appId = new ObjectId(req.body.appId);
+      await tasksColl.insertOne({ ...task, appId });
       res.json({ success: true, message: `Task ${task.taskName} created!`, data: null, meta: null, error: null });
     } catch (e) {
       res.status(500).json({ success: false, error: e.message });
