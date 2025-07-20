@@ -8,7 +8,7 @@ const modalStore = useModalStore();
 </script>
 
 <template>
-  <div class="pl-110">
+  <div class="px-4 lg:ml-92">
     <BaseButton
       v-if="appsStore.activeAppId"
       label="Create Task"

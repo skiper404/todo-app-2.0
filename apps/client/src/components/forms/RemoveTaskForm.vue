@@ -19,7 +19,7 @@ const handleSubmit = async () => {
   >
     <BaseIcon
       name="close"
-      classes="size-8 text-red-500 hover:text-red-400 absolute top-4 right-4"
+      classes="size-8 text-gray-500 hover:text-red-400 absolute top-4 right-4"
       @click="modalStore.closeModal"
     />
     <div class="text-indigo-30 mt-2 text-center text-xl text-indigo-500">

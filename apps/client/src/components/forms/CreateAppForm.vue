@@ -28,7 +28,7 @@ const options = [
   >
     <BaseIcon
       name="close"
-      classes="size-8 text-red-500 hover:text-red-400 absolute top-4 right-4"
+      classes="size-8 text-gray-500 hover:text-red-400 transition duration-300 absolute top-4 right-4"
       @click="modalStore.closeModal"
     />
     <div class="text-indigo-30 mt-2 text-center text-xl text-indigo-500">
@@ -75,7 +75,7 @@ const options = [
     <BaseButton
       type="submit"
       label="Create"
-      classes="rounded-full text-gray-400 bg-gray-900 px-6 py-1 mt-auto hover:bg-green-600 transition duration-300 hover:text-gray-100"
+      classes="transition duration-300 rounded-full text-gray-400 bg-gray-900 px-6 py-1 mt-auto hover:bg-green-600 transition duration-300 hover:text-gray-100"
     />
   </form>
 </template>

@@ -27,17 +27,24 @@ const tasksStore = useTasksStore();
     } in tasksStore.tasks"
     :key="_id"
     :class="[
-      `flex items-center gap-2 rounded-3xl px-4 py-2 transition duration-150 ${_id === appsStore.activeAppId ? 'bg-blue-900' : 'bg-gray-800 hover:bg-gray-700'}`,
+      `flex items-center gap-2 rounded-3xl px-4 py-2 transition duration-300 hover:bg-gray-800`,
+      {
+        'bg-red-800/20': taskPriority === 'high',
+        'bg-green-800/20': taskPriority === 'medium',
+        'bg-blue-800/20': taskPriority === 'low',
+      },
     ]"
   >
-    <div class="flex flex-col">
-      <TaskName :name="taskName" />
-      <div class="flex gap-4">
+    <div class="grid w-full grid-cols-3">
+      <TaskName :name="taskName" class="col-span-3" />
+      <div class="col-span-3 flex flex-col sm:flex-row sm:gap-2">
+        <CreatedAt :createdAt="createdAt" />
+        <UpdatedAt :updatedAt="createdAt" />
+      </div>
+      <div class="col-span-3 flex gap-4 capitalize">
         <TaskCategory :category="taskCategory" />
         <TaskStatus :status="taskStatus" />
         <TaskPriority :priority="taskPriority" />
-        <CreatedAt :createdAt="createdAt" />
-        <UpdatedAt :updatedAt="createdAt" />
       </div>
     </div>
 
@@ -53,7 +60,7 @@ const tasksStore = useTasksStore();
             taskPriority,
             taskStatus,
             createdAt,
-            updateddAt,
+            updatedAt,
             appId,
           })
         "
