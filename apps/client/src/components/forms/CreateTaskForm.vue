@@ -3,16 +3,18 @@ import BaseButton from "../BaseButton.vue";
 import BaseInput from "../BaseInput.vue";
 import BaseLabel from "../BaseLabel.vue";
 
-import { useTasksStore, useModalStore } from "@/stores";
+import { useTasksStore, useModalStore, useSoundStore } from "@/stores";
 import BaseSelect from "../BaseSelect.vue";
 import BaseIcon from "../BaseIcon.vue";
 
 const modalStore = useModalStore();
 const tasksStore = useTasksStore();
+const soundStore = useSoundStore();
 
 const handleSubmit = async () => {
   await tasksStore.createTask();
   modalStore.closeModal();
+  soundStore.playSound("add");
 };
 
 const categoryOptions = [
@@ -60,7 +62,6 @@ const statusOptions = [
       classes="outline-0 rounded-full bg-gray-900 py-2 px-4 w-full text-gray-400"
       v-model="tasksStore.newTaskName"
       placeholder="Enter Task"
-      @remove="tasksStore.newTaskName = ''"
     />
     <BaseLabel
       for="category"
@@ -70,8 +71,9 @@ const statusOptions = [
     <BaseSelect
       id="category"
       :options="categoryOptions"
-      classes="bg-gray-900 rounded-full w-full py-2 px-4 text-gray-400"
+      classes="bg-gray-900 flex rounded-full w-full py-2 px-4 text-gray-400"
       v-model="tasksStore.newTaskCategory"
+      @reset="tasksStore.newTaskCategory = 'frontend'"
     />
     <BaseLabel
       for="priority"
@@ -81,8 +83,9 @@ const statusOptions = [
     <BaseSelect
       id="priority"
       :options="priorityOptions"
-      classes="bg-gray-900 rounded-full w-full py-2 px-4 text-gray-400"
+      classes="relative flex rounded-full bg-gray-900 px-4 py-2 text-gray-400"
       v-model="tasksStore.newTaskPriority"
+      @reset="tasksStore.newTaskPriority = 'medium'"
     />
     <BaseLabel
       for="status"
@@ -92,8 +95,9 @@ const statusOptions = [
     <BaseSelect
       id="status"
       :options="statusOptions"
-      classes="bg-gray-900 rounded-full w-full py-2 px-4 text-gray-400"
+      classes="bg-gray-900 flex rounded-full w-full py-2 px-4 text-gray-400"
       v-model="tasksStore.newTaskStatus"
+      @reset="tasksStore.newTaskStatus = 'pending'"
     />
 
     <BaseButton

@@ -34,7 +34,7 @@ const options = [
     <div class="text-indigo-30 mt-2 text-center text-xl text-indigo-500">
       Edit App
     </div>
-    <div class="text-center text-sm text-gray-400">Edit tracking apps</div>
+    <div class="text-center text-sm text-gray-400">Edit tracking app</div>
     <BaseLabel
       for="name"
       classes="pl-4 mt-4 text-indigo-400"
@@ -45,7 +45,6 @@ const options = [
       classes="outline-0 rounded-full bg-gray-900 py-2 px-4 w-full text-gray-400"
       v-model="modalStore.modalData.appName"
       placeholder="Enter App"
-      @remove="modalStore.modalData.appName = ''"
     />
     <BaseLabel
       for="type"
@@ -55,8 +54,9 @@ const options = [
     <BaseSelect
       id="type"
       :options="options"
-      classes="bg-gray-900 rounded-full w-full py-2 px-4 text-gray-400"
+      classes="bg-gray-900 rounded-full w-full py-2 px-4 text-gray-400 flex"
       v-model="modalStore.modalData.appType"
+      @reset="modalStore.modalData.appType = 'desktop'"
     />
     <BaseIcon
       :name="modalStore.modalData.appType"

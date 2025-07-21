@@ -6,6 +6,7 @@ import {
   useAppsStore,
   useTasksStore,
   useMenuStore,
+  useFilterStore,
 } from "@/stores";
 import { onMounted } from "vue";
 
@@ -13,15 +14,16 @@ const appsStore = useAppsStore();
 const tasksStore = useTasksStore();
 const modalStore = useModalStore();
 const menuStore = useMenuStore();
+const filterStore = useFilterStore();
 
-const handleClick = async (id) => {
-  await tasksStore.getTasks(id);
-  appsStore.setActiveAppId(id);
+const handleAppSelect = async (appId) => {
+  await tasksStore.getTasks(appId);
+  appsStore.setActiveAppId(appId);
   menuStore.closeMenu();
 };
 
-onMounted(() => {
-  appsStore.getApps();
+onMounted(async () => {
+  await appsStore.getApps();
 });
 </script>
 
@@ -32,7 +34,7 @@ onMounted(() => {
     :class="[
       `flex items-center gap-2 rounded-3xl px-4 py-2 transition duration-300 ${_id === appsStore.activeAppId ? 'bg-blue-900' : 'bg-gray-800 hover:bg-gray-700'}`,
     ]"
-    @click="handleClick(_id)"
+    @click="handleAppSelect(_id)"
   >
     <BaseIcon
       :name="appType"

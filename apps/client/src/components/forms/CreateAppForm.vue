@@ -3,15 +3,18 @@ import BaseButton from "../BaseButton.vue";
 import BaseInput from "../BaseInput.vue";
 import BaseLabel from "../BaseLabel.vue";
 
-import { useAppsStore, useModalStore } from "@/stores";
+import { useAppsStore, useModalStore, useSoundStore } from "@/stores";
 import BaseSelect from "../BaseSelect.vue";
 import BaseIcon from "../BaseIcon.vue";
+
 const appsStore = useAppsStore();
 const modalStore = useModalStore();
+const soundStore = useSoundStore();
 
 const handleSubmit = async () => {
   await appsStore.createApp();
   modalStore.closeModal();
+  soundStore.playSound("add");
 };
 
 const options = [
@@ -47,7 +50,6 @@ const options = [
       classes="outline-0 rounded-full bg-gray-900 py-2 px-4 w-full text-gray-400"
       v-model="appsStore.newAppName"
       placeholder="Enter App"
-      @remove="appsStore.newAppName = ''"
     />
     <BaseLabel
       for="type"
@@ -57,8 +59,9 @@ const options = [
     <BaseSelect
       id="type"
       :options="options"
-      classes="bg-gray-900 rounded-full w-full py-2 px-4 text-gray-400"
+      classes="relative flex rounded-full bg-gray-900 px-4 py-2 text-gray-400"
       v-model="appsStore.newAppType"
+      @reset="appsStore.newAppType = 'desktop'"
     />
     <BaseIcon
       :name="appsStore.newAppType"

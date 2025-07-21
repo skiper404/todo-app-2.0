@@ -1,12 +1,12 @@
 <script setup>
 import BaseIcon from "./BaseIcon.vue";
 import TheLogo from "./TheLogo.vue";
-import Login from "./LogIn.vue";
-import { useMenuStore, useTasksStore, useAppsStore } from "@/stores";
+import Login from "./Login.vue";
+import { useMenuStore, useAppsStore, useFilterStore } from "@/stores";
 
 const menuStore = useMenuStore();
-const tasksStore = useTasksStore();
 const appsStore = useAppsStore();
+const filterStore = useFilterStore();
 </script>
 
 <template>

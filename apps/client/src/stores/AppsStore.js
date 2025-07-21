@@ -19,8 +19,8 @@ export const useAppsStore = defineStore("AppsStore", () => {
     appType: newAppType.value,
   }));
 
-  const setActiveAppId = (id) => {
-    activeAppId.value = id;
+  const setActiveAppId = (appId) => {
+    activeAppId.value = appId;
   };
 
   const resetNewAppFields = () => {

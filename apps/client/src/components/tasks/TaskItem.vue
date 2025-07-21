@@ -1,5 +1,5 @@
 <script setup>
-import { useAppsStore, useModalStore, useTasksStore } from "@/stores";
+import { useFilterStore, useModalStore, useTasksStore } from "@/stores";
 import BaseIcon from "../BaseIcon.vue";
 import TaskName from "./TaskName.vue";
 import TaskCategory from "./TaskCategory.vue";
@@ -9,8 +9,7 @@ import CreatedAt from "./CreatedAt.vue";
 import UpdatedAt from "./UpdatedAt.vue";
 
 const modalStore = useModalStore();
-const appsStore = useAppsStore();
-const tasksStore = useTasksStore();
+const filterStore = useFilterStore();
 </script>
 
 <template>
@@ -24,7 +23,7 @@ const tasksStore = useTasksStore();
       createdAt,
       updatedAt,
       appId,
-    } in tasksStore.tasks"
+    } in filterStore.filteredAndSearchedTasks"
     :key="_id"
     :class="[
       `flex items-center gap-2 rounded-3xl px-4 py-2 transition duration-300 hover:bg-gray-800`,

@@ -4,6 +4,8 @@ import {
   ComputerDesktopIcon,
   DevicePhoneMobileIcon,
   TrashIcon,
+  MusicalNoteIcon,
+  NoSymbolIcon,
 } from "@heroicons/vue/16/solid";
 
 import { PencilIcon } from "@heroicons/vue/24/solid";
@@ -17,4 +19,6 @@ export const ICONS = {
   web: GlobeAltIcon,
   edit: PencilIcon,
   remove: TrashIcon,
+  mute: NoSymbolIcon,
+  unmute: MusicalNoteIcon,
 };

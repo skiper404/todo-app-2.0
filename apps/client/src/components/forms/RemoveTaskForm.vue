@@ -1,14 +1,16 @@
 <script setup>
 import BaseButton from "../BaseButton.vue";
 
-import { useTasksStore, useModalStore } from "@/stores";
+import { useTasksStore, useModalStore, useSoundStore } from "@/stores";
 import BaseIcon from "../BaseIcon.vue";
 const modalStore = useModalStore();
 const tasksStore = useTasksStore();
+const soundStore = useSoundStore();
 
 const handleSubmit = async () => {
   await tasksStore.removeTask(modalStore.modalData);
   modalStore.closeModal();
+  soundStore.playSound("remove");
 };
 </script>
 
@@ -23,7 +25,7 @@ const handleSubmit = async () => {
       @click="modalStore.closeModal"
     />
     <div class="text-indigo-30 mt-2 text-center text-xl text-indigo-500">
-      Remove app
+      Remove task
     </div>
     <div class="mt-2 text-center text-sm text-gray-400">
       Are you really want remove
@@ -34,7 +36,7 @@ const handleSubmit = async () => {
     </div>
     <div class="mt-auto flex items-center justify-center gap-6">
       <BaseButton
-        type="submit"
+        type="button"
         label="No"
         classes="rounded-full text-gray-400 bg-gray-900 px-6 py-1 mt-auto hover:bg-red-400 transition duration-300 hover:text-gray-100"
         @click="modalStore.closeModal"

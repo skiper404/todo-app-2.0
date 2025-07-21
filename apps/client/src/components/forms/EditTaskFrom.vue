@@ -45,11 +45,9 @@ const statusOptions = [
       @click="modalStore.closeModal"
     />
     <div class="text-indigo-30 mt-2 text-center text-xl text-indigo-500">
-      New Task
+      Edit Task
     </div>
-    <div class="text-center text-sm text-gray-400">
-      Create new task for tracking
-    </div>
+    <div class="text-center text-sm text-gray-400">Edit tracking task</div>
     <BaseLabel
       for="name"
       classes="pl-4 mt-4 text-indigo-400"
@@ -60,7 +58,6 @@ const statusOptions = [
       classes="outline-0 rounded-full bg-gray-900 py-2 px-4 w-full text-gray-400"
       v-model="modalStore.modalData.taskName"
       placeholder="Enter Task"
-      @remove="modalStore.modalData.taskName = ''"
     />
     <BaseLabel
       for="category"
@@ -70,8 +67,9 @@ const statusOptions = [
     <BaseSelect
       id="category"
       :options="categoryOptions"
-      classes="bg-gray-900 rounded-full w-full py-2 px-4 text-gray-400"
+      classes="bg-gray-900 flex rounded-full w-full py-2 px-4 text-gray-400"
       v-model="modalStore.modalData.taskCategory"
+      @reset="modalStore.modalData.taskCategory = 'frontend'"
     />
     <BaseLabel
       for="priority"
@@ -81,8 +79,9 @@ const statusOptions = [
     <BaseSelect
       id="priority"
       :options="priorityOptions"
-      classes="bg-gray-900 rounded-full w-full py-2 px-4 text-gray-400"
+      classes="bg-gray-900 rounded-full w-full py-2 px-4 text-gray-400 flex"
       v-model="modalStore.modalData.taskPriority"
+      @reset="modalStore.modalData.taskPriority = 'medium'"
     />
     <BaseLabel
       for="status"
@@ -92,8 +91,9 @@ const statusOptions = [
     <BaseSelect
       id="status"
       :options="statusOptions"
-      classes="bg-gray-900 rounded-full w-full py-2 px-4 text-gray-400"
+      classes="bg-gray-900 rounded-full w-full py-2 px-4 text-gray-400 flex"
       v-model="modalStore.modalData.taskStatus"
+      @reset="modalStore.modalData.taskStatus = 'pending'"
     />
 
     <BaseButton

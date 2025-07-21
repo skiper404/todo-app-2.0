@@ -1,14 +1,16 @@
 <script setup>
 import BaseButton from "../BaseButton.vue";
 
-import { useAppsStore, useModalStore } from "@/stores";
+import { useAppsStore, useModalStore, useSoundStore } from "@/stores";
 import BaseIcon from "../BaseIcon.vue";
 const appsStore = useAppsStore();
 const modalStore = useModalStore();
+const soundStore = useSoundStore();
 
 const handleSubmit = async () => {
   await appsStore.removeApp(modalStore.modalData);
   modalStore.closeModal();
+  soundStore.playSound("remove");
 };
 </script>
 
@@ -34,7 +36,7 @@ const handleSubmit = async () => {
     </div>
     <div class="mt-auto flex items-center justify-center gap-6">
       <BaseButton
-        type="submit"
+        type="button"
         label="No"
         classes="rounded-full text-gray-400 transition duration-300 bg-gray-900 px-6 py-1 mt-auto hover:bg-red-400 transition duration-300 hover:text-gray-100"
         @click="modalStore.closeModal"
