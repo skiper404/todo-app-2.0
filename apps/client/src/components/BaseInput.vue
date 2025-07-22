@@ -13,7 +13,7 @@ const modelValue = defineModel();
 </script>
 
 <template>
-  <div class="relative mt-2">
+  <div class="relative">
     <input
       :type="type"
       v-model="modelValue"

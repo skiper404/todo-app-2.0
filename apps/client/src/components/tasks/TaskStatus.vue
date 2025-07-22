@@ -3,7 +3,7 @@ import BaseIndicator from "../BaseIndicator.vue";
 
 const props = defineProps({ status: { type: String } });
 
-const colors = { pending: "#ff0000", inProgress: "#00ff00", done: "#0000ff" };
+const colors = { pending: "#fae5ff", inProgress: "#ffed7c", done: "#8ee012" };
 </script>
 
 <template>

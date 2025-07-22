@@ -22,7 +22,7 @@ const forms = {
 
 <template>
   <div
-    class="absolute inset-0 z-10 flex items-center justify-center backdrop-blur-2xl"
+    class="absolute inset-0 z-20 flex items-center justify-center backdrop-blur-2xl"
   >
     <component :is="forms[modalStore.modalType]" />
   </div>

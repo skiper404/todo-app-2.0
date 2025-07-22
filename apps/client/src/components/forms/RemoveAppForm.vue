@@ -17,7 +17,7 @@ const handleSubmit = async () => {
 <template>
   <form
     @submit.prevent="handleSubmit"
-    class="relative z-20 flex h-1/6 w-100 flex-col rounded-3xl bg-gray-800 p-4"
+    class="absolute top-30 z-20 flex h-1/6 w-100 flex-col rounded-3xl bg-gray-800 p-4"
   >
     <BaseIcon
       name="close"

@@ -3,7 +3,7 @@ import BaseIndicator from "../BaseIndicator.vue";
 
 const props = defineProps({ priority: { type: String } });
 
-const colors = { high: "#ff0000", medium: "#00ff00", low: "#0000ff" };
+const colors = { high: "#ea143a", medium: "#fdbf18", low: "#b2f14a" };
 </script>
 
 <template>

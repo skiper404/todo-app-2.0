@@ -1,14 +1,23 @@
 <script setup>
 import TheAside from "./TheAside.vue";
 import TheTasks from "./tasks/TheTasks.vue";
+import { Splitter, SplitterPanel } from "primevue";
 </script>
 
 <template>
-  <main class="pt-16">
-    <TheAside class="top-16 bottom-10 hidden lg:block" />
-    <div
-      class="absolute left-90 hidden h-screen w-1 bg-gray-950 lg:block"
-    ></div>
-    <TheTasks />
+  <main class="h-screen overflow-hidden pt-16">
+    <Splitter class="flex h-full">
+      <SplitterPanel
+        class="hidden min-w-50 border-r-4 border-gray-800 sm:block"
+      >
+        <TheAside class="h-full overflow-auto px-4" />
+      </SplitterPanel>
+
+      <SplitterPanel class="flex h-full flex-col">
+        <div class="overflow-auto">
+          <TheTasks />
+        </div>
+      </SplitterPanel>
+    </Splitter>
   </main>
 </template>

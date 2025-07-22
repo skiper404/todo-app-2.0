@@ -1,15 +1,16 @@
 import {
-  Bars3Icon,
   XMarkIcon,
   ComputerDesktopIcon,
   DevicePhoneMobileIcon,
   TrashIcon,
   MusicalNoteIcon,
   NoSymbolIcon,
+  ChevronUpIcon,
+  ChevronDownIcon,
 } from "@heroicons/vue/16/solid";
 
-import { PencilIcon } from "@heroicons/vue/24/solid";
-import { GlobeAltIcon } from "@heroicons/vue/24/outline";
+import { PencilIcon,  } from "@heroicons/vue/24/solid";
+import { GlobeAltIcon, Bars3Icon, Bars2Icon } from "@heroicons/vue/24/outline";
 
 export const ICONS = {
   menu: Bars3Icon,
@@ -21,4 +22,7 @@ export const ICONS = {
   remove: TrashIcon,
   mute: NoSymbolIcon,
   unmute: MusicalNoteIcon,
+  show: ChevronUpIcon,
+  hide: ChevronDownIcon,
+  drag: Bars2Icon,
 };

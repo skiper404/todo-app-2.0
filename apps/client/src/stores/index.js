@@ -4,3 +4,4 @@ export { useMenuStore } from "./MenuStore";
 export { useModalStore } from "./ModalStore";
 export { useSoundStore } from "./SoundStore";
 export { useFilterStore } from "./FilterStore";
+export { useDragStore } from "./DragStore";

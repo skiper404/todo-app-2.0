@@ -1,4 +1,5 @@
 <script setup>
+import BaseInput from "./BaseInput.vue";
 import BaseSelect from "./BaseSelect.vue";
 
 import { useFilterStore } from "@/stores";
@@ -25,7 +26,13 @@ const statusOptions = [
 </script>
 
 <template>
-  <div class="flex flex-col gap-2">
+  <div class="my-2 flex flex-col gap-2">
+    <BaseInput
+      type="text"
+      placeholder="Search..."
+      classes="outline-0 rounded-full bg-gray-800 py-2 px-4 w-full text-gray-400"
+      v-model="filterStore.searchQuery"
+    />
     <BaseSelect
       :options="categoryOptions"
       v-model="filterStore.category"

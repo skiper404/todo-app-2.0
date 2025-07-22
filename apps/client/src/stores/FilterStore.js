@@ -3,10 +3,10 @@ import { ref, computed } from "vue";
 import { useTasksStore } from "./TasksStore";
 
 export const useFilterStore = defineStore("FilterStore", () => {
+  const isShowFilters = ref(false);
   const category = ref("");
   const priority = ref("");
   const status = ref("");
-
   const searchQuery = ref("");
 
   const filteredTasks = computed(() => {
@@ -22,11 +22,19 @@ export const useFilterStore = defineStore("FilterStore", () => {
     );
   });
 
+  const toggleFilters = () => {
+    isShowFilters.value = !isShowFilters.value;
+  };
+
   const filteredAndSearchedTasks = computed(() =>
     filteredTasks.value.filter(({ taskName }) =>
       taskName.toLowerCase().includes(searchQuery.value.toLowerCase()),
     ),
   );
+
+  const resetSearch = () => {
+    searchQuery.value = "";
+  };
 
   const resetCategory = () => {
     category.value = "";
@@ -40,6 +48,13 @@ export const useFilterStore = defineStore("FilterStore", () => {
     status.value = "";
   };
 
+  const resetFilters = () => {
+    resetSearch();
+    resetCategory();
+    resetPriority();
+    resetStatus();
+  };
+
   return {
     category,
     priority,
@@ -47,8 +62,11 @@ export const useFilterStore = defineStore("FilterStore", () => {
     searchQuery,
     filteredTasks,
     filteredAndSearchedTasks,
+    isShowFilters,
     resetCategory,
     resetPriority,
     resetStatus,
+    resetFilters,
+    toggleFilters,
   };
 });
