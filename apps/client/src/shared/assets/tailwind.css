@@ -3,111 +3,34 @@
 @custom-variant dark (&:where(.dark, .dark * ));
 
 @theme {
-  --color-primary-text: #eeeeee;
-  --color-secondary-text: #444444;
+  --color-primary-text: oklch(5% 0.034 264.665);
+  --color-secondary-text: oklch(98.5% 0.002 247.839);
 
-  --color-warning-text: #f59e0b;
+  --color-primary-bg: oklch(96.2% 0.018 272.314);
+  --color-secondary-bg: oklch(58.5% 0.233 277.117);
 
-  --color-app-bg: #f3f3f3;
-  --color-primary-bg: #52a8eb;
-  --color-secondary-bg: #dfeaff;
-  --color-accent-bg: #aad8ff;
+  --color-btn-primary: oklch(72.3% 0.219 149.579);
 
-  --color-button-default: #dddddd;
-  --color-button-hover: #bbbbbb;
+  --color-item-bg: oklch(87% 0.065 274.039);
+  --color-item-active: oklch(58.5% 0.233 277.117);
+  --color-item-hover: oklch(78.5% 0.115 274.713);
 
-  --color-main-layout: #000000aa;
-  --color-active-sound: #666666;
-  --color-default-sound: #999999;
-  --color-theme-icon: #666666;
-  --color-active-locale: #666666;
-  --color-default-locale: #999999;
-
-  --color-create-button: #5bc660;
-  --color-create-button-hover: #4ab550;
-
-  --color-clear-icon: #ed6e6c;
-  --color-search-icon: #ed6e6c;
-  --color-desktop-icon: #ff7420;
-  --color-mobile-icon: #00a892;
-  --color-web-icon: #ffd32b;
-  --color-edit-icon: #54b9f9;
-  --color-remove-icon: #ed6e6c;
-  --color-pending-icon: #f2c743;
-  --color-inProgress-icon: #3e94fd;
-  --color-done-icon: #00d25c;
-  --color-critical-icon: #e74340;
-  --color-high-icon: #f08f36;
-  --color-medium-icon: #fae051;
-  --color-low-icon: #5bc660;
-  --color-optional-icon: #c7d1fb;
-  --color-frontend-icon: #4e79a7;
-  --color-backend-icon: #f28e2b;
-  --color-database-icon: #e15759;
-  --color-devops-icon: #76b7b2;
-  --color-testing-icon: #59a14f;
-  --color-security-icon: #edc948;
-  --color-ux-icon: #b07aa1;
-  --color-integration-icon: #ff9da7;
-  --color-product-icon: #9c755f;
-  --color-analytics-icon: #bab0ab;
-  --color-marketing-icon: #3c5f85;
-
-  --color-task-pending-bg: #fcedd7;
-  --color-task-inProgress-bg: #dee9fc;
-  --color-task-done-bg: #e2fbe8;
+  --color-modal-primary: oklch(96.2% 0.018 272.314);
+  --color-modal-secondary: oklch(87.2% 0.01 258.338);
 }
 
 .dark {
-  --color-primary-text: #eeeeee;
-  --color-secondary-text: #eeeeee;
+  --color-primary-text: oklch(96.7% 0.003 264.542);
+  --color-secondary-text: oklch(58.5% 0.233 277.117);
+  --color-primary-bg: oklch(21% 0.034 264.665);
+  --color-secondary-bg: oklch(27.8% 0.033 256.848);
 
-  --color-app-bg: #111111;
-  --color-primary-bg: #333333;
-  --color-secondary-bg: #222222;
-  --color-accent-bg: #444444;
+  --color-btn-primary: oklch(45.7% 0.24 277.023);
 
-  --color-button-default: #555555;
-  --color-button-hover: #777777;
+  --color-item-bg: oklch(27.8% 0.033 256.848);
+  --color-item-active: oklch(31.1% 0.262 276.966);
+  --color-item-hover: oklch(44.6% 0.03 256.802);
 
-  --color-main-layout: #000000aa;
-  --color-active-sound: #bbbbbb;
-  --color-default-sound: #888888;
-  --color-theme-icon: #111111;
-  --color-active-locale: #111111;
-  --color-default-locale: #eeeeee;
-
-  --color-create-button: #5bc660;
-  --color-create-button-hover: #4ab550;
-
-  --color-clear-icon: #ed6e6c;
-  --color-search-icon: #ed6e6c;
-  --color-desktop-icon: #ff7420;
-  --color-mobile-icon: #00a892;
-  --color-web-icon: #ffd32b;
-  --color-edit-icon: #54b9f9;
-  --color-remove-icon: #ed6e6c;
-  --color-pending-icon: #f2c743;
-  --color-inProgress-icon: #3e94fd;
-  --color-done-icon: #00d25c;
-  --color-critical-icon: #e74340;
-  --color-high-icon: #f08f36;
-  --color-medium-icon: #fae051;
-  --color-low-icon: #5bc660;
-  --color-optional-icon: #c7d1fb;
-  --color-frontend-icon: #4e79a7;
-  --color-backend-icon: #f28e2b;
-  --color-database-icon: #e15759;
-  --color-devops-icon: #76b7b2;
-  --color-testing-icon: #59a14f;
-  --color-security-icon: #edc948;
-  --color-ux-icon: #b07aa1;
-  --color-integration-icon: #ff9da7;
-  --color-product-icon: #9c755f;
-  --color-analytics-icon: #bab0ab;
-  --color-marketing-icon: #3c5f85;
-
-  --color-task-pending-bg: #3b2908;
-  --color-task-inProgress-bg: #192353;
-  --color-task-done-bg: #112d18;
+  --color-modal-primary: oklch(27.8% 0.033 256.848);
+  --color-modal-secondary: oklch(21% 0.034 264.665);
 }

@@ -19,9 +19,5 @@ export const useSoundStore = defineStore("SoundStore", () => {
     }
   };
 
-  const toggleMute = () => {
-    isMuted.value = !isMuted.value;
-  };
-
-  return { playSound, isMuted, toggleMute };
+  return { playSound, isMuted };
 });

@@ -6,7 +6,7 @@ const { label, classes } = defineProps({
   placeholder: { type: String },
   classes: {
     type: String,
-    default: "flex items-center justify-center capitalize",
+    default: "flex items-center justify-center",
   },
 });
 const modelValue = defineModel();

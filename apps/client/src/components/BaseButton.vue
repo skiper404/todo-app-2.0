@@ -4,7 +4,7 @@ const { label, classes } = defineProps({
   type: { type: String, default: "button" },
   classes: {
     type: String,
-    default: "flex items-center justify-center capitalize",
+    default: "flex items-center justify-center",
   },
 });
 </script>

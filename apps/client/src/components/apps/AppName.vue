@@ -3,7 +3,7 @@ const props = defineProps({ name: { type: String } });
 </script>
 
 <template>
-  <div class="truncate text-xl text-gray-400 capitalize">
+  <div class="ml-4 truncate text-xl capitalize">
     {{ name }}
   </div>
 </template>

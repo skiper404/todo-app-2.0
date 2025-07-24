@@ -5,12 +5,14 @@ import {
   createTaskRequest,
   removeTaskRequest,
   updateTaskRequest,
+  fetchAllTasksRequest,
 } from "@/features/taskaAPi";
 import { useAppsStore } from "./AppsStore";
 
 export const useTasksStore = defineStore("TasksStore", () => {
   const appsStore = useAppsStore();
   const tasks = ref([]);
+  const allTasks = ref([]);
   const message = ref("");
   const newTaskName = ref("");
   const newTaskCategory = ref("frontend");
@@ -34,6 +36,16 @@ export const useTasksStore = defineStore("TasksStore", () => {
     newTaskCategory.value = "frontend";
     newTaskPriority.value = "medium";
     newTaskStatus.value = "pending";
+  };
+
+  const getAllTasks = async () => {
+    try {
+      const res = await fetchAllTasksRequest();
+      allTasks.value = res.tasks;
+      message.value = res.message;
+    } catch (e) {
+      message.value = e.message;
+    }
   };
 
   const getTasks = async (appId) => {
@@ -80,11 +92,13 @@ export const useTasksStore = defineStore("TasksStore", () => {
 
   return {
     tasks,
+    allTasks,
     newTaskName,
     newTaskCategory,
     newTaskPriority,
     newTaskStatus,
     getTasks,
+    getAllTasks,
     createTask,
     removeTask,
     updateTask,

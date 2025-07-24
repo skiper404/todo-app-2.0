@@ -20,7 +20,7 @@ const priorityOptions = [
 
 const statusOptions = [
   { label: "Pending", value: "pending" },
-  { label: "In Progress", value: "inProgress" },
+  { label: "InProgress", value: "inProgress" },
   { label: "Done", value: "done" },
 ];
 </script>

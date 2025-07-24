@@ -55,6 +55,15 @@ const start = async () => {
 
   //======================================================================tasks=====================================================
 
+  app.get('/api/tasks', async (req, res) => {
+    try {
+      const tasks = await tasksColl.find().toArray();
+      res.status(200).json({ success: true, message: 'Fetch app tasks', data: { tasks }, meta: null, error: null });
+    } catch (e) {
+      res.status(500).json({ success: false, error: e.message });
+    }
+  });
+
   app.get('/api/tasks/:appId', async (req, res) => {
     try {
       const appId = new ObjectId(req.params.appId);

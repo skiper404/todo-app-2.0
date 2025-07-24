@@ -7,6 +7,11 @@ export const fetchTasksRequest = async (appId) => {
   return { tasks: data.data.tasks, message: data.message };
 };
 
+export const fetchAllTasksRequest = async () => {
+  const { data } = await axios(`${API_URL}/api/tasks`);
+  return { tasks: data.data.tasks, message: data.message };
+};
+
 export const createTaskRequest = async (task, appId) => {
   const { data } = await axios.post(`${API_URL}/api/create-task`, {
     task,

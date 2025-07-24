@@ -1,10 +1,11 @@
 <script setup>
-import { Square3Stack3DIcon } from "@heroicons/vue/20/solid";
+BaseIcon;
+import BaseIcon from "./BaseIcon.vue";
 </script>
 
 <template>
-  <div class="flex items-center">
-    <Square3Stack3DIcon class="w-10 text-indigo-500" />
-    <span class="text-2xl font-thin text-indigo-500">Skiper</span>
+  <div class="text-secondary-text flex items-center">
+    <BaseIcon name="logo" classes="size-10" />
+    <span class="text-xl">Skiper</span>
   </div>
 </template>

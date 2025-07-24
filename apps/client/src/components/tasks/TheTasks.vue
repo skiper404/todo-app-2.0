@@ -1,51 +1,42 @@
 <script setup>
-import TaskItem from "./TaskItem.vue";
+import TasksList from "./TasksList.vue";
 import BaseButton from "../BaseButton.vue";
 import TheFilter from "../TheFilter.vue";
 import BaseIcon from "../BaseIcon.vue";
-import BaseChart from "../BaseChart.vue";
-import BaseTransitionUppearWrapper from "../BaseTransition.vue";
+import NoResult from "../NoResult.vue";
 
-import { useAppsStore, useModalStore, useFilterStore } from "@/stores";
+import {
+  useFilterStore,
+  useAppsStore,
+  useModalStore,
+  useTasksStore,
+} from "@/stores";
+import { capitalizer } from "@/shared/utils/capitalizer";
 
+const filterStore = useFilterStore();
 const appsStore = useAppsStore();
 const modalStore = useModalStore();
-const filterStore = useFilterStore();
+const tasksStore = useTasksStore();
 </script>
 
 <template>
-  <div class="mb-10 px-4">
-    <BaseTransitionUppearWrapper>
-      <TheFilter v-if="filterStore.isShowFilters" />
-    </BaseTransitionUppearWrapper>
-    <BaseIcon
-      classes="size-10 mx-auto text-indigo-500"
-      :name="filterStore.isShowFilters ? 'show' : 'hide'"
-      @click="filterStore.toggleFilters"
-    />
-    <BaseButton
-      v-if="appsStore.activeAppId"
-      label="Create Task"
-      classes="mx-auto mb-2 h-10 w-full rounded-3xl bg-indigo-900 text-gray-100 transition duration-300 hover:bg-indigo-800"
-      @click="modalStore.openModal('createTask')"
-    />
-    <div
-      class="text-center"
-      v-if="
-        filterStore.filteredAndSearchedTasks.length === 0 &&
-        appsStore.activeAppId
-      "
-    >
-      <span class="text-indigo-500"> No results... </span>
-      <BaseButton
-        label="Reset Filters"
-        class="mx-auto mt-2 rounded-2xl bg-indigo-800 px-4 py-2 text-xs transition duration-300 hover:bg-indigo-600"
-        @click="filterStore.resetFilters"
-      />
-    </div>
-    <BaseChart />
-    <ul class="flex flex-col gap-2">
-      <TaskItem />
-    </ul>
-  </div>
+  <TheFilter v-if="filterStore.isShowFilters" />
+
+  <BaseIcon
+    classes="size-10 mx-auto text-indigo-500"
+    :name="filterStore.isShowFilters ? 'show' : 'hide'"
+    @click="filterStore.toggleFilters"
+  />
+  <BaseButton
+    v-if="appsStore.activeAppId"
+    :label="capitalizer($t('task.new'))"
+    classes="bg-btn-primary hover:bg-btn-primary/70 mt-2 mb-4 h-10 w-full rounded-3xl text-gray-100 transition duration-300"
+    @click="modalStore.openModal('createTask')"
+  />
+  <NoResult
+    v-if="
+      !filterStore.filteredAndSearchedTasks.length && tasksStore.tasks.length
+    "
+  />
+  <TasksList />
 </template>
