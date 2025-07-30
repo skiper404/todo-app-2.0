@@ -5,7 +5,7 @@ import BaseIcon from "./BaseIcon.vue";
 
 <template>
   <div class="text-secondary-text flex items-center">
-    <BaseIcon name="logo" classes="size-10" />
+    <BaseIcon name="logo" classes="size-10 text-indigo-500" />
     <span class="text-xl">Skiper</span>
   </div>
 </template>

@@ -2,19 +2,62 @@
 import BaseButton from "../BaseButton.vue";
 import BaseInput from "../BaseInput.vue";
 import BaseLabel from "../BaseLabel.vue";
-
-import { useTasksStore, useModalStore } from "@/stores";
 import BaseSelect from "../BaseSelect.vue";
 import BaseIcon from "../BaseIcon.vue";
-import { capitalizer } from "@/shared/utils/capitalizer";
+import BaseError from "../BaseError.vue";
+import BaseTitle from "../BaseTitle.vue";
+import BaseDescription from "../BaseDescription.vue";
+import * as yup from "yup";
+import { useField, useForm } from "vee-validate";
+import { useTasksStore, useModalStore, useAppsStore } from "@/stores";
+import { onMounted } from "vue";
 
 const modalStore = useModalStore();
 const tasksStore = useTasksStore();
+const appsStore = useAppsStore();
 
-const handleSubmit = async () => {
-  await tasksStore.updateTask(modalStore.modalData);
+const schema = yup.object({
+  taskName: yup
+    .string()
+    .required("Enter task name")
+    .max(30, "Max length 30 characters"),
+  taskCategory: yup.string().required("Select category"),
+  taskPriority: yup.string().required("Select priority"),
+  taskStatus: yup.string().required("Select status"),
+});
+
+const { handleSubmit, setFieldValue } = useForm({
+  validationSchema: schema,
+  initialValues: {
+    taskName: "",
+    taskCategory: null,
+    taskPriority: null,
+    taskStatus: null,
+  },
+});
+
+const { value: taskName, errorMessage: taskNameError } = useField("taskName");
+
+const { value: taskCategory, errorMessage: taskCategoryError } =
+  useField("taskCategory");
+
+const { value: taskPriority, errorMessage: taskPriorityError } =
+  useField("taskPriority");
+
+const { value: taskStatus, errorMessage: taskStatusError } =
+  useField("taskStatus");
+
+const submit = handleSubmit(async (updatedTask) => {
+  await tasksStore.updateTask(updatedTask);
   modalStore.closeModal();
-};
+});
+
+onMounted(() => {
+  setFieldValue("taskName", tasksStore.activeTask.taskName);
+  setFieldValue("taskCategory", tasksStore.activeTask.taskCategory);
+  setFieldValue("taskPriority", tasksStore.activeTask.taskPriority);
+  setFieldValue("taskStatus", tasksStore.activeTask.taskStatus);
+});
 
 const categoryOptions = [
   { label: "Frontend", value: "frontend" },
@@ -37,72 +80,57 @@ const statusOptions = [
 
 <template>
   <form
-    @submit.prevent="handleSubmit"
-    class="bg-modal-primary absolute top-30 z-20 flex h-130 w-100 flex-col rounded-3xl p-4"
+    @submit.prevent="submit"
+    class="bg-modal-primary absolute top-30 z-20 flex w-100 flex-col rounded-3xl p-4"
   >
     <BaseIcon
       name="close"
-      classes="size-8 text-gray-500 transition duration-300 hover:text-red-400 absolute top-4 right-4"
+      classes="size-8 absolute top-4 right-4"
       @click="modalStore.closeModal"
     />
-    <div class="text-indigo-30 mt-2 text-center text-xl text-indigo-500">
-      {{ capitalizer($t("task.edit")) }}
-    </div>
-    <div class="text-center text-sm text-gray-400">
-      {{ capitalizer($t("task.editTitle")) }}
-    </div>
-    <BaseLabel
-      for="name"
-      classes="pl-4 mt-4 text-indigo-400"
-      :label="capitalizer($t('task.name'))"
-    />
+    <BaseTitle i18nKey="task.edit" />
+    <BaseDescription i18nKey="task.editTitle" />
+
+    <BaseLabel for="name" classes="px-4 py-2" i18nKey="task.name" />
     <BaseInput
       id="name"
-      classes="outline-0 rounded-full bg-modal-secondary py-2 px-4 w-full text-primary-text"
-      v-model="modalStore.modalData.taskName"
-      :placeholder="`${capitalizer($t('app.placeholder'))}...`"
+      v-model="taskName"
+      :error="taskNameError"
+      i18nKey="app.placeholder"
     />
-    <BaseLabel
-      for="category"
-      classes="pl-4 mt-4 text-indigo-400"
-      :label="capitalizer($t('task.category'))"
-    />
+    <BaseError classes="px-4 py-2" :i18nKey="taskNameError" />
+
+    <BaseLabel for="category" classes="px-4 py-2" i18nKey="task.category" />
     <BaseSelect
       id="category"
       :options="categoryOptions"
-      classes="bg-modal-secondary flex rounded-full w-full py-2 px-4 text-primary-text"
-      v-model="modalStore.modalData.taskCategory"
-      @reset="modalStore.modalData.taskCategory = 'frontend'"
+      v-model="taskCategory"
+      :error="taskCategoryError"
     />
-    <BaseLabel
-      for="priority"
-      classes="pl-4 mt-4 text-indigo-400"
-      :label="capitalizer($t('task.priority'))"
-    />
+    <BaseError classes="px-4 py-2" :i18nKey="taskCategoryError" />
+
+    <BaseLabel for="priority" classes="px-4 py-2" i18nKey="task.priority" />
     <BaseSelect
       id="priority"
       :options="priorityOptions"
-      classes="bg-modal-secondary rounded-full w-full py-2 px-4 text-primary-text flex"
-      v-model="modalStore.modalData.taskPriority"
-      @reset="modalStore.modalData.taskPriority = 'medium'"
+      v-model="taskPriority"
+      :error="taskPriorityError"
     />
-    <BaseLabel
-      for="status"
-      classes="pl-4 mt-4 text-indigo-400"
-      :label="capitalizer($t('task.status'))"
-    />
+    <BaseError classes="px-4 py-2" :i18nKey="taskPriorityError" />
+
+    <BaseLabel for="status" classes="px-4 py-2" i18nKey="task.status" />
     <BaseSelect
       id="status"
       :options="statusOptions"
-      classes="bg-modal-secondary rounded-full w-full py-2 px-4 text-primary-text flex"
-      v-model="modalStore.modalData.taskStatus"
-      @reset="modalStore.modalData.taskStatus = 'pending'"
+      v-model="taskStatus"
+      :error="taskStatusError"
     />
+    <BaseError classes="px-4 py-2" :i18nKey="taskStatusError" />
 
     <BaseButton
       type="submit"
-      :label="capitalizer($t('task.update'))"
-      classes="transition duration-300 rounded-full dark:text-primary-text text-secondary-text bg-btn-primary px-6 py-1 mt-auto hover:bg-btn-primary/70 transition duration-300 hover:text-gray-100"
+      classes="px-6 py-1 mt-auto"
+      i18nKey="task.update"
     />
   </form>
 </template>

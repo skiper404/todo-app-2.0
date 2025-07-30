@@ -5,7 +5,6 @@ export { useModalStore } from "./ModalStore";
 export { useSoundStore } from "./SoundStore";
 export { useLoaderStore } from "./LoaderStore";
 export { useFilterStore } from "./FilterStore";
-export { useDragStore } from "./DragStore";
 export { useChartStore } from "./ChartStore";
 export { useSettingStore } from "./SettingsStore";
 export { useThemeStore } from "./ThemeStore";

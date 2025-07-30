@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import {
   fetchAppsRequest,
   createAppRequest,
@@ -9,23 +9,11 @@ import {
 
 export const useAppsStore = defineStore("AppsStore", () => {
   const apps = ref([]);
-  const activeAppId = ref(null);
+  const activeApp = ref(null);
   const message = ref("");
-  const newAppName = ref("");
-  const newAppType = ref("desktop");
 
-  const newApp = computed(() => ({
-    appName: newAppName.value,
-    appType: newAppType.value,
-  }));
-
-  const setActiveAppId = (appId) => {
-    activeAppId.value = appId;
-  };
-
-  const resetNewAppFields = () => {
-    newAppName.value = "";
-    newAppType.value = "desktop";
+  const setActiveApp = (app) => {
+    activeApp.value = app;
   };
 
   const getApps = async () => {
@@ -38,20 +26,19 @@ export const useAppsStore = defineStore("AppsStore", () => {
     }
   };
 
-  const createApp = async () => {
+  const createApp = async (app) => {
     try {
-      const res = await createAppRequest(newApp.value);
+      const res = await createAppRequest(app);
       await getApps();
-      resetNewAppFields();
       message.value = res.message;
     } catch (e) {
       message.value = e.message;
     }
   };
 
-  const updateApp = async (data) => {
+  const updateApp = async (app) => {
     try {
-      const res = await updateAppRequest(data);
+      const res = await updateAppRequest({ _id: activeApp.value._id, ...app });
       await getApps();
       message.value = res.message;
     } catch (e) {
@@ -71,15 +58,12 @@ export const useAppsStore = defineStore("AppsStore", () => {
 
   return {
     apps,
-    newApp,
-    newAppName,
-    newAppType,
     message,
-    activeAppId,
+    activeApp,
     getApps,
     createApp,
     removeApp,
-    setActiveAppId,
+    setActiveApp,
     updateApp,
   };
 });

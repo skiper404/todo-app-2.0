@@ -26,30 +26,16 @@ const statusOptions = [
 </script>
 
 <template>
-  <div class="my-2 flex flex-col gap-2">
+  <div class="bg-secondary-bg my-2 flex flex-col gap-2 rounded-2xl p-2">
     <BaseInput
+      id="search"
       type="text"
-      placeholder="Search..."
-      classes="outline-0 rounded-full bg-gray-800 py-2 px-4 w-full text-gray-400"
+      i18nKey="search"
+      classes=""
       v-model="filterStore.searchQuery"
     />
-    <BaseSelect
-      :options="categoryOptions"
-      v-model="filterStore.category"
-      classes="relative flex rounded-full bg-gray-800 px-4 py-2 text-gray-400"
-      @reset="filterStore.resetCategory"
-    />
-    <BaseSelect
-      :options="priorityOptions"
-      v-model="filterStore.priority"
-      classes="relative flex rounded-full bg-gray-800 px-4 py-2 text-gray-400"
-      @reset="filterStore.resetPriority"
-    />
-    <BaseSelect
-      :options="statusOptions"
-      v-model="filterStore.status"
-      classes="relative flex rounded-full bg-gray-800 px-4 py-2 text-gray-400"
-      @reset="filterStore.resetStatus"
-    />
+    <BaseSelect :options="categoryOptions" v-model="filterStore.category" />
+    <BaseSelect :options="priorityOptions" v-model="filterStore.priority" />
+    <BaseSelect :options="statusOptions" v-model="filterStore.status" />
   </div>
 </template>

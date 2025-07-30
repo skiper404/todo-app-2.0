@@ -1,6 +1,5 @@
 <script setup>
 import { useModalStore } from "@/stores";
-import BaseIcon from "./BaseIcon.vue";
 import CreateAppForm from "./forms/CreateAppForm.vue";
 import EditAppFrom from "./forms/EditAppFrom.vue";
 import RemoveAppForm from "./forms/RemoveAppForm.vue";

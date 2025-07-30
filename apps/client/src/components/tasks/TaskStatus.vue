@@ -5,8 +5,6 @@ import BaseIndicator from "../BaseIndicator.vue";
 const props = defineProps({ status: { type: String } });
 
 const colors = { pending: "#fae5ff", inProgress: "#ffed7c", done: "#8ee012" };
-
-console.log(props.status);
 </script>
 
 <template>

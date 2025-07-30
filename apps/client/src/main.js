@@ -1,7 +1,6 @@
 import "./shared/assets/tailwind.css";
 import { createApp } from "vue";
 import { createPinia } from "pinia";
-import { useThemeStore } from "./stores";
 import App from "./App.vue";
 import i18n from "./shared/lib/i18n";
 

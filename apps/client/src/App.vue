@@ -43,6 +43,7 @@ onMounted(() => tasksStore.getAllTasks());
       <BaseModal v-if="modalStore.isShowModal" />
     </transition>
   </teleport>
+  <Forms />
 </template>
 
 <style>

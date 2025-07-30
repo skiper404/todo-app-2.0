@@ -11,7 +11,6 @@ import {
   useModalStore,
   useTasksStore,
 } from "@/stores";
-import { capitalizer } from "@/shared/utils/capitalizer";
 
 const filterStore = useFilterStore();
 const appsStore = useAppsStore();
@@ -20,19 +19,23 @@ const tasksStore = useTasksStore();
 </script>
 
 <template>
-  <TheFilter v-if="filterStore.isShowFilters" />
+  <transition name="fade">
+    <TheFilter v-if="filterStore.isShowFilters" />
+  </transition>
 
   <BaseIcon
     classes="size-10 mx-auto text-indigo-500"
     :name="filterStore.isShowFilters ? 'show' : 'hide'"
     @click="filterStore.toggleFilters"
   />
+
   <BaseButton
-    v-if="appsStore.activeAppId"
-    :label="capitalizer($t('task.new'))"
-    classes="bg-btn-primary hover:bg-btn-primary/70 mt-2 mb-4 h-10 w-full rounded-3xl text-gray-100 transition duration-300"
+    v-if="appsStore.activeApp"
+    i18nKey="task.new"
+    classes="px-6 py-1 mx-auto my-2"
     @click="modalStore.openModal('createTask')"
   />
+
   <NoResult
     v-if="
       !filterStore.filteredAndSearchedTasks.length && tasksStore.tasks.length
@@ -40,3 +43,15 @@ const tasksStore = useTasksStore();
   />
   <TasksList />
 </template>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 100ms linear;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import {
   fetchTasksRequest,
   createTaskRequest,
@@ -10,32 +10,13 @@ import {
 import { useAppsStore } from "./AppsStore";
 
 export const useTasksStore = defineStore("TasksStore", () => {
-  const appsStore = useAppsStore();
   const tasks = ref([]);
   const allTasks = ref([]);
   const message = ref("");
-  const newTaskName = ref("");
-  const newTaskCategory = ref("frontend");
-  const newTaskPriority = ref("medium");
-  const newTaskStatus = ref("pending");
+  const activeTask = ref(null);
 
-  const appId = computed(() => appsStore.activeAppId);
-
-  const getNewTask = () => ({
-    taskName: newTaskName.value,
-    taskCategory: newTaskCategory.value,
-    taskPriority: newTaskPriority.value,
-    taskStatus: newTaskStatus.value,
-    taskName: newTaskName.value,
-    createdAt: Date.now(),
-    updatedAt: null,
-  });
-
-  const resetNewTaskFields = () => {
-    newTaskName.value = "";
-    newTaskCategory.value = "frontend";
-    newTaskPriority.value = "medium";
-    newTaskStatus.value = "pending";
+  const setActiveTask = (task) => {
+    activeTask.value = task;
   };
 
   const getAllTasks = async () => {
@@ -48,9 +29,10 @@ export const useTasksStore = defineStore("TasksStore", () => {
     }
   };
 
-  const getTasks = async (appId) => {
+  const getTasks = async () => {
+    const appsStore = useAppsStore();
     try {
-      const res = await fetchTasksRequest(appId);
+      const res = await fetchTasksRequest(appsStore.activeApp._id);
       tasks.value = res.tasks;
       message.value = res.message;
     } catch (e) {
@@ -58,12 +40,10 @@ export const useTasksStore = defineStore("TasksStore", () => {
     }
   };
 
-  const createTask = async () => {
+  const createTask = async (task) => {
+    const appsStore = useAppsStore();
     try {
-      const task = getNewTask();
-      const res = await createTaskRequest(task, appId.value);
-      await getTasks(appId.value);
-      resetNewTaskFields();
+      const res = await createTaskRequest(task, appsStore.activeApp._id);
       message.value = res.message;
     } catch (e) {
       message.value = e.message;
@@ -73,17 +53,25 @@ export const useTasksStore = defineStore("TasksStore", () => {
   const removeTask = async (task) => {
     try {
       const res = await removeTaskRequest(task);
-      await getTasks(appId.value);
+      await getTasks(app);
       message.value = res.message;
     } catch (e) {
       message.value = e.message;
     }
   };
 
-  const updateTask = async (data) => {
+  const updateTask = async (task) => {
+    const appsStore = useAppsStore();
+
+    const updatedTask = {
+      _id: activeTask.value._id,
+      ...task,
+      appId: appsStore.activeApp._id,
+    };
+
     try {
-      const res = await updateTaskRequest(data);
-      await getTasks(appId.value);
+      const res = await updateTaskRequest(updatedTask);
+      await getTasks(appsStore.activeApp._id);
       message.value = res.message;
     } catch (e) {
       message.value = e.message;
@@ -93,15 +81,13 @@ export const useTasksStore = defineStore("TasksStore", () => {
   return {
     tasks,
     allTasks,
-    newTaskName,
-    newTaskCategory,
-    newTaskPriority,
-    newTaskStatus,
+    message,
+    activeTask,
+    setActiveTask,
     getTasks,
     getAllTasks,
     createTask,
     removeTask,
     updateTask,
-    message,
   };
 });

@@ -13,7 +13,7 @@ const chartStore = useChartStore();
 <template>
   <div class="relative">
     <BaseLoader v-show="loaderStore.isLoading" />
-    <TheCharts />
-    <TheTasks v-if="appsStore.activeAppId" />
+    <TheTasks v-if="appsStore.activeApp" />
+    <TheCharts v-else />
   </div>
 </template>

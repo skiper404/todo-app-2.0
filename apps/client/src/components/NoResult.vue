@@ -8,8 +8,8 @@ const filterStore = useFilterStore();
 <template>
   <p class="text-center text-indigo-500">No results...</p>
   <BaseButton
-    label="Reset Filters"
-    class="mx-auto mt-2 rounded-2xl bg-indigo-800 px-4 py-2 text-xs transition duration-300 hover:bg-indigo-600"
+    i18n-key="resetFilters"
+    classes="mx-auto px-6 py-1 my-2"
     @click="filterStore.resetFilters"
   />
 </template>

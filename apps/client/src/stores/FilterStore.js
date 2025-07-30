@@ -4,9 +4,9 @@ import { useTasksStore } from "./TasksStore";
 
 export const useFilterStore = defineStore("FilterStore", () => {
   const isShowFilters = ref(false);
-  const category = ref("");
-  const priority = ref("");
-  const status = ref("");
+  const category = ref(null);
+  const priority = ref(null);
+  const status = ref(null);
   const searchQuery = ref("");
 
   const filteredTasks = computed(() => {
@@ -37,15 +37,15 @@ export const useFilterStore = defineStore("FilterStore", () => {
   };
 
   const resetCategory = () => {
-    category.value = "";
+    category.value = null;
   };
 
   const resetPriority = () => {
-    priority.value = "";
+    priority.value = null;
   };
 
   const resetStatus = () => {
-    status.value = "";
+    status.value = null;
   };
 
   const resetFilters = () => {

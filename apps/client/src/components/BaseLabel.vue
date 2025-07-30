@@ -1,11 +1,15 @@
 <script setup>
+import { capitalize } from "vue";
+
 const props = defineProps({
-  id: { type: String },
-  label: { type: String, default: "label" },
-  classes: { type: String },
+  id: String,
+  i18nKey: String,
+  classes: String,
 });
 </script>
 
 <template>
-  <label :for="id" :class="classes">{{ label }}</label>
+  <label :for="id" :class="['text-indigo-400', classes]">{{
+    capitalize($t(i18nKey))
+  }}</label>
 </template>
