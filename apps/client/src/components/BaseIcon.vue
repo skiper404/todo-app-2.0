@@ -2,6 +2,7 @@
 import { ICONS } from "@/shared/icons";
 import { computed } from "vue";
 
+
 const { name, classes } = defineProps({
   name: { type: String, default: "close" },
   classes: [String, Array],

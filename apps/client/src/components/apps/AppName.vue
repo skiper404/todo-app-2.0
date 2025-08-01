@@ -1,9 +1,11 @@
 <script setup>
 const props = defineProps({ name: { type: String } });
+
+const classes = "ml-4 truncate capitalize";
 </script>
 
 <template>
-  <div class="ml-4 truncate capitalize">
+  <div :class="classes">
     {{ name }}
   </div>
 </template>

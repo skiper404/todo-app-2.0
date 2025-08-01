@@ -1,7 +1,7 @@
 <script setup>
 import AppName from "./AppName.vue";
 import BaseIcon from "../BaseIcon.vue";
-
+import ItemActions from "../ItemActions.vue";
 import { onMounted } from "vue";
 
 import {
@@ -17,6 +17,25 @@ const tasksStore = useTasksStore();
 const modalStore = useModalStore();
 const menuStore = useMenuStore();
 const loaderStore = useLoaderStore();
+
+const getAppClasses = (app) => [
+  `dark:text-primary-text flex items-center gap-2 rounded-3xl px-4 py-2 text-gray-500 transition duration-300 ${app._id === appsStore.activeApp?._id ? "bg-item-active text-gray-100" : "bg-item-bg hover:bg-item-hover"}`,
+];
+
+const getIconClasses = (app) => [
+  "size-6",
+  {
+    "text-orange-500": app.appType === "desktop",
+    "text-teal-300": app.appType === "mobile",
+    "text-yellow-400": app.appType === "web",
+  },
+];
+
+const editClasses = "size-6 hover:text-green-300 text-green-400";
+
+const getRemoveClasses = (app) => [
+  `size-6 hover:text-indigo-400 ${app._id === appsStore.activeApp?._id ? "text-indigo-200" : "text-indigo-500"}`,
+];
 
 const handleOnAppClick = async (app) => {
   loaderStore.setLoader();
@@ -44,38 +63,17 @@ onMounted(async () => {
 <template>
   <li
     v-for="app in appsStore.apps"
-    :key="app._id"
-    :class="[
-      `dark:text-primary-text flex items-center gap-2 rounded-3xl px-4 py-2 text-gray-500 transition duration-300 ${app._id === appsStore.activeApp ? 'bg-item-active text-gray-100' : 'bg-item-bg hover:bg-item-hover'}`,
-    ]"
+    :class="getAppClasses(app)"
     @click.stop="handleOnAppClick(app)"
   >
     <BaseIcon name="drag" :classes="`size-6 drag`" />
-    <BaseIcon
-      :name="app.appType"
-      :classes="[
-        'size-6',
-        {
-          'text-orange-500': app.appType === 'desktop',
-          'text-teal-300': app.appType === 'mobile',
-          'text-yellow-400': app.appType === 'web',
-        },
-      ]"
-    />
+    <BaseIcon :name="app.appType" :classes="getIconClasses(app)" />
     <AppName :name="app.appName" />
-    <div class="ml-auto flex gap-2">
-      <BaseIcon
-        name="edit"
-        classes="size-6 hover:text-green-300 text-green-400"
-        @click.stop="handleEdit(app)"
-      />
-      <BaseIcon
-        name="remove"
-        :classes="[
-          `size-6 hover:text-indigo-400 ${app._id === appsStore.activeApp ? 'text-indigo-200' : 'text-indigo-500'}`,
-        ]"
-        @click.stop="handleRemove(app)"
-      />
-    </div>
+    <ItemActions
+      :editClasses="editClasses"
+      :removeClasses="getRemoveClasses(app)"
+      :onEdit="() => handleEdit(app)"
+      :onRemove="() => handleRemove(app)"
+    />
   </li>
 </template>
