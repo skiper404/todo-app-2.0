@@ -1,15 +1,12 @@
 <script setup>
+import * as yup from "yup";
+import { useField, useForm } from "vee-validate";
 import BaseButton from "../BaseButton.vue";
-import BaseInput from "../BaseInput.vue";
-import BaseLabel from "../BaseLabel.vue";
-import BaseSelect from "../BaseSelect.vue";
 import BaseIcon from "../BaseIcon.vue";
-import BaseError from "../BaseError.vue";
 import BaseTitle from "../BaseTitle.vue";
 import BaseDescription from "../BaseDescription.vue";
-
-import { useField, useForm } from "vee-validate";
-import * as yup from "yup";
+import BaseFormInput from "../BaseFormInput.vue";
+import BaseFormSelect from "../BaseFormSelect.vue";
 import {
   useTasksStore,
   useModalStore,
@@ -42,23 +39,21 @@ const { handleSubmit, handleReset } = useForm({
 });
 
 const { value: taskName, errorMessage: taskNameError } = useField("taskName");
+const { value: taskPriority, errorMessage: taskPriorityError } = useField("taskPriority");
+const { value: taskCategory, errorMessage: taskCategoryError } = useField("taskCategory");
+const { value: taskStatus, errorMessage: taskStatusError } = useField("taskStatus");
 
-const { value: taskPriority, errorMessage: taskPriorityError } =
-  useField("taskPriority");
-
-const { value: taskCategory, errorMessage: taskCategoryError } =
-  useField("taskCategory");
-
-const { value: taskStatus, errorMessage: taskStatusError } =
-  useField("taskStatus");
-
-const submit = handleSubmit(async (newTask) => {
+const onSubmit = handleSubmit(async (newTask) => {
   await tasksStore.createTask(newTask);
   await tasksStore.getTasks(appsStore.activeApp);
   modalStore.closeModal();
   soundStore.playSound("add");
   handleReset();
 });
+
+const onClose = () => {
+  modalStore.closeModal();
+};
 
 const categoryOptions = [
   { label: "Frontend", value: "frontend" },
@@ -77,58 +72,53 @@ const statusOptions = [
   { label: "In Progress", value: "inProgress" },
   { label: "Done", value: "done" },
 ];
+
+const formClasses =
+  "bg-modal-primary absolute top-30 z-20 flex w-100 flex-col rounded-3xl p-4";
+const iconClasses = "size-8 absolute top-4 right-4";
+const buttonClasses = "px-6 py-1 mt-auto";
 </script>
 
 <template>
-  <form
-    @submit.prevent="submit"
-    class="bg-modal-primary absolute top-30 z-20 flex w-100 flex-col rounded-3xl p-4"
-  >
-    <BaseIcon
-      name="close"
-      classes="size-8 absolute top-4 right-4"
-      @click="modalStore.closeModal"
-    />
+  <form @submit.prevent="onSubmit" :class="formClasses">
+    <BaseIcon name="close" :classes="iconClasses" @click="onClose" />
 
     <BaseTitle i18nKey="task.edit" />
     <BaseDescription i18nKey="task.create" />
 
-    <BaseLabel for="name" classes="px-4 py-2" i18nKey="task.new" />
-    <BaseInput
+    <BaseFormInput
       id="name"
+      type="text"
       v-model="taskName"
-      i18nKey="task.placeholder"
+      i18nKeyLabel="task.new"
+      i18nKeyInput="app.placeholder"
       :error="taskNameError"
     />
-    <BaseError :i18nKey="taskNameError" classes="px-4 py-2" />
 
-    <BaseLabel for="category" classes="px-4 py-2" i18nKey="task.category" />
-    <BaseSelect
+    <BaseFormSelect
       id="category"
-      :options="categoryOptions"
       v-model="taskCategory"
       :error="taskCategoryError"
+      :options="categoryOptions"
+      i18nKeyLabel="task.category"
     />
-    <BaseError :i18nKey="taskCategoryError" classes="px-4 py-2" />
 
-    <BaseLabel for="priority" classes="px-4 py-2" i18nKey="task.priority" />
-    <BaseSelect
+    <BaseFormSelect
       id="priority"
-      :options="priorityOptions"
       v-model="taskPriority"
       :error="taskPriorityError"
+      :options="priorityOptions"
+      i18nKeyLabel="task.priority"
     />
-    <BaseError :i18nKey="taskPriorityError" classes="px-4 py-2" />
 
-    <BaseLabel for="status" classes="px-4 py-2" i18nKey="task.category" />
-    <BaseSelect
+    <BaseFormSelect
       id="status"
-      :options="statusOptions"
       v-model="taskStatus"
       :error="taskStatusError"
+      :options="statusOptions"
+      i18nKeyLabel="task.status"
     />
-    <BaseError :i18nKey="taskStatusError" classes="px-4 py-2" />
 
-    <BaseButton type="submit" i18nKey="ui.create" classes="mt-auto px-6 py-1" />
+    <BaseButton type="submit" i18nKey="ui.create" :classes="buttonClasses" />
   </form>
 </template>

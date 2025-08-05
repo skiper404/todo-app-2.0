@@ -8,9 +8,9 @@ const formattedDate = () =>
 </script>
 
 <template>
-  <div class="text-sm">
-    <span class="text-gray-600">Created: </span>
-    <span class="text-gray-500">
+  <div class="">
+    <span class="">Created: </span>
+    <span class="">
       {{ formattedDate() }}
     </span>
   </div>

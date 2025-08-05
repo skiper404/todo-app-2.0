@@ -17,12 +17,13 @@ const forms = {
   editTask: EditTaskFrom,
   removeTask: RemoveTaskForm,
 };
+
+const wrapperClasses =
+  "absolute inset-0 z-20 flex items-center justify-center backdrop-blur-2xl";
 </script>
 
 <template>
-  <div
-    class="absolute inset-0 z-20 flex items-center justify-center backdrop-blur-2xl"
-  >
+  <div :class="wrapperClasses">
     <component :is="forms[modalStore.modalType]" />
   </div>
 </template>

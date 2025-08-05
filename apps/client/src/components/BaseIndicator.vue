@@ -1,7 +1,9 @@
 <script setup>
 const props = defineProps({ color: { type: String } });
+
+const classes = "size-4 rounded-full";
 </script>
 
 <template>
-  <div :class="`size-4 rounded-full`" :style="{ backgroundColor: color }"></div>
+  <div :class="classes" :style="{ backgroundColor: color }"></div>
 </template>

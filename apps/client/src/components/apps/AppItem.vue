@@ -31,10 +31,12 @@ const getIconClasses = (app) => [
   },
 ];
 
-const editClasses = "size-6 hover:text-green-300 text-green-400";
+const getEditClasses = (app) => [
+  `size-6 hover:text-green-300 ${app._id === appsStore.activeApp?._id ? "text-indigo-300" : "text-indigo-500"}`,
+];
 
 const getRemoveClasses = (app) => [
-  `size-6 hover:text-indigo-400 ${app._id === appsStore.activeApp?._id ? "text-indigo-200" : "text-indigo-500"}`,
+  `size-6 hover:text-indigo-400 ${app._id === appsStore.activeApp?._id ? "text-indigo-300" : "text-indigo-500"}`,
 ];
 
 const handleOnAppClick = async (app) => {
@@ -66,14 +68,13 @@ onMounted(async () => {
     :class="getAppClasses(app)"
     @click.stop="handleOnAppClick(app)"
   >
-    <BaseIcon name="drag" :classes="`size-6 drag`" />
     <BaseIcon :name="app.appType" :classes="getIconClasses(app)" />
     <AppName :name="app.appName" />
     <ItemActions
-      :editClasses="editClasses"
+      :editClasses="getEditClasses(app)"
       :removeClasses="getRemoveClasses(app)"
-      :onEdit="() => handleEdit(app)"
-      :onRemove="() => handleRemove(app)"
+      @onEdit="handleEdit(app)"
+      @onRemove="handleRemove(app)"
     />
   </li>
 </template>

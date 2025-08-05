@@ -2,18 +2,21 @@
 import TheAside from "./TheAside.vue";
 import HomePage from "./HomePage.vue";
 import { Splitter, SplitterPanel } from "primevue";
+
+const mainClasses = "h-screen overflow-hidden pt-16";
+const splitterWrapperClasses = "flex h-full";
+const splitterClasses =
+  "hidden min-w-58 border-r-2 border-gray-300 sm:block dark:border-gray-800";
+const asideClasses = "h-full overflow-auto px-4";
 </script>
 
 <template>
-  <main class="h-screen overflow-hidden pt-16">
-    <Splitter class="flex h-full">
-      <SplitterPanel
-        class="hidden min-w-58 border-r-2 border-gray-300 sm:block dark:border-gray-800"
-      >
-        <TheAside class="h-full overflow-auto px-4" />
+  <main :class="mainClasses">
+    <Splitter :class="splitterWrapperClasses">
+      <SplitterPanel :class="splitterClasses">
+        <TheAside :class="asideClasses" />
       </SplitterPanel>
-
-      <SplitterPanel class="flex h-full flex-col">
+      <SplitterPanel>
         <div class="overflow-auto">
           <HomePage />
         </div>

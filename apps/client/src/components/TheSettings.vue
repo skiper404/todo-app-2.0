@@ -6,21 +6,24 @@ import TheLocale from "./TheLocale.vue";
 import TheTheme from "./TheTheme.vue";
 
 const settingsStore = useSettingStore();
+
+const wrapperClasses =
+  "absolute top-4 p-4 flex flex-col gap-4 right-4 z-30 w-60 rounded-2xl backdrop-blur-2xl transition-opacity duration-300";
+
+const iconClasses =
+  "size-8 text-gray-500 hover:text-red-400 transition duration-300 absolute top-4 right-4";
 </script>
 
 <template>
-  <div
-    class="absolute top-4 right-4 z-30 w-60 rounded-2xl backdrop-blur-2xl transition-opacity duration-300"
-  >
+  <div :class="wrapperClasses">
     <BaseIcon
       name="close"
-      classes="size-8 text-gray-500 hover:text-red-400 transition duration-300 absolute top-4 right-4"
+      :classes="iconClasses"
       @click="settingsStore.closeSettings"
     />
-    <div class="mt-12">
-      <TheSound />
-      <TheLocale />
-      <TheTheme />
-    </div>
+
+    <TheSound />
+    <TheLocale />
+    <TheTheme />
   </div>
 </template>

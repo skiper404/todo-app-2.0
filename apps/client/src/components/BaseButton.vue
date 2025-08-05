@@ -16,16 +16,15 @@ const label = computed(() => {
   }
   return capitalize(t(props.i18nKey));
 });
+
+const getClasses = (extraClasses) => [
+  "dark:text-primary-text hover:bg-btn-primary/70 text-secondary-text bg-btn-primary flex items-center justify-center rounded-full transition duration-300 hover:text-gray-100",
+  extraClasses,
+];
 </script>
 
 <template>
-  <button
-    :class="[
-      'dark:text-primary-text hover:bg-btn-primary/70 text-secondary-text bg-btn-primary flex items-center justify-center rounded-full transition duration-300 hover:text-gray-100',
-      classes,
-    ]"
-    :type="type"
-  >
+  <button :class="getClasses(classes)" :type="type">
     {{ label }}
   </button>
 </template>

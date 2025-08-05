@@ -1,7 +1,8 @@
 <script setup>
 const props = defineProps({ name: { type: String } });
+const nameClasses = "text-primary-text text-xl";
 </script>
 
 <template>
-  <div class="text-primary-text text-xl">{{ name }}</div>
+  <div :class="nameClasses">{{ name }}</div>
 </template>

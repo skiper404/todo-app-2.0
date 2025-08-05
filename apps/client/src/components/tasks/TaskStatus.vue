@@ -1,17 +1,18 @@
 <script setup>
-import { capitalizer } from "@/shared/utils/capitalizer";
+import { capitalize } from "vue";
 import BaseIndicator from "../BaseIndicator.vue";
 
 const props = defineProps({ status: { type: String } });
 
 const colors = { pending: "#fae5ff", inProgress: "#ffed7c", done: "#8ee012" };
+const wrapperClasses = "flex items-center gap-1 text-blue-500";
 </script>
 
 <template>
-  <div class="flex items-center gap-1 text-blue-500">
+  <div :class="wrapperClasses">
     <BaseIndicator :color="colors[status]" />
     <div>
-      {{ capitalizer($t(`statuses.${status}`)) }}
+      {{ capitalize($t(`statuses.${status}`)) }}
     </div>
   </div>
 </template>

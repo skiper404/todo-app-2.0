@@ -23,15 +23,17 @@ const statusOptions = [
   { label: "InProgress", value: "inProgress" },
   { label: "Done", value: "done" },
 ];
+
+const wrapperClasses =
+  "bg-secondary-bg my-2 flex flex-col gap-2 rounded-2xl p-2";
 </script>
 
 <template>
-  <div class="bg-secondary-bg my-2 flex flex-col gap-2 rounded-2xl p-2">
+  <div :class="wrapperClasses">
     <BaseInput
       id="search"
       type="text"
       i18nKey="search"
-      classes=""
       v-model="filterStore.searchQuery"
     />
     <BaseSelect :options="categoryOptions" v-model="filterStore.category" />

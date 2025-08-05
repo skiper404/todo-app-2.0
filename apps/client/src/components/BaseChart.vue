@@ -20,10 +20,12 @@ use([
 const props = defineProps({
   options: { type: Object },
 });
+
+const wrapperClasses = "h-60 overflow-hidden rounded-2xl";
 </script>
 
 <template>
-  <div class="h-60 overflow-hidden rounded-2xl">
-    <v-chart :option="options" autoresize class="h-full w-full" />
+  <div :class="wrapperClasses">
+    <v-chart :option="options" autoresize />
   </div>
 </template>

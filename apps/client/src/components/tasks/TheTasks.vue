@@ -16,6 +16,9 @@ const filterStore = useFilterStore();
 const appsStore = useAppsStore();
 const modalStore = useModalStore();
 const tasksStore = useTasksStore();
+
+const iconClasses = "size-10 mx-auto text-indigo-500";
+const buttonClasses = "px-6 py-1 mx-auto my-2";
 </script>
 
 <template>
@@ -24,7 +27,7 @@ const tasksStore = useTasksStore();
   </transition>
 
   <BaseIcon
-    classes="size-10 mx-auto text-indigo-500"
+    :classes="iconClasses"
     :name="filterStore.isShowFilters ? 'show' : 'hide'"
     @click="filterStore.toggleFilters"
   />
@@ -32,7 +35,7 @@ const tasksStore = useTasksStore();
   <BaseButton
     v-if="appsStore.activeApp"
     i18nKey="task.new"
-    classes="px-6 py-1 mx-auto my-2"
+    :classes="buttonClasses"
     @click="modalStore.openModal('createTask')"
   />
 
