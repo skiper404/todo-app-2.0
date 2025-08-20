@@ -1,18 +1,23 @@
 <script setup>
 import * as yup from "yup";
-import { useField, useForm } from "vee-validate";
 import BaseButton from "../BaseButton.vue";
 import BaseIcon from "../BaseIcon.vue";
 import BaseTitle from "../BaseTitle.vue";
 import BaseDescription from "../BaseDescription.vue";
 import BaseFormInput from "../BaseFormInput.vue";
 import BaseFormSelect from "../BaseFormSelect.vue";
+import { useField, useForm } from "vee-validate";
 import {
   useTasksStore,
   useModalStore,
   useSoundStore,
   useAppsStore,
 } from "@/stores";
+import {
+  categoryOptions,
+  priorityOptions,
+  statusOptions,
+} from "@/shared/constants/constants";
 
 const modalStore = useModalStore();
 const tasksStore = useTasksStore();
@@ -23,7 +28,7 @@ const schema = yup.object({
   taskName: yup
     .string()
     .required("Enter task name")
-    .max(30, "Max length 30 characters"),
+    .max(100, "Max length 100 characters"),
   taskCategory: yup.string().required("Select task category"),
   taskPriority: yup.string().required("Select task priority"),
   taskStatus: yup.string().required("select task status"),
@@ -39,13 +44,18 @@ const { handleSubmit, handleReset } = useForm({
 });
 
 const { value: taskName, errorMessage: taskNameError } = useField("taskName");
-const { value: taskPriority, errorMessage: taskPriorityError } = useField("taskPriority");
-const { value: taskCategory, errorMessage: taskCategoryError } = useField("taskCategory");
-const { value: taskStatus, errorMessage: taskStatusError } = useField("taskStatus");
+const { value: taskPriority, errorMessage: taskPriorityError } =
+  useField("taskPriority");
+
+const { value: taskCategory, errorMessage: taskCategoryError } =
+  useField("taskCategory");
+
+const { value: taskStatus, errorMessage: taskStatusError } =
+  useField("taskStatus");
 
 const onSubmit = handleSubmit(async (newTask) => {
   await tasksStore.createTask(newTask);
-  await tasksStore.getTasks(appsStore.activeApp);
+  await tasksStore.getTasks(appsStore.activeApp._id);
   modalStore.closeModal();
   soundStore.playSound("add");
   handleReset();
@@ -55,28 +65,10 @@ const onClose = () => {
   modalStore.closeModal();
 };
 
-const categoryOptions = [
-  { label: "Frontend", value: "frontend" },
-  { label: "Backend", value: "backend" },
-  { label: "Testing", value: "testing" },
-];
-
-const priorityOptions = [
-  { label: "High", value: "high" },
-  { label: "Medium", value: "medium" },
-  { label: "Low", value: "low" },
-];
-
-const statusOptions = [
-  { label: "Pending", value: "pending" },
-  { label: "In Progress", value: "inProgress" },
-  { label: "Done", value: "done" },
-];
-
 const formClasses =
-  "bg-modal-primary absolute top-30 z-20 flex w-100 flex-col rounded-3xl p-4";
+  "dark:bg-gray-800 bg-gray-200 absolute top-30 z-20 flex w-100 flex-col rounded-3xl p-4";
 const iconClasses = "size-8 absolute top-4 right-4";
-const buttonClasses = "px-6 py-1 mt-auto";
+const buttonClasses = "px-6 py-1 mt-10";
 </script>
 
 <template>

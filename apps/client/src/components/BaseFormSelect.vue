@@ -5,7 +5,7 @@ import BaseError from "./BaseError.vue";
 
 const props = defineProps({
   id: String,
-  error: Object,
+  error: String,
   options: Object,
   i18nKeyLabel: String,
 });

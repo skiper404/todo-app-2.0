@@ -12,13 +12,12 @@ const asideClasses = "block w-full lg:hidden px-2 mt-14";
 </script>
 
 <template>
-  <div :class="wrapperClasses">
+  <div :class="wrapperClasses" v-if="menuStore.isShowMenu">
     <BaseIcon
       name="close"
       :classes="iconClasses"
       @click="menuStore.closeMenu"
     />
-
     <TheAside :classes="asideClasses" />
   </div>
 </template>

@@ -7,6 +7,8 @@ import {
   NoSymbolIcon,
   ChevronUpIcon,
   ChevronDownIcon,
+  ArrowPathIcon,
+  ClockIcon,
 } from "@heroicons/vue/16/solid";
 
 import {
@@ -37,4 +39,6 @@ export const ICONS = {
   light: SunIcon,
   dark: MoonIcon,
   locale: MapPinIcon,
+  created: ClockIcon,
+  updated: ArrowPathIcon,
 };

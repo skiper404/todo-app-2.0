@@ -9,10 +9,7 @@ const { name, classes } = defineProps({
 
 const icon = computed(() => ICONS[name]);
 
-const getClasees = (extraClasses) => [
-  "text-gray-500 transition duration-300 hover:text-red-400",
-  extraClasses,
-];
+const getClasees = (extraClasses) => ["transition duration-300", extraClasses];
 </script>
 
 <template>

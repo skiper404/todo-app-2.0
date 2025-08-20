@@ -8,7 +8,11 @@ import BaseFormSelect from "../BaseFormSelect.vue";
 import * as yup from "yup";
 import { useField, useForm } from "vee-validate";
 import { useTasksStore, useModalStore, useSoundStore } from "@/stores";
-import { onMounted } from "vue";
+import {
+  categoryOptions,
+  priorityOptions,
+  statusOptions,
+} from "@/shared/constants/constants";
 
 const modalStore = useModalStore();
 const tasksStore = useTasksStore();
@@ -18,29 +22,66 @@ const schema = yup.object({
   taskName: yup
     .string()
     .required("Enter task name")
-    .max(30, "Max length 30 characters"),
+    .max(100, "Max length 100 characters"),
   taskCategory: yup.string().required("Select category"),
   taskPriority: yup.string().required("Select priority"),
   taskStatus: yup.string().required("Select status"),
 });
 
-const { handleSubmit, setFieldValue } = useForm({
+const { handleSubmit } = useForm({
   validationSchema: schema,
   initialValues: {
-    taskName: "",
-    taskCategory: null,
-    taskPriority: null,
-    taskStatus: null,
+    taskName: tasksStore.activeTask.taskName,
+    taskCategory: tasksStore.activeTask.taskCategory,
+    taskPriority: tasksStore.activeTask.taskPriority,
+    taskStatus: tasksStore.activeTask.taskStatus,
   },
 });
 
-const { value: taskName, errorMessage: taskNameError } = useField("taskName");
-const { value: taskCategory, errorMessage: taskCategoryError } = useField("taskCategory");
-const { value: taskPriority, errorMessage: taskPriorityError } = useField("taskPriority");
-const { value: taskStatus, errorMessage: taskStatusError } = useField("taskStatus");
+const {
+  value: taskName,
+  errorMessage: taskNameError,
+  meta: taskNameMeta,
+} = useField("taskName");
+
+const {
+  value: taskCategory,
+  errorMessage: taskCategoryError,
+  meta: taskCategoryMeta,
+} = useField("taskCategory");
+
+const {
+  value: taskPriority,
+  errorMessage: taskPriorityError,
+  meta: taskPriorityMeta,
+} = useField("taskPriority");
+
+const {
+  value: taskStatus,
+  errorMessage: taskStatusError,
+  meta: taskStatusMeta,
+} = useField("taskStatus");
 
 const onSubmit = handleSubmit(async (updatedTask) => {
-  await tasksStore.updateTask(updatedTask);
+  const changes = {};
+
+  if (taskNameMeta.dirty) {
+    changes.taskName = updatedTask.taskName;
+  }
+
+  if (taskCategoryMeta.dirty) {
+    changes.taskCategory = updatedTask.taskCategory;
+  }
+
+  if (taskPriorityMeta.dirty) {
+    changes.taskPriority = updatedTask.taskPriority;
+  }
+
+  if (taskStatusMeta.dirty) {
+    changes.taskStatus = updatedTask.taskStatus;
+  }
+
+  await tasksStore.updateTask(tasksStore.activeTask._id, changes);
   modalStore.closeModal();
   soundStore.playSound("add");
 });
@@ -49,35 +90,10 @@ const onClose = () => {
   modalStore.closeModal();
 };
 
-onMounted(() => {
-  setFieldValue("taskName", tasksStore.activeTask.taskName);
-  setFieldValue("taskCategory", tasksStore.activeTask.taskCategory);
-  setFieldValue("taskPriority", tasksStore.activeTask.taskPriority);
-  setFieldValue("taskStatus", tasksStore.activeTask.taskStatus);
-});
-
-const categoryOptions = [
-  { label: "Frontend", value: "frontend" },
-  { label: "Backend", value: "backend" },
-  { label: "Testing", value: "testing" },
-];
-
-const priorityOptions = [
-  { label: "High", value: "high" },
-  { label: "Medium", value: "medium" },
-  { label: "Low", value: "low" },
-];
-
-const statusOptions = [
-  { label: "Pending", value: "pending" },
-  { label: "In Progress", value: "inProgress" },
-  { label: "Done", value: "done" },
-];
-
 const formClasses =
-  "bg-modal-primary absolute top-30 z-20 flex w-100 flex-col rounded-3xl p-4";
+  "dark:bg-gray-800 bg-gray-200  absolute top-30 z-20 flex w-100 flex-col rounded-3xl p-4";
 const iconClasses = "size-8 absolute top-4 right-4";
-const buttonClasses = "px-6 py-1 mt-auto";
+const buttonClasses = "px-6 py-1 mt-10";
 </script>
 
 <template>

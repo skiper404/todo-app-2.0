@@ -5,6 +5,7 @@ import TaskCategory from "./TaskCategory.vue";
 import TaskStatus from "./TaskStatus.vue";
 import TaskPriority from "./TaskPriority.vue";
 import ItemActions from "../ItemActions.vue";
+import TaskTime from "./TaskTime.vue";
 
 const modalStore = useModalStore();
 const filterStore = useFilterStore();
@@ -25,17 +26,14 @@ const onRemove = (task) => {
 };
 
 const getTaskClasses = (task) => [
-  `flex items-center gap-2 rounded-3xl px-4 py-2 backdrop-blur-2xl transition duration-300 hover:bg-gray-300 dark:hover:bg-gray-800`,
-  {
-    "bg-red-200 dark:bg-red-600/20": task.taskPriority === "high",
-    "bg-yellow-100 dark:bg-yellow-500/20": task.taskPriority === "medium",
-    "bg-green-200 dark:bg-green-500/20": task.taskPriority === "low",
-  },
+  `flex items-center rounded-3xl px-4 py-2 transition duration-300 bg-gray-300 dark:text-gray-100 dark:bg-gray-800`,
 ];
 
-const getEditClasses = (task) => ["size-6 hover:text-green-400 text-green-500"];
+const getEditClasses = (task) => [
+  "size-6 hover:text-green-400 text-indigo-500",
+];
 const getRemoveClasses = (task) => [
-  "text-indigo-500 size-6 hover:text-indigo-400",
+  "text-indigo-500 size-6 hover:text-red-400",
 ];
 </script>
 
@@ -46,14 +44,18 @@ const getRemoveClasses = (task) => [
     :class="getTaskClasses(task)"
     @click="OnTaskClick(task)"
   >
-    <div class="grid w-full grid-cols-3">
+    <section class="flex min-w-0 flex-1 flex-col gap-1">
       <TaskName :name="task.taskName" class="col-span-3" />
-      <div class="col-span-3 flex gap-4">
+      <section class="flex gap-2">
+        <TaskTime :time="task.createdAt" label="created" />
+        <TaskTime :time="task.updatedAt" label="updated" />
+      </section>
+      <section class="flex gap-4">
         <TaskCategory :category="task.taskCategory" />
         <TaskStatus :status="task.taskStatus" />
         <TaskPriority :priority="task.taskPriority" />
-      </div>
-    </div>
+      </section>
+    </section>
     <ItemActions
       :editClasses="getEditClasses(task)"
       :removeClasses="getRemoveClasses(task)"

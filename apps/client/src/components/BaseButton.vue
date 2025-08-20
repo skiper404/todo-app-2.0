@@ -3,7 +3,6 @@ import { capitalize, computed } from "vue";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
-
 const props = defineProps({
   i18nKey: String,
   type: { type: String, default: "button" },
@@ -18,7 +17,7 @@ const label = computed(() => {
 });
 
 const getClasses = (extraClasses) => [
-  "dark:text-primary-text hover:bg-btn-primary/70 text-secondary-text bg-btn-primary flex items-center justify-center rounded-full transition duration-300 hover:text-gray-100",
+  "dark:text-gray-100 dark:bg-indigo-700 bg-indigo-500 text-gray-100 flex items-center justify-center rounded-full transition duration-300",
   extraClasses,
 ];
 </script>

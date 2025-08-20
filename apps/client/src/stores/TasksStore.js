@@ -6,7 +6,7 @@ import {
   removeTaskRequest,
   updateTaskRequest,
   fetchAllTasksRequest,
-} from "@/features/taskaAPi";
+} from "@/api/taskaAPi";
 import { useAppsStore } from "./AppsStore";
 
 export const useTasksStore = defineStore("TasksStore", () => {
@@ -29,10 +29,9 @@ export const useTasksStore = defineStore("TasksStore", () => {
     }
   };
 
-  const getTasks = async () => {
-    const appsStore = useAppsStore();
+  const getTasks = async (appId) => {
     try {
-      const res = await fetchTasksRequest(appsStore.activeApp._id);
+      const res = await fetchTasksRequest(appId);
       tasks.value = res.tasks;
       message.value = res.message;
     } catch (e) {
@@ -50,27 +49,21 @@ export const useTasksStore = defineStore("TasksStore", () => {
     }
   };
 
-  const removeTask = async (task) => {
+  const removeTask = async () => {
+    const appsStore = useAppsStore();
     try {
-      const res = await removeTaskRequest(task);
-      await getTasks(app);
+      const res = await removeTaskRequest(activeTask.value._id);
+      await getTasks(appsStore.activeApp._id);
       message.value = res.message;
     } catch (e) {
       message.value = e.message;
     }
   };
 
-  const updateTask = async (task) => {
+  const updateTask = async (taskId, changes) => {
     const appsStore = useAppsStore();
-
-    const updatedTask = {
-      _id: activeTask.value._id,
-      ...task,
-      appId: appsStore.activeApp._id,
-    };
-
     try {
-      const res = await updateTaskRequest(updatedTask);
+      const res = await updateTaskRequest(taskId, changes);
       await getTasks(appsStore.activeApp._id);
       message.value = res.message;
     } catch (e) {

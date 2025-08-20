@@ -12,10 +12,10 @@ const props = defineProps({
 const modelValue = defineModel();
 
 const getWrapperClasses = (error) => [
-  "bg-modal-secondary text-primary-text relative rounded-2xl border-2 border-gray-900 transition duration-300",
+  "relative rounded-2xl transition duration-300 bg-gray-300 border-2 border-gray-300 dark:bg-gray-900 dark:text-gray-500 dark:border-gray-800",
   {
-    "border-orange-500": error,
-    "border-green-500": !error && modelValue.value,
+    "border-orange-500 dark:border-orange-500": error,
+    "border-green-500 dark:border-green-500": !error && modelValue.value,
   },
 ];
 
@@ -31,7 +31,7 @@ const iconClasses =
       :id="id"
       :type="type"
       v-model.trim="modelValue"
-      maxlength="50"
+      maxlength="101"
       :placeholder="`${capitalize($t(i18nKey))}...`"
       :class="inputClasses"
     />

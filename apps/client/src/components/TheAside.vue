@@ -1,9 +1,9 @@
 <script setup>
-import { useAppsStore, useModalStore } from "@/stores";
+import AppsList from "./apps/AppsList.vue";
 import BaseButton from "./BaseButton.vue";
-import TheAppsList from "./apps/TheAppsList.vue";
-import { useEventListener } from "@vueuse/core";
 import { ref } from "vue";
+import { useEventListener } from "@vueuse/core";
+import { useAppsStore, useModalStore } from "@/stores";
 
 const modalStore = useModalStore();
 const appsStore = useAppsStore();
@@ -23,6 +23,6 @@ useEventListener(target, "click", () => {
       classes="px-6 py-1 mx-auto my-4"
       @click="modalStore.openModal('createApp')"
     />
-    <TheAppsList />
+    <AppsList />
   </div>
 </template>

@@ -1,5 +1,5 @@
 <script setup>
-const wrapperClasses = "mt-auto flex items-center justify-center gap-6";
+const wrapperClasses = "flex items-center justify-center gap-6";
 </script>
 
 <template>

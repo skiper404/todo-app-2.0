@@ -8,20 +8,19 @@ import TheTheme from "./TheTheme.vue";
 const settingsStore = useSettingStore();
 
 const wrapperClasses =
-  "absolute top-4 p-4 flex flex-col gap-4 right-4 z-30 w-60 rounded-2xl backdrop-blur-2xl transition-opacity duration-300";
+  "absolute top-4 p-4 flex flex-col gap-4 right-4 z-30 w-60 rounded-2xl backdrop-blur-2xl transition-opacity duration-300 text-white";
 
 const iconClasses =
   "size-8 text-gray-500 hover:text-red-400 transition duration-300 absolute top-4 right-4";
 </script>
 
 <template>
-  <div :class="wrapperClasses">
+  <div :class="wrapperClasses" v-if="settingsStore.showSettings">
     <BaseIcon
       name="close"
       :classes="iconClasses"
       @click="settingsStore.closeSettings"
     />
-
     <TheSound />
     <TheLocale />
     <TheTheme />

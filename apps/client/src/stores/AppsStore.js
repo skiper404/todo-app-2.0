@@ -5,10 +5,11 @@ import {
   createAppRequest,
   removeAppRequest,
   updateAppRequest,
-} from "@/features/appsAPI";
+} from "@/api/appsAPI";
 
 export const useAppsStore = defineStore("AppsStore", () => {
   const apps = ref([]);
+
   const activeApp = ref(null);
   const message = ref("");
 
@@ -36,9 +37,9 @@ export const useAppsStore = defineStore("AppsStore", () => {
     }
   };
 
-  const updateApp = async (app) => {
+  const updateApp = async (appId, changes) => {
     try {
-      const res = await updateAppRequest({ _id: activeApp.value._id, ...app });
+      const res = await updateAppRequest(appId, changes);
       await getApps();
       message.value = res.message;
     } catch (e) {
@@ -46,9 +47,9 @@ export const useAppsStore = defineStore("AppsStore", () => {
     }
   };
 
-  const removeApp = async (app) => {
+  const removeApp = async (appId) => {
     try {
-      const res = await removeAppRequest(app);
+      const res = await removeAppRequest(appId);
       await getApps();
       message.value = res.message;
     } catch (e) {

@@ -1,26 +1,44 @@
 <script setup>
-import TheAside from "./TheAside.vue";
-import HomePage from "./HomePage.vue";
+import TheAside from "../components/TheAside.vue";
+import Charts from "./Charts.vue";
+import BaseLoader from "../components/BaseLoader.vue";
+import BaseModal from "./BaseModal.vue";
+import TheWorkspace from "./TheWorkspace.vue";
+import TheSettings from "./TheSettings.vue";
+import TheMenu from "./TheMenu.vue";
 import { Splitter, SplitterPanel } from "primevue";
+import { useModalStore } from "@/stores";
+
+const modalStore = useModalStore();
 
 const mainClasses = "h-screen overflow-hidden pt-16";
-const splitterWrapperClasses = "flex h-full";
-const splitterClasses =
-  "hidden min-w-58 border-r-2 border-gray-300 sm:block dark:border-gray-800";
+const splitterClasses = "h-full flex";
+const splitterPanelClasses = "sm:block border-gray-300 dark:border-gray-800";
 const asideClasses = "h-full overflow-auto px-4";
 </script>
 
 <template>
   <main :class="mainClasses">
-    <Splitter :class="splitterWrapperClasses">
-      <SplitterPanel :class="splitterClasses">
+    <Splitter :class="splitterClasses">
+      <SplitterPanel
+        :class="['hidden min-w-54 border-r-2', splitterPanelClasses]"
+        size="20"
+      >
         <TheAside :class="asideClasses" />
       </SplitterPanel>
-      <SplitterPanel>
-        <div class="overflow-auto">
-          <HomePage />
-        </div>
+      <SplitterPanel
+        :class="['min-w-100 border-l-2', splitterPanelClasses]"
+        size="80"
+      >
+        <TheWorkspace />
+        <BaseLoader />
+        <Charts />
+        <TheSettings />
+        <TheMenu />
       </SplitterPanel>
     </Splitter>
+    <teleport to="body">
+      <BaseModal v-if="modalStore.isShowModal" />
+    </teleport>
   </main>
 </template>

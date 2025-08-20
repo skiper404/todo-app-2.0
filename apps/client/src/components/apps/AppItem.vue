@@ -19,7 +19,10 @@ const menuStore = useMenuStore();
 const loaderStore = useLoaderStore();
 
 const getAppClasses = (app) => [
-  `dark:text-primary-text flex items-center gap-2 rounded-3xl px-4 py-2 text-gray-500 transition duration-300 ${app._id === appsStore.activeApp?._id ? "bg-item-active text-gray-100" : "bg-item-bg hover:bg-item-hover"}`,
+  `
+  dark:text-gray-100 flex items-center gap-2 rounded-3xl px-4 py-2 transition duration-300
+  ${app._id === appsStore.activeApp?._id ? " dark:text-gray-100 dark:bg-gray-600 text-gray-100 bg-indigo-500" : "dark:bg-gray-800 text-gray-100 dark:text-gray-100 bg-indigo-300"}
+  `,
 ];
 
 const getIconClasses = (app) => [
@@ -32,17 +35,17 @@ const getIconClasses = (app) => [
 ];
 
 const getEditClasses = (app) => [
-  `size-6 hover:text-green-300 ${app._id === appsStore.activeApp?._id ? "text-indigo-300" : "text-indigo-500"}`,
+  `size-6 hover:text-green-400 ${app._id === appsStore.activeApp?._id ? "dark:text-indigo-500" : "text-indigo-500"}`,
 ];
 
 const getRemoveClasses = (app) => [
-  `size-6 hover:text-indigo-400 ${app._id === appsStore.activeApp?._id ? "text-indigo-300" : "text-indigo-500"}`,
+  `size-6 hover:text-red-400 ${app._id === appsStore.activeApp?._id ? "dark:text-indigo-500" : "text-indigo-500"}`,
 ];
 
 const handleOnAppClick = async (app) => {
   loaderStore.setLoader();
   appsStore.setActiveApp(app);
-  await tasksStore.getTasks(app);
+  await tasksStore.getTasks(app._id);
   menuStore.closeMenu();
   loaderStore.removeLoader();
 };

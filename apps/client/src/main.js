@@ -3,8 +3,9 @@ import { createApp } from "vue";
 import { createPinia } from "pinia";
 import App from "./App.vue";
 import i18n from "./shared/lib/i18n";
+import { router } from "./router";
 
 const app = createApp(App);
 const pinia = createPinia();
 
-app.use(pinia).use(i18n).mount("#app");
+app.use(pinia).use(i18n).use(router).mount("#app");

@@ -12,7 +12,7 @@ const buttonClasses = "mx-auto px-6 py-1 my-2";
   <p :class="labelClasses">No results...</p>
   <BaseButton
     i18n-key="resetFilters"
-    classes="buttonClasses"
+    :classes="buttonClasses"
     @click="filterStore.resetFilters"
   />
 </template>

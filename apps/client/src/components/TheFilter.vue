@@ -1,4 +1,9 @@
 <script setup>
+import {
+  categoryOptions,
+  priorityOptions,
+  statusOptions,
+} from "@/shared/constants/constants";
 import BaseInput from "./BaseInput.vue";
 import BaseSelect from "./BaseSelect.vue";
 
@@ -6,26 +11,8 @@ import { useFilterStore } from "@/stores";
 
 const filterStore = useFilterStore();
 
-const categoryOptions = [
-  { label: "Frontend", value: "frontend" },
-  { label: "Backend", value: "backend" },
-  { label: "Testing", value: "testing" },
-];
-
-const priorityOptions = [
-  { label: "High", value: "high" },
-  { label: "Medium", value: "medium" },
-  { label: "Low", value: "low" },
-];
-
-const statusOptions = [
-  { label: "Pending", value: "pending" },
-  { label: "InProgress", value: "inProgress" },
-  { label: "Done", value: "done" },
-];
-
 const wrapperClasses =
-  "bg-secondary-bg my-2 flex flex-col gap-2 rounded-2xl p-2";
+  "bg-indigo-200 dark:bg-indigo-900 my-2 flex flex-col gap-2 rounded-2xl p-2";
 </script>
 
 <template>

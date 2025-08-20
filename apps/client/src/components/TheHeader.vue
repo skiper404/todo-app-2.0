@@ -1,33 +1,22 @@
 <script setup>
 import BaseIcon from "./BaseIcon.vue";
 import TheLogo from "./TheLogo.vue";
-import {
-  useMenuStore,
-  useAppsStore,
-  useSettingStore,
-  useFilterStore,
-  useTasksStore,
-} from "@/stores";
+import { useMenuStore, useAppsStore, useSettingStore } from "@/stores";
 
 const menuStore = useMenuStore();
 const appsStore = useAppsStore();
 const settingsStore = useSettingStore();
-const filterStore = useFilterStore();
-const tasksStore = useTasksStore();
 
 const headerClasses =
-  "bg-secondary-bg fixed top-0 right-0 left-0 flex h-16 items-center justify-between px-4";
-
+  "dark:bg-gray-800 bg-indigo-500 fixed top-0 right-0 left-0 flex h-16 items-center justify-between px-4";
 const iconClasses =
-  "text-secondary-text size-8 hidden sm:block hover:text-secondary-text/50";
-
-const menuClasses = "size-8 text-secondary-text sm:hidden";
+  "dark:text-indigo-500 size-6 dark:hover:text-indigo-300 text-gray-100 hover:text-indigo-300";
 </script>
 
 <template>
   <header :class="headerClasses">
     <TheLogo @click="appsStore.activeApp = null" />
-    <div>
+    <section class="flex">
       <BaseIcon
         name="cog"
         :classes="iconClasses"
@@ -35,9 +24,9 @@ const menuClasses = "size-8 text-secondary-text sm:hidden";
       />
       <BaseIcon
         name="menu"
-        :classes="menuClasses"
+        :classes="['sm:hidden', iconClasses]"
         @click="menuStore.openMenu"
       />
-    </div>
+    </section>
   </header>
 </template>

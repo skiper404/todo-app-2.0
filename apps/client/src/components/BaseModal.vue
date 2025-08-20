@@ -1,11 +1,11 @@
 <script setup>
 import { useModalStore } from "@/stores";
-import CreateAppForm from "./forms/CreateAppForm.vue";
-import EditAppFrom from "./forms/EditAppFrom.vue";
-import RemoveAppForm from "./forms/RemoveAppForm.vue";
-import CreateTaskForm from "./forms/CreateTaskForm.vue";
-import EditTaskFrom from "./forms/EditTaskFrom.vue";
-import RemoveTaskForm from "./forms/RemoveTaskForm.vue";
+import CreateAppForm from "./modal-forms/CreateAppForm.vue";
+import EditAppFrom from "./modal-forms/EditAppFrom.vue";
+import RemoveAppForm from "./modal-forms/RemoveAppForm.vue";
+import CreateTaskForm from "./modal-forms/CreateTaskForm.vue";
+import EditTaskFrom from "./modal-forms/EditTaskFrom.vue";
+import RemoveTaskForm from "./modal-forms/RemoveTaskForm.vue";
 
 const modalStore = useModalStore();
 

@@ -6,7 +6,7 @@ import BaseInput from "./BaseInput.vue";
 const props = defineProps({
   id: String,
   type: String,
-  error: Object,
+  error: String,
   i18nKeyLabel: String,
   i18nKeyInput: String,
 });
